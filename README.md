@@ -1,7 +1,5 @@
 <div align="center">
 
-<img src="public/logo.svg" alt="NutriAI Logo" width="80" />
-
 # NutriAI
 
 **AI-Powered Health, Nutrition & Fitness Platform for the MENA Region**
@@ -18,6 +16,10 @@
 > **Track nutrition. Scan meals. Get AI-powered workout plans.**  
 > Available in Arabic & English — built for Egypt, UAE, Saudi Arabia, and beyond.
 
+<br/>
+
+![NutriAI Hero](WomenWithNutriAI.png)
+
 </div>
 
 ---
@@ -25,6 +27,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
+- [Screenshots](#screenshots)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
@@ -42,6 +45,22 @@
 NutriAI is a full-stack AI health platform designed specifically for the MENA market. It combines intelligent food scanning, personalized workout plans, real-time coaching, and detailed analytics — all in a single Arabic-first application.
 
 The platform addresses a critical gap: **67% of MENA adults are physically inactive** (WHO 2024), yet no existing app offers a complete, locally-aware solution with Egyptian food support, RTL interfaces, and EGP-based pricing.
+
+---
+
+## Screenshots
+
+### Before & After — Real Results
+
+![Before After](Before_AfterInsta.png)
+
+### AI Coach — Workout & Nutrition Intelligence
+
+![AI Coach](AI_Coach.png)
+
+### MENA Food Database — 12,000+ Local Foods
+
+![MENA Foods](MENA_Foods.png)
 
 ---
 
@@ -183,6 +202,10 @@ nutriai/
 │
 ├── public/
 │   ├── logo.svg
+│   ├── WomenWithNutriAI.png    # Hero lifestyle photo
+│   ├── Before_AfterInsta.png   # Before/After result image
+│   ├── AI_Coach.png            # AI coach illustration
+│   ├── MENA_Foods.png          # MENA food database visual
 │   └── foods/                  # Local food image assets
 │
 ├── messages/                   # i18n translations
@@ -333,6 +356,6 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for details.
 
 Built with ❤️ for the MENA region
 
-🇪🇬 Egypt &nbsp;·&nbsp; 🇦🇪 UAE &nbsp;·&nbsp; 🇸🇦 Saudi Arabia &nbsp;·&nbsp; 🇯🇴 Jordan &nbsp;·&nbsp; 🇰🇼 Kuwait
+🇪🇬 Egypt · 🇦🇪 UAE · 🇸🇦 Saudi Arabia · 🇯🇴 Jordan · 🇰🇼 Kuwait
 
 </div>
