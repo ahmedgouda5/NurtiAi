@@ -1,28 +1,61 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { SectionTitle } from '@/components/shared/SectionTitle';
-import { testimonials } from '@/data/testimonials';
-import { fadeUp, staggerContainer } from '@/utils/animations';
-import { Author, Grid, Name, Quote, QuoteCard, Role, Section } from './styles';
+import { motion } from "framer-motion";
+import { SectionTitle } from "@/components/shared/SectionTitle";
+import { testimonials } from "@/data/testimonials";
+import { fadeUp, staggerContainer } from "@/utils/animations";
+
+import {
+  Author,
+  AuthorInfo,
+  Avatar,
+  Grid,
+  Name,
+  Quote,
+  QuoteCard,
+  Role,
+  Section,
+  Stars,
+} from "./styles";
+import { SpanItalic } from "../Hero/styles";
 
 export function Testimonials() {
   return (
-    <Section>
+    <Section id="testimonials">
       <div className="container">
         <SectionTitle
-          eyebrow="Testimonials"
-          title={<>Designed to feel credible to teams, founders, and coaches.</>}
-          description="A premium interface only works if the product promise is believable. These short testimonials create that signal."
+          eyebrow="💚Testimonials"
+          title={
+            <>
+              Real results, <SpanItalic>real people</SpanItalic>
+            </>
+          }
         />
 
-        <Grid as={motion.div} variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+        <Grid
+          as={motion.div}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {testimonials.map((testimonial) => (
-            <QuoteCard key={testimonial.name} as={motion.blockquote} variants={fadeUp}>
-              <Quote>“{testimonial.quote}”</Quote>
+            <QuoteCard
+              key={testimonial.name}
+              as={motion.blockquote}
+              variants={fadeUp}
+            >
+              <Stars>★★★★★</Stars>
+
+              <Quote>{`"${testimonial.quote}"`}</Quote>
+
               <Author>
-                <Name>{testimonial.name}</Name>
-                <Role>{testimonial.role}</Role>
+                <Avatar>{testimonial.initials}</Avatar>
+
+                <AuthorInfo>
+                  <Name>{testimonial.name}</Name>
+                  <Role>{testimonial.role}</Role>
+                </AuthorInfo>
               </Author>
             </QuoteCard>
           ))}
@@ -31,4 +64,3 @@ export function Testimonials() {
     </Section>
   );
 }
-

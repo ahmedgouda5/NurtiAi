@@ -1,45 +1,89 @@
-import { FiInstagram, FiLinkedin, FiTwitter } from 'react-icons/fi';
-import { FooterShell, Grid, Brand, Title, Text, Links, LinkTitle, FooterLink, Bottom } from './styles';
+import { FiInstagram, FiTwitter, FiYoutube } from "react-icons/fi";
+import { FaTiktok } from "react-icons/fa";
+
+import {
+  FooterShell,
+  FooterTop,
+  Brand,
+  Logo,
+  LogoText,
+  Description,
+  Socials,
+  SocialLink,
+  Column,
+  ColumnTitle,
+  FooterLink,
+  Bottom,
+} from "./styles";
 
 export function Footer() {
   return (
     <FooterShell>
       <div className="container">
-        <Grid>
+        <FooterTop>
           <Brand>
-            <Title>NutriAI</Title>
-            <Text>
-              AI coaching, Arabic-first food recognition, and premium analytics for a healthier MENA.
-            </Text>
+            <div className="flex items-center gap-2">
+              <Logo>
+                <span>✚</span>
+              </Logo>
+              <LogoText>NutriAI</LogoText>
+            </div>
+
+            <Description>
+              Your AI-powered health and fitness companion. Available in Arabic
+              and English.
+            </Description>
+
+            <Socials>
+              <SocialLink href="#">
+                <FiTwitter />
+              </SocialLink>
+
+              <SocialLink href="#">
+                <FiInstagram />
+              </SocialLink>
+
+              <SocialLink href="#">
+                <FaTiktok />
+              </SocialLink>
+
+              <SocialLink href="#">
+                <FiYoutube />
+              </SocialLink>
+            </Socials>
           </Brand>
 
-          <Links>
-            <LinkTitle>Product</LinkTitle>
+          <Column>
+            <ColumnTitle>Product</ColumnTitle>
             <FooterLink href="#features">Features</FooterLink>
             <FooterLink href="#pricing">Pricing</FooterLink>
-            <FooterLink href="/dashboard">Dashboard</FooterLink>
-          </Links>
+            <FooterLink href="#">Mobile App</FooterLink>
+            <FooterLink href="#">API</FooterLink>
+          </Column>
 
-          <Links>
-            <LinkTitle>Follow</LinkTitle>
-            <FooterLink href="https://instagram.com" target="_blank" rel="noreferrer">
-              <FiInstagram /> Instagram
-            </FooterLink>
-            <FooterLink href="https://x.com" target="_blank" rel="noreferrer">
-              <FiTwitter /> X
-            </FooterLink>
-            <FooterLink href="https://linkedin.com" target="_blank" rel="noreferrer">
-              <FiLinkedin /> LinkedIn
-            </FooterLink>
-          </Links>
-        </Grid>
+          <Column>
+            <ColumnTitle>Support</ColumnTitle>
+            <FooterLink href="#">Help Center</FooterLink>
+            <FooterLink href="#">Community</FooterLink>
+            <FooterLink href="#">Coaches</FooterLink>
+            <FooterLink href="#">Blog</FooterLink>
+          </Column>
+
+          <Column>
+            <ColumnTitle>Company</ColumnTitle>
+            <FooterLink href="#">About</FooterLink>
+            <FooterLink href="#">Careers</FooterLink>
+            <FooterLink href="#">Privacy Policy</FooterLink>
+            <FooterLink href="#">Terms of Service</FooterLink>
+          </Column>
+        </FooterTop>
 
         <Bottom>
-          <Text>© 2026 NutriAI. Built for performance, clarity, and long-term consistency.</Text>
-          <Text>Privacy-first nutrition intelligence for the region.</Text>
+          <span>© 2025 NutriAI Inc. All rights reserved.</span>
+
+          <span>Made with ❤️ for healthier lives worldwide</span>
         </Bottom>
       </div>
     </FooterShell>
   );
 }
-

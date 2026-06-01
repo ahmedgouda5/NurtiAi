@@ -6,7 +6,7 @@ import { Analytics } from "@/components/features/landing-page/Analytics";
 import { HowItWorks } from "@/components/features/landing-page/HowItWorks";
 import { Pricing } from "@/components/features/landing-page/Pricing";
 import { Testimonials } from "@/components/features/landing-page/Testimonials";
-import { MobilePreview } from "@/components/features/landing-page/MobilePreview";
+import MobileApp from "@/components/features/landing-page/MobilePreview";
 import { CTA } from "@/components/features/landing-page/CTA";
 import Sponser from "@/components/features/landing-page/Sponsers";
 
@@ -22,7 +22,7 @@ export default function Home() {
         <HowItWorks />
         <Pricing />
         <Testimonials />
-        <MobilePreview />
+        <MobileApp />
         <CTA />
       </main>
       <Footer />

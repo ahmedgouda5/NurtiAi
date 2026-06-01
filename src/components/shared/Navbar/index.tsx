@@ -22,9 +22,9 @@ import { SpanItalic } from "@/components/features/landing-page/Hero/styles";
 const links = [
   { href: "#features", label: "Features" },
   { href: "#sponsers", label: "Sponsers" },
-  { href: "#plans", label: "Plans" },
+  { href: "#pricing", label: "pricing" },
   { href: "#coaches", label: "Coaches" },
-  { href: "#reviews", label: "Reviews" },
+  { href: "#testimonials", label: "Reviews" },
 ];
 
 export function Navbar() {

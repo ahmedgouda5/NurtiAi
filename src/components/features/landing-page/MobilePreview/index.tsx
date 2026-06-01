@@ -1,40 +1,146 @@
-'use client';
+import React from "react";
+import {
+  Section,
+  Inner,
+  Left,
+  Badge,
+  BadgeIcon,
+  Headline,
+  Subtitle,
+  StoreButtons,
+  StoreBtn,
+  StoreBtnIcon,
+  StoreBtnText,
+  StoreBtnLabel,
+  StoreBtnName,
+  Stats,
+  StatPill,
+  Right,
+  CardA,
+  CalorieBar,
+  CalorieText,
+  MacroRow,
+  MacroPill,
+  MealTitle,
+  MealRow,
+  CardB,
+  ScanLabel,
+  ScanFood,
+  ScanKcal,
+  StepsLabel,
+  BarsRow,
+  Bar,
+} from "./styles";
+import { theme } from "@/styles/theme";
 
-import { motion } from 'framer-motion';
-import { SectionTitle } from '@/components/shared/SectionTitle';
-import { fadeUp, staggerContainer } from '@/utils/animations';
-import { Grid, Panel, Pill, Phone, Screen, SectionCopy, Text, Title, Wave, Section } from './styles';
+const MobileApp: React.FC = () => {
+  const bars = [
+    { h: 55 },
+    { h: 40 },
+    { h: 70 },
+    { h: 85, active: true },
+    { h: 60 },
+    { h: 45 },
+    { h: 30 },
+  ];
 
-export function MobilePreview() {
   return (
     <Section>
-      <div className="container">
-        <Grid as={motion.div} variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-          <Phone as={motion.div} variants={fadeUp}>
-            <Screen>
-              <Pill>iOS companion</Pill>
-              <Panel>
-                <Title>Daily score</Title>
-                <Text>Tap in a meal, water, or workout and the app adjusts your plan immediately.</Text>
-                <Wave />
-              </Panel>
-              <Panel>
-                <Title>Coach pulse</Title>
-                <Text>Receive short action prompts based on recent adherence and recovery.</Text>
-              </Panel>
-            </Screen>
-          </Phone>
+      <Inner>
+        <Left>
+          <Badge>
+            <BadgeIcon>📱</BadgeIcon>
+            Mobile App
+          </Badge>
 
-          <SectionCopy>
-            <SectionTitle
-              eyebrow="Mobile app"
-              title={<>A companion UI that feels native, fast, and simple.</>}
-              description="The mobile surface mirrors the desktop system without losing the visual identity or the premium interaction language."
-            />
-          </SectionCopy>
-        </Grid>
-      </div>
+          <Headline>
+            Track anywhere,<span>anytime</span>
+          </Headline>
+
+          <Subtitle>
+            Available on iOS and Android. Sync with Apple Health, Google Fit,
+            Fitbit, and 50+ devices. Real-time notifications and smart reminders
+            keep you on track 24/7.
+          </Subtitle>
+
+          <StoreButtons>
+            <StoreBtn href="#">
+              <StoreBtnIcon>🍎</StoreBtnIcon>
+              <StoreBtnText>
+                <StoreBtnLabel>Download on</StoreBtnLabel>
+                <StoreBtnName>App Store</StoreBtnName>
+              </StoreBtnText>
+            </StoreBtn>
+
+            <StoreBtn href="#">
+              <StoreBtnIcon>▶</StoreBtnIcon>
+              <StoreBtnText>
+                <StoreBtnLabel>Get it on</StoreBtnLabel>
+                <StoreBtnName>Google Play</StoreBtnName>
+              </StoreBtnText>
+            </StoreBtn>
+          </StoreButtons>
+
+          <Stats>
+            <StatPill>⭐ 4.9 stars (48K ratings)</StatPill>
+            <StatPill>⬇ 2M+ downloads</StatPill>
+          </Stats>
+        </Left>
+
+        {/* ── Right ── */}
+        <Right>
+          {/* Card A – Nutrition */}
+          <CardA>
+            <CalorieBar />
+            <CalorieText>Calories: 1847 / 2200</CalorieText>
+
+            <MacroRow>
+              <MacroPill color={theme.colors.primary}>
+                <div className="pct">72%</div>
+                <div className="lbl">Protein</div>
+              </MacroPill>
+              <MacroPill color={theme.colors.amber}>
+                <div className="pct">55%</div>
+                <div className="lbl">Carbs</div>
+              </MacroPill>
+              <MacroPill color={theme.colors.blue}>
+                <div className="pct">48%</div>
+                <div className="lbl">Fat</div>
+              </MacroPill>
+            </MacroRow>
+
+            <MealTitle>🔥 Today&apos;s Meals</MealTitle>
+            <MealRow>
+              <span>Breakfast</span>
+              <span>420 kcal</span>
+            </MealRow>
+            <MealRow>
+              <span>Lunch</span>
+              <span>680 kcal</span>
+            </MealRow>
+            <MealRow>
+              <span>Dinner</span>
+              <span>747 kcal</span>
+            </MealRow>
+          </CardA>
+
+          {/* Card B – AI Scan */}
+          <CardB>
+            <ScanLabel>AI Scan Result</ScanLabel>
+            <ScanFood>🥗 Greek Salad</ScanFood>
+            <ScanKcal>185 kcal</ScanKcal>
+
+            <StepsLabel>Weekly Steps</StepsLabel>
+            <BarsRow>
+              {bars.map((b, i) => (
+                <Bar key={i} h={b.h} active={b.active} />
+              ))}
+            </BarsRow>
+          </CardB>
+        </Right>
+      </Inner>
     </Section>
   );
-}
+};
 
+export default MobileApp;

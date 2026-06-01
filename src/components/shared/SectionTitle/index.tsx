@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import { Description, Eyebrow, Title, Wrap } from "./styles";
 
 type SectionTitleProps = {
-  eyebrow: string;
-  title: ReactNode;
+  eyebrow: string | ReactNode;
+  title?: ReactNode;
   description?: string;
 };
 

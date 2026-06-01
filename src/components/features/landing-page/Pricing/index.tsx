@@ -1,74 +1,106 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { SectionTitle } from '@/components/shared/SectionTitle';
-import { Button } from '@/components/shared/Button';
-import { Modal } from '@/components/shared/Modal';
-import { useModal } from '@/hooks/useModal';
-import { fadeUp, staggerContainer } from '@/utils/animations';
-import { FeaturedTag, Grid, Item, List, Name, Plan, Price, Section } from './styles';
+import { motion } from "framer-motion";
+import { Check, X, Rocket } from "lucide-react";
 
-const plans = [
-  {
-    name: 'Starter',
-    price: '$19',
-    items: ['Food scanning', 'Basic dashboard', 'Weekly habit reminders'],
-  },
-  {
-    name: 'Pro',
-    price: '$49',
-    featured: true,
-    items: ['Advanced analytics', 'Coach sessions', 'Meal prediction', 'Dashboard workflows'],
-  },
-  {
-    name: 'Enterprise',
-    price: 'Custom',
-    items: ['Teams', 'Role-based access', 'White-label flows', 'Priority support'],
-  },
-];
+import { SectionTitle } from "@/components/shared/SectionTitle";
+import { Button } from "@/components/shared/Button";
+
+import { fadeUp, staggerContainer } from "@/utils/animations";
+
+import {
+  Description,
+  Divider,
+  FeaturedTag,
+  Grid,
+  Item,
+  List,
+  Name,
+  Period,
+  Plan,
+  Price,
+  PriceWrapper,
+  Section,
+} from "./styles";
+import { plans } from "@/data/plans";
+import { SpanItalic } from "../Hero/styles";
 
 export function Pricing() {
-  const paymentModal = useModal();
-
   return (
     <Section id="pricing">
       <div className="container">
         <SectionTitle
           eyebrow="Pricing"
-          title={<>Simple packaging with enough room for premium healthcare workflows.</>}
-          description="The payment path can open a modal so conversion remains in flow instead of pushing the user away."
+          title={
+            <>
+              Simple, <SpanItalic>transparent </SpanItalic>pricing
+            </>
+          }
+          description="Start free. Upgrade when you're ready. Cancel anytime."
         />
 
-        <Grid as={motion.div} variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+        <Grid
+          as={motion.div}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {plans.map((plan) => (
-            <Plan key={plan.name} $featured={plan.featured} as={motion.article} variants={fadeUp}>
-              {plan.featured ? <FeaturedTag>Most popular</FeaturedTag> : null}
-              <Name>{plan.name}</Name>
-              <Price>{plan.price}</Price>
+            <Plan
+              key={plan.name}
+              $featured={plan.featured}
+              $premium={plan.premium}
+              as={motion.article}
+              variants={fadeUp}
+            >
+              <div>
+                {plan.featured && <FeaturedTag>Most Popular</FeaturedTag>}
+
+                <Name $premium={plan.premium}>{plan.name}</Name>
+
+                <PriceWrapper>
+                  <Price>{plan.price}</Price>
+                  <Period>{plan.period}</Period>
+                </PriceWrapper>
+
+                <Description>{plan.description}</Description>
+
+                <Divider />
+              </div>
+
               <List>
-                {plan.items.map((item) => (
-                  <Item key={item}>{item}</Item>
+                {plan.features.map((feature) => (
+                  <Item
+                    key={feature.text}
+                    $active={feature.available}
+                    $premium={plan.premium}
+                  >
+                    {feature.available ? <Check size={20} /> : <X size={20} />}
+
+                    <span>{feature.text}</span>
+                  </Item>
                 ))}
               </List>
-              <Button variant={plan.featured ? 'primary' : 'secondary'} onClick={paymentModal.onOpen} fullWidth>
-                Choose plan
-              </Button>
+
+              <div className="mt-auto">
+                <Button
+                  href="/"
+                  style={{
+                    width: "100%",
+                    justifyContent: "center",
+                    padding: "18px",
+                    borderRadius: "999px",
+                  }}
+                >
+                  {plan.featured && <Rocket size={18} />}
+                  {plan.button}
+                </Button>
+              </div>
             </Plan>
           ))}
         </Grid>
       </div>
-
-      <Modal
-        isOpen={paymentModal.open}
-        onClose={paymentModal.onClose}
-        title="Payment modal"
-        description="A premium checkout overlay for plan upgrades and session purchases."
-      >
-        <Button fullWidth onClick={paymentModal.onClose}>
-          Confirm payment
-        </Button>
-      </Modal>
     </Section>
   );
 }
-
