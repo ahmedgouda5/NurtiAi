@@ -1,14 +1,25 @@
-import { Navbar } from "@/components/shared/Navbar";
-import { Footer } from "@/components/shared/Footer";
-import { Hero } from "@/components/features/landing-page/Hero";
-import { Features } from "@/components/features/landing-page/Features";
-import { Analytics } from "@/components/features/landing-page/Analytics";
-import { HowItWorks } from "@/components/features/landing-page/HowItWorks";
-import { Pricing } from "@/components/features/landing-page/Pricing";
-import { Testimonials } from "@/components/features/landing-page/Testimonials";
-import MobileApp from "@/components/features/landing-page/MobilePreview";
-import { CTA } from "@/components/features/landing-page/CTA";
-import Sponser from "@/components/features/landing-page/Sponsers";
+import { Navbar } from "@/AppFeature/shared/Navbar";
+import { Footer } from "@/AppFeature/shared/Footer";
+import { Hero } from "@/AppFeature/features/landing-page/Hero";
+import { Features } from "@/AppFeature/features/landing-page/Features";
+import { HowItWorks } from "@/AppFeature/features/landing-page/HowItWorks";
+import { Pricing } from "@/AppFeature/features/landing-page/Pricing";
+import MobileApp from "@/AppFeature/features/landing-page/MobilePreview";
+import { CTA } from "@/AppFeature/features/landing-page/CTA";
+import Sponser from "@/AppFeature/features/landing-page/Sponsers";
+import { lazy, Suspense } from "react";
+
+const Analytics = lazy(
+  () => import("@/AppFeature/features/landing-page/Analytics/index"),
+);
+
+const CoachesSection = lazy(
+  () => import("@/AppFeature/features/landing-page/Coaches/index"),
+);
+
+const TestimonialsSection = lazy(
+  () => import("@/AppFeature/features/landing-page/Testimonials/index"),
+);
 
 export default function Home() {
   return (
@@ -18,10 +29,17 @@ export default function Home() {
         <Hero />
         <Sponser />
         <Features />
-        <Analytics />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Analytics />
+        </Suspense>
         <HowItWorks />
+        <Suspense fallback={<div>Loading...</div>}>
+          <CoachesSection />
+        </Suspense>
         <Pricing />
-        <Testimonials />
+        <Suspense fallback={<div>Loading...</div>}>
+          <TestimonialsSection />
+        </Suspense>
         <MobileApp />
         <CTA />
       </main>
