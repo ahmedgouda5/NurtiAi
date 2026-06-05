@@ -71,7 +71,7 @@ export function HowItWorks() {
               {index === 2 ? (
                 <FooterRow>
                   <span>Need coaching support?</span>
-                  <Button variant="secondary" onClick={coachModal.onOpen}>
+                  <Button onClick={coachModal.onOpen}>
                     Book coach
                   </Button>
                 </FooterRow>
