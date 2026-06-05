@@ -81,11 +81,7 @@ export function Chatbot() {
                 <Title>NutriAI Coach</Title>
                 <Status>Live assistance demo</Status>
               </HeaderMeta>
-              <Button
-                variant="ghost"
-                onClick={() => setOpen(false)}
-                aria-label="Close chat"
-              >
+              <Button onClick={() => setOpen(false)} aria-label="Close chat">
                 <FiX />
               </Button>
             </Header>
@@ -108,7 +104,7 @@ export function Chatbot() {
                 onChange={(event) => setInput(event.target.value)}
                 placeholder="Ask about meals or workouts"
               />
-              <Button type="submit" variant="primary" aria-label="Send message">
+              <Button type="submit" aria-label="Send message">
                 <FiSend />
               </Button>
             </Composer>
