@@ -12,7 +12,7 @@ const buttonStyles = css<{
   border: 0;
   border-radius: 999px;
   cursor: pointer;
-  padding: 0.95rem 1.35rem;
+  padding: 0.65rem 1.05rem;
   font-weight: 700;
   letter-spacing: 0.01em;
   transition:

@@ -16,23 +16,25 @@ import {
   Side,
 } from "./styles";
 import { SpanItalic } from "../Hero/styles";
-
-const metrics = [
-  { label: "Active users", value: "28.4k" },
-  { label: "Avg adherence", value: "91%" },
-  { label: "Meal scans", value: "4.2m" },
-  { label: "Coach bookings", value: "12.8k" },
-];
+import { useTranslation } from "react-i18next";
 
 export function Analytics() {
+  const { t } = useTranslation();
+  const metrics = [
+    { id: 1, label: t("Analytics.metrics.labelOne"), value: "28.4k" },
+    { id: 2, label: t("Analytics.metrics.labelTwo"), value: "91%" },
+    { id: 3, label: t("Analytics.metrics.labelThree"), value: "4.2m" },
+    { id: 4, label: t("Analytics.metrics.labelFour"), value: "12.8k" },
+  ];
   return (
     <Section id="analytics">
       <div className="container">
         <SectionTitle
-          eyebrow="Analytics"
+          eyebrow={t("Analytics.eyebrow")}
           title={
             <>
-              See your <SpanItalic>transformation</SpanItalic> in real time
+              {t("Analytics.title.normal")}{" "}
+              <SpanItalic> {t("Analytics.title.italic")}</SpanItalic>
             </>
           }
         />
@@ -51,11 +53,7 @@ export function Analytics() {
           >
             <MetricGrid>
               {metrics.map((metric) => (
-                <MetricCard
-                  as={motion.div}
-                  key={metric.label}
-                  variants={fadeUp}
-                >
+                <MetricCard as={motion.div} key={metric.id} variants={fadeUp}>
                   <MetricLabel>{metric.label}</MetricLabel>
                   <MetricValue>{metric.value}</MetricValue>
                 </MetricCard>

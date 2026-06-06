@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import { weeklyCaloriesData } from "@/data/charts";
 import { CanvasWrap, Header, Meta, Title, Wrap } from "./styles";
 import { GlassCard } from "@/AppFeature/shared/GlassCard";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
@@ -28,14 +29,15 @@ export function WeeklyCaloriesChart() {
       },
     ],
   };
+  const { t } = useTranslation();
 
   return (
     <GlassCard padding="0">
       <Wrap as={motion.div} whileHover={{ y: -4 }}>
         <Header>
           <div>
-            <Title>Weekly calories</Title>
-            <Meta>Consistency trend this week</Meta>
+            <Title>{t("Analytics.WeeklyCaloriesChart.title")}</Title>
+            <Meta>{t("Analytics.WeeklyCaloriesChart.meta")}</Meta>
           </div>
           <Meta>1,965 avg</Meta>
         </Header>

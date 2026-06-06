@@ -23,9 +23,11 @@ export const Step = styled.article`
     rgba(9, 16, 31, 0.7)
   );
   border: 1px solid rgba(255, 255, 255, 0.06);
-  min-height: 240px;
+
   display: grid;
+  grid-template-rows: auto 1fr auto;
   gap: 0.9rem;
+  height: 100%;
 `;
 
 export const Number = styled.span`
@@ -40,22 +42,23 @@ export const Number = styled.span`
 
 export const Title = styled.h3`
   margin: 0;
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
 `;
 
 export const Text = styled.p`
   margin: 0;
-  color: var(--color-text-secondary);
+  color: ${(props) => props.theme.colors.textSecondary};
   line-height: 1.75;
 `;
 
 export const FooterRow = styled.div`
   margin-top: auto;
+  min-height: 48px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
 `;
-
 export const StepsIcon = styled.div<{ $iconBg: string }>`
   width: 64px;
   height: 64px;

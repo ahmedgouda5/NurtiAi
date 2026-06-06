@@ -16,40 +16,23 @@ import {
   Title,
 } from "./styles";
 import { SpanItalic } from "../Hero/styles";
-
-const steps = [
-  {
-    icon: "📱",
-    iconBg: "blue",
-    title: "Set Your Goals",
-    text: "Tell us your weight goal, dietary preferences, and fitness level. Our AI builds your personalized plan in seconds.",
-  },
-  {
-    icon: "🍽️",
-    iconBg: "brown",
-    title: "Track Everything",
-    text: "Scan food photos or type names. Log workouts. Track water, sleep, and steps. Everything syncs automatically.",
-  },
-  {
-    icon: "🚀",
-    iconBg: "green",
-    title: "Transform",
-    text: "Get AI recommendations, coach sessions, and community support. Watch your health metrics improve week by week.",
-  },
-];
+import { UseHowItsWorks } from "@/data/How_Its_Works";
+import { useTranslation } from "react-i18next";
 
 export function HowItWorks() {
+  const steps = UseHowItsWorks();
   const coachModal = useModal();
+  const { t } = useTranslation();
 
   return (
     <Section>
       <div className="container">
         <SectionTitle
-          eyebrow="How It Works
-"
+          eyebrow={t("HowItWorks.eyebrow")}
           title={
             <>
-              Start in <SpanItalic>3 simple steps</SpanItalic>
+              {t("HowItWorks.title.normal")}{" "}
+              <SpanItalic>{t("HowItWorks.title.italic")}</SpanItalic>
             </>
           }
         />
@@ -62,7 +45,7 @@ export function HowItWorks() {
           viewport={{ once: true, amount: 0.2 }}
         >
           {steps.map((step, index) => (
-            <Step key={step.title} as={motion.article} variants={fadeUp}>
+            <Step key={step.id} as={motion.article} variants={fadeUp}>
               <StepsIcon $iconBg={step.iconBg}>{step.icon}</StepsIcon>
               <Title>
                 {index + 1}. {step.title}
@@ -70,9 +53,9 @@ export function HowItWorks() {
               <Text>{step.text}</Text>
               {index === 2 ? (
                 <FooterRow>
-                  <span>Need coaching support?</span>
+                  <span>{t("HowItWorks.steps.three.support")}</span>
                   <Button onClick={coachModal.onOpen}>
-                    Book coach
+                    {t("HowItWorks.steps.three.BtnCoach")}
                   </Button>
                 </FooterRow>
               ) : null}

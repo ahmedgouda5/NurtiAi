@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { macroData } from "@/data/charts";
 import { CanvasWrap, Header, Meta, Title, Wrap } from "./styles";
 import { GlassCard } from "@/AppFeature/shared/GlassCard";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -21,14 +22,14 @@ export function MacroDonutChart() {
       },
     ],
   };
-
+  const { t } = useTranslation();
   return (
     <GlassCard padding="0">
       <Wrap as={motion.div} whileHover={{ y: -4 }}>
         <Header>
           <div>
-            <Title>Macro split</Title>
-            <Meta>Balanced for strength and recovery</Meta>
+            <Title>{t("Analytics.MacroDonutChart.title")}</Title>
+            <Meta>{t("Analytics.MacroDonutChart.meta")}</Meta>
           </div>
           <Meta>100%</Meta>
         </Header>

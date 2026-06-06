@@ -21,10 +21,12 @@ import { SignUpSchema } from "@/app/Schemes/AuthSchema";
 import { z } from "zod";
 import { FaXmark } from "react-icons/fa6";
 import { FaRocket } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 type SignUpType = z.infer<typeof SignUpSchema>;
 
 const SignUp = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -62,7 +64,7 @@ const SignUp = () => {
             color: "black",
           }}
         >
-          <FaRocket size={18} /> try for free
+          <FaRocket size={18} /> {t("navbar.Sign Up")}
         </Button>
       </AlertDialogTrigger>
 

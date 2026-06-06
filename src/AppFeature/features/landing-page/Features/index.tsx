@@ -1,14 +1,5 @@
 "use client";
-
 import { motion } from "framer-motion";
-import {
-  FiActivity,
-  FiBarChart2,
-  FiMessageSquare,
-  FiRotateCw,
-  FiShield,
-  FiTrendingUp,
-} from "react-icons/fi";
 import { SectionTitle } from "@/AppFeature/shared/SectionTitle";
 import { fadeUp, staggerContainer } from "@/utils/animations";
 import {
@@ -20,81 +11,28 @@ import {
   Section,
   Title,
 } from "./styles";
-import { SpanItalic } from "../Hero/styles";
-import { theme } from "@/styles/theme";
 import { FaArrowRight } from "react-icons/fa";
-
-const features = [
-  {
-    icon: FiRotateCw,
-    title: "AI Food Scanner",
-    bg: `${theme.colors.primaryDark}`,
-    description:
-      "Snap a photo of any meal. Our AI instantly identifies food items, estimates portion sizes, and calculates full nutrition breakdown.",
-    href: "/scanner",
-  },
-  {
-    icon: FiBarChart2,
-    bg: `${theme.colors.amber}`,
-
-    title: "Smart Analytics",
-    description:
-      "Weekly and monthly charts showing your calorie trends, macronutrient ratios, weight progress, and predicted outcomes.",
-    href: "/analytics",
-  },
-  {
-    icon: FiActivity,
-    bg: `${theme.colors.purple}`,
-
-    title: "Workout Plans",
-    description:
-      "AI-generated workout routines tailored to your fitness level, available equipment, and goals. Adapt in real time based on progress.",
-    href: "/dashboard",
-  },
-  {
-    icon: FiMessageSquare,
-    bg: `${theme.colors.blue}`,
-
-    title: "Coach & Doctor Sessions",
-    description:
-      "Book 1-on-1 sessions with certified nutritionists, fitness coaches, and doctors. They monitor your data in real time.",
-    href: "/dashboard",
-  },
-  {
-    icon: FiTrendingUp,
-    bg: `${theme.colors.coral}`,
-
-    title: "Weight Prediction",
-    description:
-      "AI models predict your weight trajectory based on your diet, exercise, and metabolism. See where you'll be in 30 days.",
-    href: "/dashboard",
-  },
-  {
-    icon: FiShield,
-    bg: `${theme.colors.primaryDark}`,
-
-    title: "Gamified Achievements",
-    description:
-      "Join step challenges, nutrition streaks, and transformation contests with thousands of members globally.",
-    href: "/dashboard",
-  },
-];
-
+import { useTranslation } from "react-i18next";
+import { useFeaturesData } from "@/data/Featuers";
+import { SpanItalic } from "../Hero/styles";
+import i18n from "@/lib/i18n";
+import { FaArrowLeft } from "react-icons/fa6";
 export function Features() {
+  const { t } = useTranslation();
+  const features = useFeaturesData();
+
   return (
     <Section id="features">
       <div className="container">
         <SectionTitle
-          eyebrow="Everything You Need
-"
+          eyebrow={t("features.eyebrow")}
           title={
             <>
-              Your complete <SpanItalic>health ecosystem</SpanItalic>{" "}
+              {t("features.title.normal")}
+              <SpanItalic> {t("features.title.italic")}</SpanItalic>
             </>
           }
-          description="From food scanning to AI coaching, every tool you need to reach your health goals lives in one powerful platform.
-
-"
+          description={t("features.description")}
         />
 
         <Grid
@@ -106,20 +44,25 @@ export function Features() {
         >
           {features.map((feature) => {
             const Icon = feature.icon;
+
             return (
               <FeatureCard
                 as={motion.a}
                 href={feature.href}
-                key={feature.title}
+                key={feature.id}
                 variants={fadeUp}
               >
                 <IconWrap bg={feature.bg}>
                   <Icon />
                 </IconWrap>
+
                 <Title>{feature.title}</Title>
+
                 <Description>{feature.description}</Description>
+
                 <Meta color={feature.bg}>
-                  Learn more <FaArrowRight />
+                  {t("features.learnMore")}{" "}
+                  {i18n.language === "en" ? <FaArrowRight /> : <FaArrowLeft />}
                 </Meta>
               </FeatureCard>
             );

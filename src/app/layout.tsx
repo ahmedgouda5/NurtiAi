@@ -3,10 +3,9 @@ import { Outfit, Syne, Geist } from "next/font/google";
 import "./globals.css";
 import StyledComponentsRegistry from "@/styles/StyledComponentsRegistry";
 import { Chatbot } from "@/AppFeature/chatbot";
-import Script from "next/script";
 import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+import I18nProvider from "@/providers/I18nProvider";
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -31,12 +30,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(outfit.variable, syne.variable, "font-sans", geist.variable)}>
+    <html
+      lang="en"
+      className={cn(
+        outfit.variable,
+        syne.variable,
+        "font-sans",
+        geist.variable,
+      )}
+    >
       <body>
-        <StyledComponentsRegistry>
-          {children}
-          <Chatbot />
-        </StyledComponentsRegistry>
+        <I18nProvider>
+          <StyledComponentsRegistry>
+            {children}
+            <Chatbot />
+          </StyledComponentsRegistry>
+        </I18nProvider>
       </body>
     </html>
   );

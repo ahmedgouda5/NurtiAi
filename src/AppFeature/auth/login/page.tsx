@@ -17,8 +17,10 @@ import { FaXmark } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { LoginSchema } from "@/app/Schemes/AuthSchema";
 import zod from "zod";
+import { useTranslation } from "react-i18next";
 
 const SignIn = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -40,7 +42,7 @@ const SignIn = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button>Sign In</Button>
+        <Button>{t("navbar.Sign In")}</Button>
       </AlertDialogTrigger>
 
       <AlertDialogContent

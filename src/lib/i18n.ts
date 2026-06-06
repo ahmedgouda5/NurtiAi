@@ -1,0 +1,26 @@
+"use client";
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+
+import en from "../app/Languages/en.json";
+import ar from "../app/Languages/ar.json";
+
+i18n.use(initReactI18next).init({
+  resources: {
+    en: {
+      translation: en,
+    },
+    ar: {
+      translation: ar,
+    },
+  },
+
+  fallbackLng: "en",
+  lng: "en",
+
+  interpolation: {
+    escapeValue: false,
+  },
+});
+
+export default i18n;

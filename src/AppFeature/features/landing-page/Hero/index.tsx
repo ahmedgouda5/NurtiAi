@@ -30,9 +30,9 @@ import {
   Subtitle,
   SpanItalic,
 } from "./styles";
-import { theme } from "@/styles/theme";
-import { FaCamera, FaPlay } from "react-icons/fa";
+import { FaCamera } from "react-icons/fa";
 import SignUp from "@/AppFeature/auth/register/page";
+import { useTranslation } from "react-i18next";
 
 const stats = [
   { value: "240K+", label: "meals analyzed" },
@@ -41,6 +41,7 @@ const stats = [
 ];
 
 export function Hero() {
+  const { t } = useTranslation();
   return (
     <Section>
       <div className="container">
@@ -53,23 +54,22 @@ export function Hero() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <Badge as={motion.div} variants={fadeUp}>
-              AI-Powered Health Platform
+              {t("hero.badge")}
             </Badge>
             <Heading as={motion.h1} variants={fadeUp}>
-              Your Personal <SpanItalic>AI Nutrition</SpanItalic> & Fitness
-              Coach{" "}
+              {t("hero.title.normal")}{" "}
+              <SpanItalic>{t("hero.title.highlight")}</SpanItalic>
+              {t("hero.title.suffix")}
             </Heading>
             <Subtitle as={motion.p} variants={fadeUp}>
-              Scan food with your camera, get instant calorie breakdowns,
-              personalized workout plans, and real-time coaching — all powered
-              by advanced AI.
+              {t("hero.subtitle")}
             </Subtitle>
             <p>محلل تغذية ذكي بالذكاء الاصطناعي</p>
             <Actions as={motion.div} variants={fadeUp}>
               <SignUp />
               <Button>
                 <FaCamera />
-                Scan food
+                {t("hero.actions.scanFood")}
               </Button>
             </Actions>
             <Stats as={motion.div} variants={fadeUp}>
@@ -90,13 +90,13 @@ export function Hero() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <BadgeFloat $top="12%" $left="-5%">
-              +24g protein
+              {t("hero.badges.protein")}
             </BadgeFloat>
             <BadgeFloat $top="18%" $left="72%">
-              AI scan ready
+              {t("hero.badges.scanReady")}
             </BadgeFloat>
             <BadgeFloat $top="78%" $left="8%">
-              7 day streak
+              {t("hero.badges.streak")}
             </BadgeFloat>
             <GlassCard padding="1.3rem">
               <FloatingCard className="float">
@@ -156,19 +156,23 @@ export function Hero() {
                       fill="#7A90B3"
                       fontSize="10"
                     >
-                      calories
+                      {t("hero.plan.calories")}
                     </text>
                   </svg>
                   <RingLabel>
-                    <span className="gradient-text">Today&apos;s plan</span>
-                    <RingValue>1,840 / 2,200 kcal</RingValue>
-                    <DetailText>You are 360 calories under target.</DetailText>
+                    <span className="gradient-text">
+                      {t("hero.plan.title")}
+                    </span>
+                    <RingValue>
+                      1,840 / 2,200 {t("hero.plan.calories")}
+                    </RingValue>
+                    <DetailText>{t("hero.plan.remaining")}</DetailText>
                   </RingLabel>
                 </RingWrap>
                 <Macros>
                   <MacroRow>
                     <MacroLabel>
-                      <span>Protein</span>
+                      <span>{t("hero.macros.protein")}</span>
                       <span>42%</span>
                     </MacroLabel>
                     <MacroTrack>
@@ -180,7 +184,7 @@ export function Hero() {
                   </MacroRow>
                   <MacroRow>
                     <MacroLabel>
-                      <span>Carbs</span>
+                      <span>{t("hero.macros.carbs")}</span>
                       <span>38%</span>
                     </MacroLabel>
                     <MacroTrack>
@@ -192,7 +196,7 @@ export function Hero() {
                   </MacroRow>
                   <MacroRow>
                     <MacroLabel>
-                      <span>Fat</span>
+                      <span>{t("hero.macros.fat")}</span>
                       <span>20%</span>
                     </MacroLabel>
                     <MacroTrack>

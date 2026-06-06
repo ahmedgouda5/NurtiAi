@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FiMenu } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
+
 import {
   Bar,
   Inner,
@@ -16,20 +18,14 @@ import {
   MobileAuth,
 } from "./styles";
 
+import { Button } from "@/AppFeature/shared/Button";
 import { SpanItalic } from "@/AppFeature/features/landing-page/Hero/styles";
 import SignUp from "@/AppFeature/auth/register/page";
 import SignIn from "@/AppFeature/auth/login/page";
 
-const links = [
-  { href: "#features", label: "Features" },
-  { href: "#sponsers", label: "Sponsers" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#coaches", label: "Coaches" },
-  { href: "#testimonials", label: "Reviews" },
-];
-
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -37,14 +33,34 @@ export function Navbar() {
     };
 
     window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
+
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
   }, []);
+
+  const links = [
+    { href: "#features", label: t("navbar.Features") },
+    { href: "#sponsers", label: t("navbar.Sponsers") },
+    { href: "#pricing", label: t("navbar.Pricing") },
+    { href: "#coaches", label: t("navbar.Coaches") },
+    { href: "#testimonials", label: t("navbar.Reviews") },
+  ];
+
+  const currentLang = i18n.language || "en";
+
+  const toggleLanguage = useCallback(() => {
+    const newLang = currentLang === "en" ? "ar" : "en";
+    i18n.changeLanguage(newLang);
+    localStorage.setItem("language", newLang);
+    document.documentElement.lang = newLang;
+    document.documentElement.dir = newLang === "ar" ? "rtl" : "ltr";
+  }, [i18n, currentLang]);
 
   return (
     <Bar>
       <div className="container">
         <Inner>
-          {/* LOGO ALWAYS */}
           <Brand href="/">
             <Mark>NA</Mark>
             <h1>
@@ -52,7 +68,6 @@ export function Navbar() {
             </h1>
           </Brand>
 
-          {/* DESKTOP ONLY NAV + AUTH */}
           <DesktopNav>
             {links.map((link) => (
               <NavLink key={link.href} href={link.href}>
@@ -62,12 +77,15 @@ export function Navbar() {
           </DesktopNav>
 
           <Actions>
-            <div className="hidden md:flex">
+            <div className="hidden md:flex gap-2">
+              <Button onClick={toggleLanguage}>
+                {currentLang === "en" ? "Ar" : "En"}
+              </Button>
+
               <SignIn />
               <SignUp />
             </div>
 
-            {/* MOBILE MENU BUTTON ONLY */}
             <MobileMenuButton
               onClick={() => setOpen((prev) => !prev)}
               aria-label="Toggle menu"
@@ -77,7 +95,6 @@ export function Navbar() {
           </Actions>
         </Inner>
 
-        {/* MOBILE DROPDOWN MENU */}
         <MobileNav $open={open}>
           {links.map((link) => (
             <MobileLink
@@ -92,6 +109,10 @@ export function Navbar() {
           <MobileAuth>
             <SignIn />
             <SignUp />
+
+            <Button onClick={toggleLanguage}>
+              {currentLang === "en" ? "العربية" : "English"}
+            </Button>
           </MobileAuth>
         </MobileNav>
       </div>

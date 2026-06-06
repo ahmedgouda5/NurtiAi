@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 import { weightProgressData } from "@/data/charts";
 import { CanvasWrap, Header, Meta, Title, Wrap } from "./styles";
 import { GlassCard } from "@/AppFeature/shared/GlassCard";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(
   CategoryScale,
@@ -71,14 +72,14 @@ export function WeightProgressChart() {
       },
     },
   };
-
+  const { t } = useTranslation();
   return (
     <GlassCard padding="0">
       <Wrap as={motion.div} whileHover={{ y: -4 }}>
         <Header>
           <div>
-            <Title>Weight progress</Title>
-            <Meta>4.5 kg down over 6 months</Meta>
+            <Title>{t("Analytics.WeightProgressChart.title")}</Title>
+            <Meta>{t("Analytics.WeightProgressChart.meta")}</Meta>
           </div>
           <Meta>-5.4%</Meta>
         </Header>

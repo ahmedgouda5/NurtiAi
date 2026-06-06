@@ -1,0 +1,132 @@
+{
+  "hero": {
+    "badge": "AI-Powered Health Platform",
+    "title": {
+      "normal": "Your Personal",
+      "highlight": "AI Nutrition",
+      "suffix": "& Fitness Coach"
+    },
+    "subtitle": "Scan food with your camera, get instant calorie breakdowns, personalized workout plans, and real-time coaching — all powered by advanced AI.",
+    "actions": {
+      "scanFood": "Scan food",
+      "signUp": "Get Started"
+    },
+    "stats": {
+      "mealsAnalyzed": "meals analyzed",
+      "weeklyAdherence": "weekly adherence",
+      "scanTime": "scan-to-insight time"
+    },
+    "badges": {
+      "protein": "+24g protein",
+      "scanReady": "AI scan ready",
+      "streak": "7 day streak"
+    },
+    "plan": {
+      "title": "Today's plan",
+      "calories": "calories",
+      "remaining": "You are 360 calories under target."
+    },
+    "macros": {
+      "protein": "Protein",
+      "carbs": "Carbs",
+      "fat": "Fat"
+    }
+  },
+  "navbar": {
+    "Features": "Features",
+    "Sponsers": "Sponsers",
+    "Pricing": "Pricing",
+    "Coaches": "Coaches",
+    "Reviews": "Reviews",
+    "Sign In": "Sign In",
+    "Sign Up": "Try For Free"
+  },
+  "Sponsers": {
+    "Trust": "Trusted by Health Professionals"
+  },
+  "features": {
+    "eyebrow": "Everything You Need",
+    "title": {
+      "normal": "Your complete",
+      "italic": "health ecosystem"
+    },
+    "description": "From food scanning to AI coaching, every tool you need to reach your health goals lives in one powerful platform.",
+    "learnMore": "Learn more",
+
+    "items": {
+      "foodScanner": {
+        "title": "AI Food Scanner",
+        "description": "Snap a photo of any meal. Our AI instantly identifies food items, estimates portion sizes, and calculates full nutrition breakdown."
+      },
+      "analytics": {
+        "title": "Smart Analytics",
+        "description": "Weekly and monthly charts showing your calorie trends, macronutrient ratios, weight progress, and predicted outcomes."
+      },
+      "workoutPlans": {
+        "title": "Workout Plans",
+        "description": "AI-generated workout routines tailored to your fitness level, available equipment, and goals. Adapt in real time based on progress."
+      },
+      "sessions": {
+        "title": "Coach & Doctor Sessions",
+        "description": "Book 1-on-1 sessions with certified nutritionists, fitness coaches, and doctors. They monitor your data in real time."
+      },
+      "prediction": {
+        "title": "Weight Prediction",
+        "description": "AI models predict your weight trajectory based on your diet, exercise, and metabolism. See where you'll be in 30 days."
+      },
+      "achievements": {
+        "title": "Gamified Achievements",
+        "description": "Join step challenges, nutrition streaks, and transformation contests with thousands of members globally."
+      }
+    }
+  },
+  "Analytics": {
+    "eyebrow": "Analytics",
+    "title": {
+      "normal": "See your",
+      "italic": "transformation in real time"
+    },
+    "WeightProgressChart": {
+      "title": "Weight progress",
+      "meta": "4.5 kg down over 6 months"
+    },
+    "WeeklyCaloriesChart": {
+      "title": "Weekly calories",
+      "meta": "Consistency trend this week"
+    },
+    "MacroDonutChart": {
+      "title": "Macro split",
+      "meta": "Balanced for strength and recovery"
+    },
+    "metrics": {
+      "labelOne": "Active users",
+      "labelTwo": "Avg adherence",
+      "labelThree": "Meal scans",
+      "labelFour": "Coach bookings"
+    }
+  },
+  "HowItWorks": {
+    "eyebrow": "How it works",
+    "title": {
+      "normal": "Simple steps",
+      "italic": "to better health"
+    },
+    "description": "From food scanning to AI coaching, every tool you need to reach your health goals lives in one powerful platform.",
+    "steps": {
+      "one": {
+        "title": "Set goals",
+        "description": "Tell us your weight loss goal, dietary preferences, and fitness level. Our AI system will create a personalized plan for you in seconds."
+      },
+      "two": {
+        "title": "Track everything",
+        "description": "Weekly and monthly charts showing your calorie trends, macronutrient ratios, weight progress, and predicted outcomes."
+      },
+      "three": {
+        "title": "Transform",
+        "description": "Get AI recommendations, coach sessions, and community support. Watch your health metrics improve week by week.",
+        "support": "Need coaching support?",
+        "BtnCoach": "Book a session"
+      }
+    }
+  }
+}
