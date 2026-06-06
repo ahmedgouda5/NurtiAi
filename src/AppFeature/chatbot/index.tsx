@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiSend, FiX } from "react-icons/fi";
 import { Button } from "@/AppFeature/shared/Button";
@@ -25,19 +26,19 @@ type ChatMessage = {
   text: string;
 };
 
-const cannedReplies = [
-  "You are under target today. Keep protein high and avoid extra liquid calories.",
-  "That meal could use more fiber and a smaller rice portion for balance.",
-  "Try a 20-minute walk after dinner to improve recovery and glucose control.",
-];
-
 export function Chatbot() {
+  const { t } = useTranslation();
+
+  const cannedReplies = t("chatbot.replies", {
+    returnObjects: true,
+  }) as string[];
+
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
       role: "bot",
-      text: "Hi, I can help with nutrition, workouts, and meal choices.",
+      text: t("chatbot.welcome"),
     },
   ]);
   const [input, setInput] = useState("");
@@ -78,8 +79,8 @@ export function Chatbot() {
           >
             <Header>
               <HeaderMeta>
-                <Title>NutriAI Coach</Title>
-                <Status>Live assistance demo</Status>
+                <Title>{t("chatbot.title")}</Title>
+                <Status>{t("chatbot.status")}</Status>
               </HeaderMeta>
               <Button onClick={() => setOpen(false)} aria-label="Close chat">
                 <FiX />
@@ -102,7 +103,7 @@ export function Chatbot() {
               <Input
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
-                placeholder="Ask about meals or workouts"
+                placeholder={t("chatbot.placeholder")}
               />
               <Button type="submit" aria-label="Send message">
                 <FiSend />

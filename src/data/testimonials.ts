@@ -1,23 +1,39 @@
-export const testimonials = [
-  {
-    name: "Rania K.",
-    role: "Dubai, UAE • -8kg in 2 months",
-    initials: "RK",
-    quote:
-      "Lost 8kg in 2 months! The AI food scanner is incredibly accurate. I scan every meal and it keeps me accountable. The weekly predictions kept me motivated to stay on track.",
-  },
-  {
-    name: "Ahmed M.",
-    role: "Cairo, Egypt • +6kg muscle",
-    initials: "AM",
-    quote:
-      "The coach booking feature changed everything. Dr. Sara monitored my actual app data and gave me advice based on my real numbers. Felt like having a personal nutritionist at a fraction of the cost.",
-  },
-  {
-    name: "Layla N.",
-    role: "Riyadh, KSA • 5-month user",
-    initials: "LN",
-    quote:
-      "As someone who eats Arabic food, I was skeptical about food recognition. NutriAI recognized كباب and مقلوبة perfectly! The Arabic interface support is excellent and the results are super accurate.",
-  },
-];
+"use client";
+
+import { useTranslation } from "react-i18next";
+
+export interface Testimonial {
+  id: number;
+  name: string;
+  role: string;
+  initials: string;
+  quote: string;
+}
+
+export function useTestimonialsData(): Testimonial[] {
+  const { t } = useTranslation();
+
+  return [
+    {
+      id: 1,
+      name: t("testimonials.items.1.name"),
+      role: t("testimonials.items.1.role"),
+      initials: "RK",
+      quote: t("testimonials.items.1.quote"),
+    },
+    {
+      id: 2,
+      name: t("testimonials.items.2.name"),
+      role: t("testimonials.items.2.role"),
+      initials: "AM",
+      quote: t("testimonials.items.2.quote"),
+    },
+    {
+      id: 3,
+      name: t("testimonials.items.3.name"),
+      role: t("testimonials.items.3.role"),
+      initials: "LN",
+      quote: t("testimonials.items.3.quote"),
+    },
+  ];
+}

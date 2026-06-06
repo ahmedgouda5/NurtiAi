@@ -21,22 +21,32 @@ import {
   Price,
   PriceWrapper,
   Section,
+  Header,
+  Content,
+  Footer,
 } from "./styles";
-import { plans } from "@/data/plans";
+
 import { SpanItalic } from "../Hero/styles";
+import { usePlansData } from "@/data/plans";
+import { useTranslation } from "react-i18next";
 
 export function Pricing() {
+  const plans = usePlansData();
+  const { t } = useTranslation();
+
   return (
     <Section id="pricing">
       <div className="container">
         <SectionTitle
-          eyebrow="Pricing"
+          eyebrow={t("pricing.eyebrow")}
           title={
             <>
-              Simple, <SpanItalic>transparent </SpanItalic>pricing
+              {t("pricing.title.normal")}{" "}
+              <SpanItalic>{t("pricing.title.italic")}</SpanItalic>{" "}
+              {t("pricing.title.suffix")}
             </>
           }
-          description="Start free. Upgrade when you're ready. Cancel anytime."
+          description={t("pricing.description")}
         />
 
         <Grid
@@ -48,14 +58,19 @@ export function Pricing() {
         >
           {plans.map((plan) => (
             <Plan
-              key={plan.name}
-              $featured={plan.featured}
+              key={plan.id}
               $premium={plan.premium}
+              $featured={plan.featured}
               as={motion.article}
               variants={fadeUp}
             >
-              <div>
-                {plan.featured && <FeaturedTag>Most Popular</FeaturedTag>}
+              {/* HEADER */}
+              <Header>
+                {plan.featured ? (
+                  <FeaturedTag>{t("pricing.mostPopular")}</FeaturedTag>
+                ) : (
+                  <div style={{ height: "3.2rem" }} />
+                )}
 
                 <Name $premium={plan.premium}>{plan.name}</Name>
 
@@ -67,23 +82,30 @@ export function Pricing() {
                 <Description>{plan.description}</Description>
 
                 <Divider />
-              </div>
+              </Header>
 
-              <List>
-                {plan.features.map((feature) => (
-                  <Item
-                    key={feature.text}
-                    $active={feature.available}
-                    $premium={plan.premium}
-                  >
-                    {feature.available ? <Check size={20} /> : <X size={20} />}
+              {/* CONTENT */}
+              <Content>
+                <List>
+                  {plan.features.map((feature) => (
+                    <Item
+                      key={feature.text}
+                      $active={feature.available}
+                      $premium={plan.premium}
+                    >
+                      {feature.available ? (
+                        <Check size={20} />
+                      ) : (
+                        <X size={20} />
+                      )}
+                      <span>{feature.text}</span>
+                    </Item>
+                  ))}
+                </List>
+              </Content>
 
-                    <span>{feature.text}</span>
-                  </Item>
-                ))}
-              </List>
-
-              <div className="mt-auto">
+              {/* FOOTER */}
+              <Footer>
                 <Button
                   href="/"
                   style={{
@@ -96,7 +118,7 @@ export function Pricing() {
                   {plan.featured && <Rocket size={18} />}
                   {plan.button}
                 </Button>
-              </div>
+              </Footer>
             </Plan>
           ))}
         </Grid>

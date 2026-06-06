@@ -1,3 +1,7 @@
+"use client";
+
+import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import { FiInstagram, FiTwitter, FiYoutube } from "react-icons/fi";
 import { FaTiktok } from "react-icons/fa";
 
@@ -5,7 +9,6 @@ import {
   FooterShell,
   FooterTop,
   Brand,
-  Logo,
   LogoText,
   Description,
   Socials,
@@ -15,24 +18,29 @@ import {
   FooterLink,
   Bottom,
 } from "./styles";
+import { Mark } from "../Navbar/styles";
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <FooterShell>
       <div className="container">
         <FooterTop>
           <Brand>
             <div className="flex items-center gap-2">
-              <Logo>
-                <span>✚</span>
-              </Logo>
+              <Mark>
+                <Image
+                  src="/LogoLeaf.ico"
+                  alt="NutriAI logo"
+                  width={32}
+                  height={32}
+                />
+              </Mark>
               <LogoText>NutriAI</LogoText>
             </div>
 
-            <Description>
-              Your AI-powered health and fitness companion. Available in Arabic
-              and English.
-            </Description>
+            <Description>{t("footer.description")}</Description>
 
             <Socials>
               <SocialLink href="#">
@@ -54,34 +62,38 @@ export function Footer() {
           </Brand>
 
           <Column>
-            <ColumnTitle>Product</ColumnTitle>
-            <FooterLink href="#features">Features</FooterLink>
-            <FooterLink href="#pricing">Pricing</FooterLink>
-            <FooterLink href="#">Mobile App</FooterLink>
-            <FooterLink href="#">API</FooterLink>
+            <ColumnTitle>{t("footer.product.title")}</ColumnTitle>
+            <FooterLink href="#features">
+              {t("footer.product.features")}
+            </FooterLink>
+            <FooterLink href="#pricing">
+              {t("footer.product.pricing")}
+            </FooterLink>
+            <FooterLink href="#">{t("footer.product.mobileApp")}</FooterLink>
+            <FooterLink href="#">{t("footer.product.api")}</FooterLink>
           </Column>
 
           <Column>
-            <ColumnTitle>Support</ColumnTitle>
-            <FooterLink href="#">Help Center</FooterLink>
-            <FooterLink href="#">Community</FooterLink>
-            <FooterLink href="#">Coaches</FooterLink>
-            <FooterLink href="#">Blog</FooterLink>
+            <ColumnTitle>{t("footer.support.title")}</ColumnTitle>
+            <FooterLink href="#">{t("footer.support.helpCenter")}</FooterLink>
+            <FooterLink href="#">{t("footer.support.community")}</FooterLink>
+            <FooterLink href="#">{t("footer.support.coaches")}</FooterLink>
+            <FooterLink href="#">{t("footer.support.blog")}</FooterLink>
           </Column>
 
           <Column>
-            <ColumnTitle>Company</ColumnTitle>
-            <FooterLink href="#">About</FooterLink>
-            <FooterLink href="#">Careers</FooterLink>
-            <FooterLink href="#">Privacy Policy</FooterLink>
-            <FooterLink href="#">Terms of Service</FooterLink>
+            <ColumnTitle>{t("footer.company.title")}</ColumnTitle>
+            <FooterLink href="#">{t("footer.company.about")}</FooterLink>
+            <FooterLink href="#">{t("footer.company.careers")}</FooterLink>
+            <FooterLink href="#">{t("footer.company.privacy")}</FooterLink>
+            <FooterLink href="#">{t("footer.company.terms")}</FooterLink>
           </Column>
         </FooterTop>
 
         <Bottom>
-          <span>© 2025 NutriAI Inc. All rights reserved.</span>
+          <span>{t("footer.bottom.copyright")}</span>
 
-          <span>Made with ❤️ for healthier lives worldwide</span>
+          <span>{t("footer.bottom.tagline")}</span>
         </Bottom>
       </div>
     </FooterShell>

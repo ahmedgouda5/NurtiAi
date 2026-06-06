@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { SectionTitle } from "@/AppFeature/shared/SectionTitle";
-import { testimonials } from "@/data/testimonials";
+import { useTestimonialsData } from "@/data/testimonials";
 import { fadeUp, staggerContainer } from "@/utils/animations";
 
 import {
@@ -20,14 +21,18 @@ import {
 import { SpanItalic } from "../Hero/styles";
 
 export default function Testimonials() {
+  const { t } = useTranslation();
+  const testimonials = useTestimonialsData();
+
   return (
     <Section id="testimonials">
       <div className="container">
         <SectionTitle
-          eyebrow="💚Testimonials"
+          eyebrow={t("testimonials.eyebrow")}
           title={
             <>
-              Real results, <SpanItalic>real people</SpanItalic>
+              {t("testimonials.title.normal")}{" "}
+              <SpanItalic>{t("testimonials.title.italic")}</SpanItalic>
             </>
           }
         />

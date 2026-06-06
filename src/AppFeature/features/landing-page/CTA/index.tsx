@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/AppFeature/shared/Button";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { fadeUp, staggerContainer } from "@/utils/animations";
 import { Actions, Banner, Section, Text, Title } from "./styles";
 import { SpanItalic } from "../Hero/styles";
@@ -9,7 +9,10 @@ import { SectionTitle } from "@/AppFeature/shared/SectionTitle";
 import { IoIosRocket } from "react-icons/io";
 import SignIn from "@/AppFeature/auth/login/page";
 import SignUp from "@/AppFeature/auth/register/page";
+
 export function CTA() {
+  const { t } = useTranslation();
+
   return (
     <Section>
       <div className="container">
@@ -23,16 +26,17 @@ export function CTA() {
           <SectionTitle
             eyebrow={
               <span className="flex items-center gap-2">
-                <IoIosRocket size={18} /> Limited Time Offer
+                <IoIosRocket size={18} /> {t("cta.eyebrow")}
               </span>
             }
           />
           <Title as={motion.h2} variants={fadeUp}>
-            Start your <SpanItalic> free month</SpanItalic> today
+            {t("cta.title.normal")}{" "}
+            <SpanItalic>{t("cta.title.highlight")}</SpanItalic>{" "}
+            {t("cta.title.suffix")}
           </Title>
           <Text as={motion.p} variants={fadeUp}>
-            Join 250,000+ people already transforming their health with NutriAI.
-            No credit card required for the first month.
+            {t("cta.text")}
           </Text>
           <Actions as={motion.div} variants={fadeUp}>
             <SignUp />

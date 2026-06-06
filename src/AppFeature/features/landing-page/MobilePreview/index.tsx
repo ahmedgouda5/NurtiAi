@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Section,
   Inner,
@@ -34,6 +37,8 @@ import {
 import { theme } from "@/styles/theme";
 
 const MobileApp: React.FC = () => {
+  const { t } = useTranslation();
+
   const bars = [
     { h: 55 },
     { h: 40 },
@@ -50,40 +55,45 @@ const MobileApp: React.FC = () => {
         <Left>
           <Badge>
             <BadgeIcon>📱</BadgeIcon>
-            Mobile App
+            {t("mobilePreview.badge")}
           </Badge>
 
           <Headline>
-            Track anywhere,<span>anytime</span>
+            {t("mobilePreview.headline.normal")}
+            <span>{t("mobilePreview.headline.highlight")}</span>
           </Headline>
 
-          <Subtitle>
-            Available on iOS and Android. Sync with Apple Health, Google Fit,
-            Fitbit, and 50+ devices. Real-time notifications and smart reminders
-            keep you on track 24/7.
-          </Subtitle>
+          <Subtitle>{t("mobilePreview.subtitle")}</Subtitle>
 
           <StoreButtons>
             <StoreBtn href="#">
               <StoreBtnIcon>🍎</StoreBtnIcon>
               <StoreBtnText>
-                <StoreBtnLabel>Download on</StoreBtnLabel>
-                <StoreBtnName>App Store</StoreBtnName>
+                <StoreBtnLabel>
+                  {t("mobilePreview.store.apple.label")}
+                </StoreBtnLabel>
+                <StoreBtnName>
+                  {t("mobilePreview.store.apple.name")}
+                </StoreBtnName>
               </StoreBtnText>
             </StoreBtn>
 
             <StoreBtn href="#">
               <StoreBtnIcon>▶</StoreBtnIcon>
               <StoreBtnText>
-                <StoreBtnLabel>Get it on</StoreBtnLabel>
-                <StoreBtnName>Google Play</StoreBtnName>
+                <StoreBtnLabel>
+                  {t("mobilePreview.store.google.label")}
+                </StoreBtnLabel>
+                <StoreBtnName>
+                  {t("mobilePreview.store.google.name")}
+                </StoreBtnName>
               </StoreBtnText>
             </StoreBtn>
           </StoreButtons>
 
           <Stats>
-            <StatPill>⭐ 4.9 stars (48K ratings)</StatPill>
-            <StatPill>⬇ 2M+ downloads</StatPill>
+            <StatPill>{t("mobilePreview.stats.rating")}</StatPill>
+            <StatPill>{t("mobilePreview.stats.downloads")}</StatPill>
           </Stats>
         </Left>
 
@@ -92,48 +102,52 @@ const MobileApp: React.FC = () => {
           {/* Card A – Nutrition */}
           <CardA>
             <CalorieBar />
-            <CalorieText>Calories: 1847 / 2200</CalorieText>
+            <CalorieText>{t("mobilePreview.cardA.calories")}</CalorieText>
 
             <MacroRow>
               <MacroPill color={theme.colors.primary}>
                 <div className="pct">72%</div>
-                <div className="lbl">Protein</div>
+                <div className="lbl">
+                  {t("mobilePreview.cardA.macros.protein")}
+                </div>
               </MacroPill>
               <MacroPill color={theme.colors.amber}>
                 <div className="pct">55%</div>
-                <div className="lbl">Carbs</div>
+                <div className="lbl">
+                  {t("mobilePreview.cardA.macros.carbs")}
+                </div>
               </MacroPill>
               <MacroPill color={theme.colors.blue}>
                 <div className="pct">48%</div>
-                <div className="lbl">Fat</div>
+                <div className="lbl">{t("mobilePreview.cardA.macros.fat")}</div>
               </MacroPill>
             </MacroRow>
 
-            <MealTitle>🔥 Today&apos;s Meals</MealTitle>
+            <MealTitle>{t("mobilePreview.cardA.mealsTitle")}</MealTitle>
             <MealRow>
-              <span>Breakfast</span>
+              <span>{t("mobilePreview.cardA.meals.breakfast")}</span>
               <span>420 kcal</span>
             </MealRow>
             <MealRow>
-              <span>Lunch</span>
+              <span>{t("mobilePreview.cardA.meals.lunch")}</span>
               <span>680 kcal</span>
             </MealRow>
             <MealRow>
-              <span>Dinner</span>
+              <span>{t("mobilePreview.cardA.meals.dinner")}</span>
               <span>747 kcal</span>
             </MealRow>
           </CardA>
 
           {/* Card B – AI Scan */}
           <CardB>
-            <ScanLabel>AI Scan Result</ScanLabel>
-            <ScanFood>🥗 Greek Salad</ScanFood>
-            <ScanKcal>185 kcal</ScanKcal>
+            <ScanLabel>{t("mobilePreview.cardB.scanLabel")}</ScanLabel>
+            <ScanFood>{t("mobilePreview.cardB.scanFood")}</ScanFood>
+            <ScanKcal>{t("mobilePreview.cardB.scanKcal")}</ScanKcal>
 
-            <StepsLabel>Weekly Steps</StepsLabel>
+            <StepsLabel>{t("mobilePreview.cardB.stepsLabel")}</StepsLabel>
             <BarsRow>
               {bars.map((b, i) => (
-                <Bar key={i} h={b.h} $active={b.active} />
+                <Bar key={i} h={b.h} $active={b.active} suppressHydrationWarning />
               ))}
             </BarsRow>
           </CardB>

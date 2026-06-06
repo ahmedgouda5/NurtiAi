@@ -165,5 +165,176 @@
         "specialty": "Flexibility"
       }
     }
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": {
+      "normal": "Simple,",
+      "italic": "transparent",
+      "suffix": "pricing"
+    },
+    "description": "Start free. Upgrade when you're ready. Cancel anytime.",
+    "mostPopular": "Most Popular",
+    "plans": {
+      "free": {
+        "name": "FREE TRIAL",
+        "price": "$0",
+        "period": "/ first month",
+        "description": "Everything you need to start your health transformation. No credit card required.",
+        "button": "Start Free Trial",
+        "features": [
+          "AI Food Scanner (20/day)",
+          "Basic Calorie Tracking",
+          "3 Workout Plans",
+          "Weekly Analytics",
+          "Coach Sessions",
+          "AI Predictions"
+        ]
+      },
+      "pro": {
+        "name": "PRO",
+        "price": "$19",
+        "period": "/ month",
+        "description": "Advanced AI tools, unlimited tracking, and detailed insights for serious health goals.",
+        "button": "Get Pro",
+        "features": [
+          "Unlimited Food Scans",
+          "Full Macro & Micro Tracking",
+          "All Workout Plans",
+          "AI Weight Prediction",
+          "Monthly Analytics",
+          "Coach Sessions"
+        ]
+      },
+      "premium": {
+        "name": "PREMIUM COACH",
+        "price": "$79",
+        "period": "/ month",
+        "description": "Everything in Pro, plus dedicated coach/doctor sessions and priority support.",
+        "button": "Get Premium",
+        "features": [
+          "Everything in Pro",
+          "4 Coach Sessions/month",
+          "Doctor Consultation",
+          "Custom Meal Plans",
+          "Priority Support 24/7",
+          "Before/After Tracking"
+        ]
+      }
+    }
+  },
+  "testimonials": {
+    "eyebrow": "💚 Testimonials",
+    "title": {
+      "normal": "Real results,",
+      "italic": "real people"
+    },
+    "items": {
+      "1": {
+        "name": "Rania K.",
+        "role": "Dubai, UAE • -8kg in 2 months",
+        "quote": "Lost 8kg in 2 months! The AI food scanner is incredibly accurate. I scan every meal and it keeps me accountable. The weekly predictions kept me motivated to stay on track."
+      },
+      "2": {
+        "name": "Ahmed M.",
+        "role": "Cairo, Egypt • +6kg muscle",
+        "quote": "The coach booking feature changed everything. Dr. Sara monitored my actual app data and gave me advice based on my real numbers. Felt like having a personal nutritionist at a fraction of the cost."
+      },
+      "3": {
+        "name": "Layla N.",
+        "role": "Riyadh, KSA • 5-month user",
+        "quote": "As someone who eats Arabic food, I was skeptical about food recognition. NutriAI recognized كباب and مقلوبة perfectly! The Arabic interface support is excellent and the results are super accurate."
+      }
+    }
+  },
+  "mobilePreview": {
+    "badge": "Mobile App",
+    "headline": {
+      "normal": "Track anywhere,",
+      "highlight": "anytime"
+    },
+    "subtitle": "Available on iOS and Android. Sync with Apple Health, Google Fit, Fitbit, and 50+ devices. Real-time notifications and smart reminders keep you on track 24/7.",
+    "store": {
+      "apple": {
+        "label": "Download on",
+        "name": "App Store"
+      },
+      "google": {
+        "label": "Get it on",
+        "name": "Google Play"
+      }
+    },
+    "stats": {
+      "rating": "⭐ 4.9 stars (48K ratings)",
+      "downloads": "⬇ 2M+ downloads"
+    },
+    "cardA": {
+      "calories": "Calories: 1847 / 2200",
+      "macros": {
+        "protein": "Protein",
+        "carbs": "Carbs",
+        "fat": "Fat"
+      },
+      "mealsTitle": "🔥 Today's Meals",
+      "meals": {
+        "breakfast": "Breakfast",
+        "lunch": "Lunch",
+        "dinner": "Dinner"
+      }
+    },
+    "cardB": {
+      "scanLabel": "AI Scan Result",
+      "scanFood": "🥗 Greek Salad",
+      "scanKcal": "185 kcal",
+      "stepsLabel": "Weekly Steps"
+    }
+  },
+  "cta": {
+    "eyebrow": "Limited Time Offer",
+    "title": {
+      "normal": "Start your",
+      "highlight": "free month",
+      "suffix": "today"
+    },
+    "text": "Join 250,000+ people already transforming their health with NutriAI. No credit card required for the first month."
+  },
+  "footer": {
+    "description": "Your AI-powered health and fitness companion. Available in Arabic and English.",
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "mobileApp": "Mobile App",
+      "api": "API"
+    },
+    "support": {
+      "title": "Support",
+      "helpCenter": "Help Center",
+      "community": "Community",
+      "coaches": "Coaches",
+      "blog": "Blog"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "careers": "Careers",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "bottom": {
+      "copyright": "© 2025 NutriAI Inc. All rights reserved.",
+      "tagline": "Made with 💚 for healthier lives worldwide"
+    }
+  },
+  "chatbot": {
+    "title": "NutriAI Coach",
+    "status": "Live assistance demo",
+    "placeholder": "Ask about meals or workouts",
+    "welcome": "Hi, I can help with nutrition, workouts, and meal choices.",
+    "replies": [
+      "You are under target today. Keep protein high and avoid extra liquid calories.",
+      "That meal could use more fiber and a smaller rice portion for balance.",
+      "Try a 20-minute walk after dinner to improve recovery and glucose control."
+    ]
   }
 }
