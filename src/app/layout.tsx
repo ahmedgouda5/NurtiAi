@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   description:
     "AI-powered health, nutrition, and fitness platform for the MENA region.",
   metadataBase: new URL("https://nutri.ai"),
+  icons: {
+    icon: [{ url: "/LogoLeaf.ico", sizes: "192x192", type: "image/x-icon" }],
+    shortcut: { url: "/LogoLeaf.ico", sizes: "196x196" },
+    apple: { url: "/LogoLeaf.ico", sizes: "180x180" },
+  },
 };
 
 export default function RootLayout({

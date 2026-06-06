@@ -128,5 +128,42 @@
         "BtnCoach": "Book a session"
       }
     }
+  },
+  "coaches": {
+    "eyebrow": "👤 Expert Team",
+    "title": {
+      "normal": "Book sessions with",
+      "italic": "certified experts"
+    },
+    "description": "Our coaches and doctors monitor your NutriAI data in real time and provide personalized guidance tailored exactly to your journey.",
+    "labels": {
+      "specialty": "Specialty",
+      "rate": "Rate",
+      "reviews": "reviews",
+      "perSession": "/session"
+    },
+    "cta": "Book Session",
+    "items": {
+      "1": {
+        "name": "Dr. Sara Ahmed",
+        "title": "Nutritionist, MD",
+        "specialty": "Weight Loss"
+      },
+      "2": {
+        "name": "Mike Kowalski",
+        "title": "Fitness Coach, CSCS",
+        "specialty": "Strength"
+      },
+      "3": {
+        "name": "Dr. Lina Rashid",
+        "title": "Sports Medicine",
+        "specialty": "Recovery"
+      },
+      "4": {
+        "name": "James Torres",
+        "title": "Yoga & Mindfulness",
+        "specialty": "Flexibility"
+      }
+    }
   }
 }

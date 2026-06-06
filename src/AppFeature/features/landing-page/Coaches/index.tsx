@@ -1,5 +1,5 @@
-import React from "react";
-
+"use client";
+import { useTranslation } from "react-i18next";
 import {
   Avatar,
   Bottom,
@@ -18,66 +18,61 @@ import {
   Top,
   Value,
 } from "./style";
-import { coachesData } from "@/data/Coaches";
+import { useCoachesData } from "@/data/Coaches";
 import { SectionTitle } from "@/AppFeature/shared/SectionTitle";
 import { Button } from "@/AppFeature/shared/Button";
 import { theme } from "@/styles/theme";
 import { SpanItalic } from "../Hero/styles";
-
 const Coaches = () => {
+  const { t } = useTranslation();
+  const coaches = useCoachesData();
   return (
     <Section id="coaches">
       <Container>
         <SectionTitle
-          eyebrow={"👤Expert Team"}
+          eyebrow={t("coaches.eyebrow")}
           title={
             <>
-              Book sessions with <SpanItalic>certified experts</SpanItalic>
+              {t("coaches.title.normal")}{" "}
+              <SpanItalic>{t("coaches.title.italic")}</SpanItalic>
             </>
           }
-          description="Our coaches and doctors monitor your NutriAI data in real time and provide personalized guidance tailored exactly to your journey.
-
-"
+          description={t("coaches.description")}
         />
         <Grid>
-          {coachesData.map((coach) => (
+          {coaches.map((coach) => (
             <Card key={coach.id}>
               <Top>
                 <Avatar gradient={coach.gradient}>{coach.initials}</Avatar>
-
                 <Name>{coach.name}</Name>
-
                 <Title>{coach.title}</Title>
-
                 <Stars>★★★★★</Stars>
-
                 <Reviews>
-                  {coach.rate} ({coach.reviews} reviews)
+                  {coach.rate} ({coach.reviews} {t("coaches.labels.reviews")})
                 </Reviews>
               </Top>
-
               <Divider />
-
               <Bottom>
                 <Info>
                   <div>
-                    <Label>Specialty</Label>
+                    <Label>{t("coaches.labels.specialty")}</Label>
                     <Value>{coach.specialty}</Value>
                   </div>
-
                   <div style={{ textAlign: "right" }}>
-                    <Label>Rate</Label>
-                    <Price>${coach.price}/session</Price>
+                    <Label>{t("coaches.labels.rate")}</Label>
+                    <Price>
+                      ${coach.price}
+                      {t("coaches.labels.perSession")}
+                    </Price>
                   </div>
                 </Info>
-
                 <Button
                   style={{
                     background: theme.colors.primaryDark,
                     width: "100%",
                   }}
                 >
-                  Book Session
+                  {t("coaches.cta")}
                 </Button>
               </Bottom>
             </Card>
@@ -87,5 +82,4 @@ const Coaches = () => {
     </Section>
   );
 };
-
 export default Coaches;

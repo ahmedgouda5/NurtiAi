@@ -22,6 +22,7 @@ import { Button } from "@/AppFeature/shared/Button";
 import { SpanItalic } from "@/AppFeature/features/landing-page/Hero/styles";
 import SignUp from "@/AppFeature/auth/register/page";
 import SignIn from "@/AppFeature/auth/login/page";
+import Image from "next/image";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -62,7 +63,14 @@ export function Navbar() {
       <div className="container">
         <Inner>
           <Brand href="/">
-            <Mark>NA</Mark>
+            <Mark>
+              <Image
+                width={90}
+                height={90}
+                src="/LogoLeaf.ico"
+                alt="logo leaf"
+              />
+            </Mark>
             <h1>
               Nutri<SpanItalic>AI</SpanItalic>
             </h1>
