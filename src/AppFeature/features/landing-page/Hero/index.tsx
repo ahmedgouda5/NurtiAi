@@ -67,7 +67,7 @@ export function Hero() {
             <p>محلل تغذية ذكي بالذكاء الاصطناعي</p>
             <Actions as={motion.div} variants={fadeUp}>
               <SignUp />
-              <Button>
+              <Button href="/dashboard">
                 <FaCamera />
                 {t("hero.actions.scanFood")}
               </Button>
