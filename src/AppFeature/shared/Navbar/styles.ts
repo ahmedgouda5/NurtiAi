@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 /* ================= HEADER ================= */
@@ -21,7 +22,7 @@ export const Inner = styled.div`
 `;
 
 /* ================= BRAND ================= */
-export const Brand = styled.a`
+export const Brand = styled.div`
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
@@ -33,7 +34,6 @@ export const Brand = styled.a`
   text-decoration: none;
   color: var(--color-text);
 `;
-
 export const Mark = styled.span`
   display: grid;
   place-items: center;

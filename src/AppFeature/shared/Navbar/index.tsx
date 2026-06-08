@@ -23,6 +23,7 @@ import { SpanItalic } from "@/AppFeature/features/landing-page/Hero/styles";
 import SignUp from "@/AppFeature/auth/register/page";
 import SignIn from "@/AppFeature/auth/login/page";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -62,18 +63,20 @@ export function Navbar() {
     <Bar>
       <div className="container">
         <Inner>
-          <Brand href="/">
-            <Mark>
-              <Image
-                width={90}
-                height={90}
-                src="/LogoLeaf.ico"
-                alt="logo leaf"
-              />
-            </Mark>
-            <h1>
-              Nutri<SpanItalic>AI</SpanItalic>
-            </h1>
+          <Brand>
+            <Link href="/" className="flex items-center gap-3">
+              <Mark>
+                <Image
+                  width={90}
+                  height={90}
+                  src="/LogoLeaf.ico"
+                  alt="logo leaf"
+                />
+              </Mark>
+              <h1>
+                Nutri<SpanItalic>AI</SpanItalic>
+              </h1>
+            </Link>
           </Brand>
 
           <DesktopNav>

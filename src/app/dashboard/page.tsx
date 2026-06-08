@@ -1,90 +1,45 @@
-"use client";
+import { MeasuersBoxes } from "@/AppFeature/Dashboard/Overview/MeasuersBoxes";
 
-import { useTranslation } from "react-i18next";
-
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
-import { theme } from "@/styles/theme";
-import { AppSidebar } from "@/AppFeature/Dashboard/app-sidebar";
-
-export default function Page() {
-  const { i18n } = useTranslation();
-
-  const isArabic = i18n.language === "ar";
-
+const page = () => {
   return (
-    <div dir={isArabic ? "rtl" : "ltr"}>
-      <SidebarProvider>
-        <AppSidebar side={isArabic ? "right" : "left"} />
-
-        <SidebarInset style={{ backgroundColor: theme.colors.bg }}>
-          <header
-            className="flex h-16 shrink-0 items-center gap-2"
-            style={{
-              backgroundColor: theme.colors.bg2,
-              borderBottom: `1px solid ${theme.colors.border}`,
-            }}
-          >
-            <div className="flex items-center gap-2 px-3">
-              <SidebarTrigger
-                style={{ color: theme.colors.textSecondary }}
-                className="hover:bg-transparent focus-visible:ring-0"
-              />
-
-              <Separator
-                orientation="vertical"
-                className="mr-2 data-vertical:h-4 data-vertical:self-auto"
-                style={{ backgroundColor: theme.colors.border }}
-              />
-
-              <Breadcrumb>
-                <BreadcrumbList>
-                  <BreadcrumbItem className="hidden md:block">
-                    <BreadcrumbLink
-                      href="#"
-                      style={{ color: theme.colors.textSecondary }}
-                    >
-                      NutriAI
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-
-                  <BreadcrumbSeparator
-                    className="hidden md:block"
-                    style={{ color: theme.colors.textSecondary }}
-                  />
-
-                  <BreadcrumbItem>
-                    <BreadcrumbPage
-                      style={{ color: theme.colors.text }}
-                      className="font-medium"
-                    >
-                      AI-Powered Health Platform
-                    </BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
-            </div>
-          </header>
-
-          <div className="flex flex-1 flex-col gap-4 p-4">
-            <div>
-              <h1>Build Your Application</h1>
-            </div>
-          </div>
-        </SidebarInset>
-      </SidebarProvider>
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <MeasuersBoxes
+        title="Calories Today"
+        value="1200"
+        subtitle="of 2,200 goal"
+        valueColor="text-[#00D68F]"
+        progress={60}
+        progressColor={["#00D68F", "#38BDF8"]}
+      />
+      <MeasuersBoxes
+        title="Calories Burned"
+        value="342
+"
+        subtitle="kcal from exercise
+"
+        valueColor="text-[#FF6B6B]"
+        progress={40}
+        progressColor={["#FF6B6B", "#F59E0B"]}
+      />
+      <MeasuersBoxes
+        title="Current Weight
+"
+        value="77.8 kg
+"
+        subtitle=" −0.4 this week
+"
+        valueColor="text-[#FFFFFF]"
+      />
+      <MeasuersBoxes
+        title="Weekly Streak
+"
+        value="14 🔥"
+        subtitle="days in a row!
+"
+        valueColor="text-[#F59E0B]"
+      />
     </div>
   );
-}
+};
+
+export default page;
