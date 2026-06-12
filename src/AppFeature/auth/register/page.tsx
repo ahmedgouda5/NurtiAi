@@ -6,221 +6,195 @@ import { theme } from "@/styles/theme";
 import { fadeUp, springTransition } from "@/utils/animations";
 import { motion } from "framer-motion";
 
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { SignUpSchema } from "@/app/Schemes/AuthSchema";
 import { z } from "zod";
-import { FaXmark } from "react-icons/fa6";
-import { FaRocket } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
+import { SignUpSchema } from "@/app/Schemes/AuthSchema";
+import { useRegisterForm, type Step1Data } from "./RegisterFormContext";
+import { ButtonBase } from "@/AppFeature/shared/Button/styles";
 
-type SignUpType = z.infer<typeof SignUpSchema>;
+// Step 1 only needs these fields
+const Step1Schema = SignUpSchema.pick({
+  firstName: true,
+  lastName: true,
+  email: true,
+  password: true,
+  country: true,
+  city: true,
+});
+
+type Step1Type = z.infer<typeof Step1Schema>;
 
 const SignUp = () => {
-  const { t } = useTranslation();
+  const { saveStep1, step1Data } = useRegisterForm();
+
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isSubmitting },
-  } = useForm<SignUpType>({
-    resolver: zodResolver(SignUpSchema),
+  } = useForm<Step1Type>({
+    resolver: zodResolver(Step1Schema),
     mode: "onBlur",
     defaultValues: {
-      email: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      weight: undefined as any,
-      height: undefined as any,
-      birthDate: "",
-      gender: "male",
-      goals: "stay in shape",
-      country: "",
-      city: "",
+      email: step1Data.email ?? "",
+      password: step1Data.password ?? "",
+      firstName: step1Data.firstName ?? "",
+      lastName: step1Data.lastName ?? "",
+      country: step1Data.country ?? "",
+      city: step1Data.city ?? "",
     },
   });
 
-  function onSubmit(data: SignUpType) {
-    console.log(data);
-    reset();
+  function onSubmit(data: Step1Type) {
+    saveStep1(data as Step1Data);
   }
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button
-          style={{
-            backgroundColor: theme.colors.primaryDark,
-            color: "black",
-          }}
-        >
-          <FaRocket size={18} /> {t("navbar.Sign Up")}
-        </Button>
-      </AlertDialogTrigger>
-
-      <AlertDialogContent
+    <div className="">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        animate="visible"
+        transition={springTransition}
+        className="mx-auto max-w-4xl rounded-3xl border p-6 md:p-8"
         style={{
-          width: "700px",
-          maxWidth: "90vw",
           background: theme.colors.bg2,
-          color: theme.colors.text,
-          borderRadius: theme.radius,
-          border: `1px solid ${theme.colors.border}`,
+          borderColor: theme.colors.border,
         }}
       >
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          transition={springTransition}
-        >
-          <AlertDialogHeader className="flex flex-row items-center justify-between">
-            <AlertDialogTitle className="text-2xl font-bold">
-              Create Account 🚀
-            </AlertDialogTitle>
-
-            <AlertDialogCancel>
-              <FaXmark className="text-black" />
-            </AlertDialogCancel>
-          </AlertDialogHeader>
-
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="mt-4 grid grid-cols-2 gap-4"
+        <div className="mb-8">
+          <h1
+            className="text-3xl font-bold"
+            style={{ color: theme.colors.text }}
           >
-            {/* First Name */}
-            <div>
-              <input
-                placeholder="First Name"
-                {...register("firstName")}
-                className="input"
-              />
-              {errors.firstName && (
-                <p className="text-red-500 text-sm">
-                  {errors.firstName.message}
-                </p>
-              )}
-            </div>
+            Create Account 🚀
+          </h1>
 
-            {/* Last Name */}
-            <div>
-              <input
-                placeholder="Last Name"
-                {...register("lastName")}
-                className="input"
-              />
-              {errors.lastName && (
-                <p className="text-red-500 text-sm">
-                  {errors.lastName.message}
-                </p>
-              )}
-            </div>
+          <p className="mt-2" style={{ color: theme.colors.textSecondary }}>
+            Step 1 of 2 — Tell us about yourself.
+          </p>
+        </div>
 
-            {/* Email */}
-            <div className="col-span-2">
-              <input
-                type="email"
-                placeholder="Email"
-                {...register("email")}
-                className="input"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
-              )}
-            </div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid grid-cols-1 gap-4 md:grid-cols-2"
+        >
+          {/* First Name */}
+          <div>
+            <input
+              placeholder="First Name"
+              {...register("firstName")}
+              className="input"
+            />
 
-            {/* Password */}
-            <div className="col-span-2">
-              <input
-                type="password"
-                placeholder="Password"
-                {...register("password")}
-                className="input"
-              />
-              {errors.password && (
-                <p className="text-red-500 text-sm">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
+            {errors.firstName && (
+              <p className="mt-1 text-sm text-red-500">
+                {errors.firstName.message}
+              </p>
+            )}
+          </div>
 
-            {/* Country */}
+          {/* Last Name */}
+          <div>
+            <input
+              placeholder="Last Name"
+              {...register("lastName")}
+              className="input"
+            />
+
+            {errors.lastName && (
+              <p className="mt-1 text-sm text-red-500">
+                {errors.lastName.message}
+              </p>
+            )}
+          </div>
+
+          {/* Email */}
+          <div className="md:col-span-2">
+            <input
+              type="email"
+              placeholder="Email"
+              {...register("email")}
+              className="input"
+            />
+
+            {errors.email && (
+              <p className="mt-1 text-sm text-red-500">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+
+          {/* Password */}
+          <div className="md:col-span-2">
+            <input
+              type="password"
+              placeholder="Password"
+              {...register("password")}
+              className="input"
+            />
+
+            {errors.password && (
+              <p className="mt-1 text-sm text-red-500">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+
+          {/* Country */}
+          <div>
             <input
               placeholder="Country"
               {...register("country")}
               className="input"
             />
+            {errors.country && (
+              <p className="mt-1 text-sm text-red-500">
+                {errors.country.message}
+              </p>
+            )}
+          </div>
 
-            {/* City */}
+          {/* City */}
+          <div>
             <input placeholder="City" {...register("city")} className="input" />
+            {errors.city && (
+              <p className="mt-1 text-sm text-red-500">{errors.city.message}</p>
+            )}
+          </div>
 
-            {/* Weight */}
-            <input
-              type="number"
-              placeholder="Weight"
-              {...register("weight", { valueAsNumber: true })}
-              className="input"
-            />
-
-            {/* Height */}
-            <input
-              type="number"
-              placeholder="Height"
-              {...register("height", { valueAsNumber: true })}
-              className="input"
-            />
-
-            {/* Birth Date */}
-            <input
-              type="date"
-              {...register("birthDate")}
-              className="input col-span-2"
-            />
-
-            {/* Gender */}
-            <select {...register("gender")} className="input col-span-1">
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-
-            {/* Goals */}
-            <select {...register("goals")} className="input col-span-1">
-              <option value="lose weight">Lose Weight</option>
-              <option value="gain weight">Gain Weight</option>
-              <option value="build muscle">Build Muscle</option>
-              <option value="stay in shape">Stay in Shape</option>
-            </select>
-
-            {/* Submit */}
-            <Button disabled={isSubmitting} className="col-span-2 w-full mt-2">
-              {isSubmitting ? "Creating..." : "Create Account"}
-            </Button>
-          </form>
-        </motion.div>
-      </AlertDialogContent>
+          {/* Next */}
+          <div className="col-span-1 mt-2 md:col-span-2">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`w-full rounded-lg p-3 text-white`}
+              style={{
+                background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.primaryDark})`,
+              }}
+            >
+              Next →
+            </button>
+          </div>
+        </form>
+      </motion.div>
 
       <style jsx>{`
         .input {
           width: 100%;
-          padding: 6px 18px;
+          padding: 12px 16px;
           border-radius: ${theme.radius};
           background: ${theme.colors.bg3};
           border: 1px solid ${theme.colors.border};
           color: ${theme.colors.text};
           outline: none;
         }
+
+        .input:focus {
+          border-color: ${theme.colors.primaryDark};
+        }
       `}</style>
-    </AlertDialog>
+    </div>
   );
 };
 

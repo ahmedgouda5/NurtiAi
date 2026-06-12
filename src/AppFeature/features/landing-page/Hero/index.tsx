@@ -33,6 +33,9 @@ import {
 import { FaCamera } from "react-icons/fa";
 import SignUp from "@/AppFeature/auth/register/page";
 import { useTranslation } from "react-i18next";
+import { ButtonLink } from "@/AppFeature/shared/Button/styles";
+import { FaRocket } from "react-icons/fa6";
+import { theme } from "@/styles/theme";
 
 const stats = [
   { value: "240K+", label: "meals analyzed" },
@@ -66,7 +69,15 @@ export function Hero() {
             </Subtitle>
             <p>محلل تغذية ذكي بالذكاء الاصطناعي</p>
             <Actions as={motion.div} variants={fadeUp}>
-              <SignUp />
+              <ButtonLink
+                style={{
+                  backgroundColor: theme.colors.primaryDark,
+                  color: "black",
+                }}
+                href="/auth/register"
+              >
+                <FaRocket size={18} /> {t("navbar.Sign Up")}
+              </ButtonLink>
               <Button href="/dashboard">
                 <FaCamera />
                 {t("hero.actions.scanFood")}

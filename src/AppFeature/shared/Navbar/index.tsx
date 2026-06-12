@@ -1,5 +1,4 @@
 "use client";
-
 import { useCallback, useEffect, useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
@@ -20,10 +19,12 @@ import {
 
 import { Button } from "@/AppFeature/shared/Button";
 import { SpanItalic } from "@/AppFeature/features/landing-page/Hero/styles";
-import SignUp from "@/AppFeature/auth/register/page";
 import SignIn from "@/AppFeature/auth/login/page";
 import Image from "next/image";
 import Link from "next/link";
+import { ButtonLink } from "../Button/styles";
+import { theme } from "@/styles/theme";
+import { FaRocket } from "react-icons/fa6";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -94,7 +95,15 @@ export function Navbar() {
               </Button>
 
               <SignIn />
-              <SignUp />
+              <ButtonLink
+                style={{
+                  backgroundColor: theme.colors.primaryDark,
+                  color: "black",
+                }}
+                href="/auth/register"
+              >
+                <FaRocket size={18} /> {t("navbar.Sign Up")}
+              </ButtonLink>
             </div>
 
             <MobileMenuButton
@@ -119,7 +128,7 @@ export function Navbar() {
 
           <MobileAuth>
             <SignIn />
-            <SignUp />
+            <ButtonLink href="/auth/register">{t("navbar.Sign Up")}</ButtonLink>
 
             <Button onClick={toggleLanguage}>
               {currentLang === "en" ? "العربية" : "English"}

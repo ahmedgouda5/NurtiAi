@@ -36,4 +36,12 @@ export const SignUpSchema = z.object({
     "build muscle",
     "stay in shape",
   ]),
+
+  maritalStatus: z.enum(["single", "married", "divorced", "widowed"]),
+
+  financialStatus: z.enum(["low", "middle", "high"]),
+
+  healthConditions: z
+    .array(z.string())
+    .min(1, "Please select at least one option (choose 'None' if healthy)"),
 });

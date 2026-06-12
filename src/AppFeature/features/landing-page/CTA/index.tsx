@@ -9,6 +9,9 @@ import { SectionTitle } from "@/AppFeature/shared/SectionTitle";
 import { IoIosRocket } from "react-icons/io";
 import SignIn from "@/AppFeature/auth/login/page";
 import SignUp from "@/AppFeature/auth/register/page";
+import { ButtonLink } from "@/AppFeature/shared/Button/styles";
+import { theme } from "@/styles/theme";
+import { FaRocket } from "react-icons/fa6";
 
 export function CTA() {
   const { t } = useTranslation();
@@ -39,7 +42,15 @@ export function CTA() {
             {t("cta.text")}
           </Text>
           <Actions as={motion.div} variants={fadeUp}>
-            <SignUp />
+            <ButtonLink
+              style={{
+                backgroundColor: theme.colors.primaryDark,
+                color: "black",
+              }}
+              href="/auth/register"
+            >
+              <FaRocket size={18} /> {t("navbar.Sign Up")}
+            </ButtonLink>
             <SignIn />
           </Actions>
         </Banner>
