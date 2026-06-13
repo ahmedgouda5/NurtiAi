@@ -3,9 +3,22 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { fadeUp, springTransition } from "@/utils/animations";
-import { theme } from "@/styles/theme";
-import { Button } from "@/AppFeature/shared/Button";
 import { useRegisterForm } from "../RegisterFormContext";
+import {
+  Container,
+  Card,
+  Header,
+  Title,
+  Subtitle,
+  CardsGrid,
+  StatusCard,
+  CardEmoji,
+  CardLabel,
+  ErrorText,
+  ActionsRow,
+  BackButton,
+  SubmitButton,
+} from "./style";
 
 type MaritalStatus = "single" | "married" | "divorced" | "widowed";
 
@@ -35,35 +48,23 @@ const MaritalStatusStep = () => {
   }
 
   return (
-    <div>
+    <Container>
       <motion.div
         variants={fadeUp}
         initial="hidden"
         animate="visible"
         transition={springTransition}
-        className="mx-auto max-w-4xl rounded-3xl border p-6 md:p-8"
-        style={{
-          background: theme.colors.bg2,
-          borderColor: theme.colors.border,
-        }}
       >
-        <div className="mb-8">
-          <h1
-            className="text-3xl font-bold"
-            style={{ color: theme.colors.text }}
-          >
-            Your Relationship Status 💑
-          </h1>
-          <p className="mt-2" style={{ color: theme.colors.textSecondary }}>
-            Step 3 of 5 — This helps us personalise your nutrition plan.
-          </p>
-        </div>
+        <Card>
+          <Header>
+            <Title>Your Relationship Status 💑</Title>
+            <Subtitle>
+              Step 3 of 5 — This helps us personalise your nutrition plan.
+            </Subtitle>
+          </Header>
 
-        {/* Cards grid */}
-        <div className="cards-grid">
-          {OPTIONS.map(({ value, label, emoji }) => {
-            const isActive = selected === value;
-            return (
+          <CardsGrid>
+            {OPTIONS.map(({ value, label, emoji }) => (
               <motion.button
                 key={value}
                 type="button"
@@ -73,106 +74,26 @@ const MaritalStatusStep = () => {
                 }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="status-card rounded-2xl p-4"
-                style={{
-                  background: isActive
-                    ? theme.colors.primary + "22"
-                    : theme.colors.bg3,
-                  borderColor: isActive
-                    ? theme.colors.primary
-                    : theme.colors.border,
-                  color: theme.colors.text,
-                }}
               >
-                <span className="card-emoji">{emoji}</span>
-                <span className="card-label">{label}</span>
+                <StatusCard $isActive={selected === value}>
+                  <CardEmoji>{emoji}</CardEmoji>
+                  <CardLabel>{label}</CardLabel>
+                </StatusCard>
               </motion.button>
-            );
-          })}
-        </div>
+            ))}
+          </CardsGrid>
 
-        {error && <p className="mt-4 text-sm text-red-500">{error}</p>}
+          {error && <ErrorText>{error}</ErrorText>}
 
-        {/* Actions */}
-        <div className="mt-8 flex gap-3 justify-between">
-          <button
-            type="button"
-            onClick={goBack}
-            className="back-btn w-full"
-            style={{
-              background: theme.colors.bg3,
-              borderColor: theme.colors.border,
-              color: theme.colors.textSecondary,
-            }}
-          >
-            ← Back
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="w-full rounded-lg p-3 text-white"
-            style={{
-              background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.primaryDark})`,
-            }}
-          >
-            Next →
-          </button>
-        </div>
+          <ActionsRow>
+            <BackButton type="button" onClick={goBack}>
+              ← Back
+            </BackButton>
+            <SubmitButton onClick={handleSubmit}>Next →</SubmitButton>
+          </ActionsRow>
+        </Card>
       </motion.div>
-
-      <style jsx>{`
-        .cards-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
-        }
-        @media (min-width: 768px) {
-          .cards-grid {
-            grid-template-columns: repeat(4, 1fr);
-          }
-        }
-        .status-card {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 1.5rem 1rem;
-          border-radius: ${theme.radius};
-          border: 2px solid;
-          cursor: pointer;
-          transition:
-            background 0.2s,
-            border-color 0.2s;
-          text-align: center;
-        }
-        .card-emoji {
-          font-size: 2rem;
-          line-height: 1;
-        }
-        .card-label {
-          font-size: 1rem;
-          font-weight: 600;
-        }
-        .card-desc {
-          font-size: 0.75rem;
-        }
-        .card-check {
-          position: absolute;
-          top: 0.5rem;
-          right: 0.75rem;
-          font-size: 1rem;
-          font-weight: 700;
-        }
-        .back-btn {
-          padding: 12px 24px;
-          border-radius: ${theme.radius};
-          border: 1px solid;
-          cursor: pointer;
-          white-space: nowrap;
-          transition: background 0.2s;
-        }
-      `}</style>
-    </div>
+    </Container>
   );
 };
 

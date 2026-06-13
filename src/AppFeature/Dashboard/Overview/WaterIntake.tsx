@@ -2,6 +2,7 @@
 
 import { theme } from "@/styles/theme";
 import { useState } from "react";
+import { FaBottleWater } from "react-icons/fa6";
 import { IoIosWater } from "react-icons/io";
 
 const initialGlasses = Array.from({ length: 8 }, (_, index) => ({
@@ -51,7 +52,7 @@ const WaterIntake = () => {
       <section className="mt-12 flex justify-between">
         {glasses.map((item) => (
           <button key={item.id} onClick={() => handleAddGlass(item.id)}>
-            <IoIosWater
+            <FaBottleWater
               size={30}
               style={{
                 color: item.active

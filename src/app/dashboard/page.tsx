@@ -1,4 +1,5 @@
 import AiRecommendations from "@/AppFeature/Dashboard/Overview/AiRecommendations";
+import BMIcalculator from "@/AppFeature/Dashboard/Overview/BMIcalculator";
 import { MeasuersBoxes } from "@/AppFeature/Dashboard/Overview/MeasuersBoxes";
 import RunSteps from "@/AppFeature/Dashboard/Overview/RunSteps";
 import Sleep from "@/AppFeature/Dashboard/Overview/Sleep";
@@ -65,6 +66,7 @@ const page = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         <AiRecommendations />
         <TodayMeals />
+        <BMIcalculator />
       </div>
     </>
   );

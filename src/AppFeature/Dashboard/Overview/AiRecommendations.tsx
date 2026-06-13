@@ -28,7 +28,7 @@ const recomendations = [
 const AiRecommendations = () => {
   return (
     <div
-      className="rounded-3xl border p-5"
+      className="rounded-3xl border p-4"
       style={{
         backgroundColor: theme.colors.border,
         borderColor: theme.colors.border,

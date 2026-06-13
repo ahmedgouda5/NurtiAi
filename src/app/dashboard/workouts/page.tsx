@@ -1,5 +1,7 @@
+import Workout from "@/AppFeature/Dashboard/workout/page";
+
 const WorkoutsPage = () => {
-  return <div>workouts page</div>;
+  return <Workout />;
 };
 
 export default WorkoutsPage;

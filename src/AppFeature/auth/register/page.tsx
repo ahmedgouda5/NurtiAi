@@ -1,19 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Button } from "@/AppFeature/shared/Button";
-import { theme } from "@/styles/theme";
-import { fadeUp, springTransition } from "@/utils/animations";
-import { motion } from "framer-motion";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { SignUpSchema } from "@/app/Schemes/AuthSchema";
 import { useRegisterForm, type Step1Data } from "./RegisterFormContext";
-import { ButtonBase } from "@/AppFeature/shared/Button/styles";
+import {
+  RegisterContainer,
+  Header,
+  Title,
+  Subtitle,
+  Form,
+  InputGroup,
+  InputGroupFull,
+  Input,
+  ErrorText,
+  SubmitContainer,
+  SubmitButton,
+} from "./style";
 
-// Step 1 only needs these fields
 const Step1Schema = SignUpSchema.pick({
   firstName: true,
   lastName: true,
@@ -50,151 +56,60 @@ const SignUp = () => {
   }
 
   return (
-    <div className="">
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        animate="visible"
-        transition={springTransition}
-        className="mx-auto max-w-4xl rounded-3xl border p-6 md:p-8"
-        style={{
-          background: theme.colors.bg2,
-          borderColor: theme.colors.border,
-        }}
-      >
-        <div className="mb-8">
-          <h1
-            className="text-3xl font-bold"
-            style={{ color: theme.colors.text }}
-          >
-            Create Account 🚀
-          </h1>
+    <RegisterContainer>
+      <Header>
+        <Title>Create Account 🚀</Title>
+        <Subtitle>Step 1 of 2 — Tell us about yourself.</Subtitle>
+      </Header>
 
-          <p className="mt-2" style={{ color: theme.colors.textSecondary }}>
-            Step 1 of 2 — Tell us about yourself.
-          </p>
-        </div>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <InputGroup>
+          <Input placeholder="First Name" {...register("firstName")} />
+          {errors.firstName && (
+            <ErrorText>{errors.firstName.message}</ErrorText>
+          )}
+        </InputGroup>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-1 gap-4 md:grid-cols-2"
-        >
-          {/* First Name */}
-          <div>
-            <input
-              placeholder="First Name"
-              {...register("firstName")}
-              className="input"
-            />
+        <InputGroup>
+          <Input placeholder="Last Name" {...register("lastName")} />
+          {errors.lastName && (
+            <ErrorText>{errors.lastName.message}</ErrorText>
+          )}
+        </InputGroup>
 
-            {errors.firstName && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.firstName.message}
-              </p>
-            )}
-          </div>
+        <InputGroupFull>
+          <Input type="email" placeholder="Email" {...register("email")} />
+          {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+        </InputGroupFull>
 
-          {/* Last Name */}
-          <div>
-            <input
-              placeholder="Last Name"
-              {...register("lastName")}
-              className="input"
-            />
+        <InputGroupFull>
+          <Input
+            type="password"
+            placeholder="Password"
+            {...register("password")}
+          />
+          {errors.password && (
+            <ErrorText>{errors.password.message}</ErrorText>
+          )}
+        </InputGroupFull>
 
-            {errors.lastName && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.lastName.message}
-              </p>
-            )}
-          </div>
+        <InputGroup>
+          <Input placeholder="Country" {...register("country")} />
+          {errors.country && <ErrorText>{errors.country.message}</ErrorText>}
+        </InputGroup>
 
-          {/* Email */}
-          <div className="md:col-span-2">
-            <input
-              type="email"
-              placeholder="Email"
-              {...register("email")}
-              className="input"
-            />
+        <InputGroup>
+          <Input placeholder="City" {...register("city")} />
+          {errors.city && <ErrorText>{errors.city.message}</ErrorText>}
+        </InputGroup>
 
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.email.message}
-              </p>
-            )}
-          </div>
-
-          {/* Password */}
-          <div className="md:col-span-2">
-            <input
-              type="password"
-              placeholder="Password"
-              {...register("password")}
-              className="input"
-            />
-
-            {errors.password && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.password.message}
-              </p>
-            )}
-          </div>
-
-          {/* Country */}
-          <div>
-            <input
-              placeholder="Country"
-              {...register("country")}
-              className="input"
-            />
-            {errors.country && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.country.message}
-              </p>
-            )}
-          </div>
-
-          {/* City */}
-          <div>
-            <input placeholder="City" {...register("city")} className="input" />
-            {errors.city && (
-              <p className="mt-1 text-sm text-red-500">{errors.city.message}</p>
-            )}
-          </div>
-
-          {/* Next */}
-          <div className="col-span-1 mt-2 md:col-span-2">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`w-full rounded-lg p-3 text-white`}
-              style={{
-                background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.primaryDark})`,
-              }}
-            >
-              Next →
-            </button>
-          </div>
-        </form>
-      </motion.div>
-
-      <style jsx>{`
-        .input {
-          width: 100%;
-          padding: 12px 16px;
-          border-radius: ${theme.radius};
-          background: ${theme.colors.bg3};
-          border: 1px solid ${theme.colors.border};
-          color: ${theme.colors.text};
-          outline: none;
-        }
-
-        .input:focus {
-          border-color: ${theme.colors.primaryDark};
-        }
-      `}</style>
-    </div>
+        <SubmitContainer>
+          <SubmitButton type="submit" disabled={isSubmitting}>
+            Next →
+          </SubmitButton>
+        </SubmitContainer>
+      </Form>
+    </RegisterContainer>
   );
 };
 
