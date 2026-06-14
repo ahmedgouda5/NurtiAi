@@ -1,5 +1,5 @@
-const ProfilePage = () => {
-  return <div>Profile Page</div>;
-};
+import SettingsDashboard from "@/AppFeature/Dashboard/Settings";
 
-export default ProfilePage;
+export default function SettingsPage() {
+  return <SettingsDashboard />;
+}

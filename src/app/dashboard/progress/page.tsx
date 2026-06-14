@@ -1,7 +1,5 @@
-import React from "react";
+import ProgressDashboard from "@/AppFeature/Dashboard/Progress";
 
-const ProgressPage = () => {
-  return <div>Progress Page</div>;
-};
-
-export default ProgressPage;
+export default function ProgressPage() {
+  return <ProgressDashboard />;
+}

@@ -1,7 +1,5 @@
-import React from "react";
+import CommunityDashboard from "@/AppFeature/Dashboard/Community";
 
-const CommunityPage = () => {
-  return <div>Community Page</div>;
-};
-
-export default CommunityPage;
+export default function CommunityPage() {
+  return <CommunityDashboard />;
+}
