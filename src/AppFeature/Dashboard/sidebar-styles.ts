@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import Link from "next/link";
 import { theme } from "@/styles/theme";
 
 export const SidebarWrapper = styled.div`
@@ -33,7 +34,7 @@ export const BrandContainer = styled.div`
   z-index: 1;
 `;
 
-export const LogoLink = styled.a`
+export const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -181,17 +182,29 @@ export const NavSection = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, ${theme.colors.primary}40, ${theme.colors.blue}30);
+    background: linear-gradient(
+      180deg,
+      ${theme.colors.primary}40,
+      ${theme.colors.blue}30
+    );
     border-radius: 100px;
     transition: background 0.3s ease;
 
     &:hover {
-      background: linear-gradient(180deg, ${theme.colors.primary}70, ${theme.colors.blue}50);
+      background: linear-gradient(
+        180deg,
+        ${theme.colors.primary}70,
+        ${theme.colors.blue}50
+      );
     }
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, ${theme.colors.primary}80, ${theme.colors.blue}60);
+    background: linear-gradient(
+      180deg,
+      ${theme.colors.primary}80,
+      ${theme.colors.blue}60
+    );
   }
 
   scrollbar-width: thin;
@@ -202,7 +215,7 @@ export const NavItem = styled.div<{ $active?: boolean }>`
   margin: 0.25rem 1rem;
 `;
 
-export const NavLink = styled.a<{ $active?: boolean }>`
+export const NavLink = styled(Link)<{ $active?: boolean }>`
   display: flex;
   align-items: center;
   gap: 0.85rem;
@@ -273,7 +286,7 @@ export const FooterSection = styled.div`
   z-index: 1;
 `;
 
-export const FooterLink = styled.a<{ $highlight?: boolean }>`
+export const FooterLink = styled(Link)<{ $highlight?: boolean }>`
   display: flex;
   align-items: center;
   gap: 0.85rem;

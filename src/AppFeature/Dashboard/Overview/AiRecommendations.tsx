@@ -1,4 +1,3 @@
-"use client";
 import { theme } from "@/styles/theme";
 import { FaBrain } from "react-icons/fa6";
 const recomendations = [

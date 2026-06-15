@@ -1,6 +1,3 @@
-"use client";
-
-import { memo, useMemo } from "react";
 import { FaStar } from "react-icons/fa";
 import LeaderboardItem from "./LeaderboardItem";
 import EmptyState from "./EmptyState";
@@ -11,13 +8,10 @@ interface LeaderboardProps {
   users: LeaderboardUser[];
 }
 
-const Leaderboard = memo(({ users }: LeaderboardProps) => {
-  const sortedUsers = useMemo(
-    () => [...users].sort((a, b) => a.rank - b.rank),
-    [users]
-  );
+const Leaderboard = ({ users }: LeaderboardProps) => {
+  const sorted = [...users].sort((a, b) => a.rank - b.rank);
 
-  if (sortedUsers.length === 0) {
+  if (sorted.length === 0) {
     return (
       <SectionCard>
         <SectionTitle>
@@ -38,14 +32,12 @@ const Leaderboard = memo(({ users }: LeaderboardProps) => {
         <FaStar /> Leaderboard
       </SectionTitle>
       <LeaderboardList>
-        {sortedUsers.map((user, index) => (
+        {sorted.map((user, index) => (
           <LeaderboardItem key={user.rank} user={user} index={index} />
         ))}
       </LeaderboardList>
     </SectionCard>
   );
-});
-
-Leaderboard.displayName = "Leaderboard";
+};
 
 export default Leaderboard;

@@ -43,13 +43,9 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
           <BrandContainer>
             <LogoLink href="/">
               <LogoMark>
-                <Image
-                  width={90}
-                  height={90}
-                  src="/LogoLeaf.ico"
-                  alt="logo leaf"
-                />
+                <Image width={50} height={50} src="/LogoLeaf.ico" alt="Logo" />
               </LogoMark>
+
               <LogoText>
                 Nutri<LogoAccent>AI</LogoAccent>
               </LogoText>

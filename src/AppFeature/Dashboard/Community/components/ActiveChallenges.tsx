@@ -1,6 +1,3 @@
-"use client";
-
-import { memo, useMemo } from "react";
 import { FaTrophy } from "react-icons/fa";
 import ChallengeCard from "./ChallengeCard";
 import EmptyState from "./EmptyState";
@@ -11,17 +8,13 @@ interface ActiveChallengesProps {
   challenges: Challenge[];
 }
 
-const ActiveChallenges = memo(({ challenges }: ActiveChallengesProps) => {
-  const sortedChallenges = useMemo(
-    () =>
-      [...challenges].sort((a, b) => {
-        const order = { active: 0, popular: 1, join: 2 };
-        return order[a.badge] - order[b.badge];
-      }),
-    [challenges]
-  );
+const ActiveChallenges = ({ challenges }: ActiveChallengesProps) => {
+  const sorted = [...challenges].sort((a, b) => {
+    const order = { active: 0, popular: 1, join: 2 };
+    return order[a.badge] - order[b.badge];
+  });
 
-  if (sortedChallenges.length === 0) {
+  if (sorted.length === 0) {
     return (
       <SectionCard>
         <SectionTitle>
@@ -42,14 +35,12 @@ const ActiveChallenges = memo(({ challenges }: ActiveChallengesProps) => {
         <FaTrophy /> Active Challenges
       </SectionTitle>
       <ChallengesList>
-        {sortedChallenges.map((challenge, index) => (
+        {sorted.map((challenge, index) => (
           <ChallengeCard key={challenge.id} challenge={challenge} index={index} />
         ))}
       </ChallengesList>
     </SectionCard>
   );
-});
-
-ActiveChallenges.displayName = "ActiveChallenges";
+};
 
 export default ActiveChallenges;
