@@ -1,29 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, X, Rocket } from "lucide-react";
+import { Check, X, Crown, Zap, ArrowRight } from "lucide-react";
 
 import { SectionTitle } from "@/AppFeature/shared/SectionTitle";
-import { Button } from "@/AppFeature/shared/Button";
 
 import { fadeUp, staggerContainer } from "@/utils/animations";
 
 import {
-  Description,
-  Divider,
-  FeaturedTag,
-  Grid,
-  Item,
-  List,
-  Name,
-  Period,
-  Plan,
-  Price,
-  PriceWrapper,
   Section,
+  Grid,
+  Plan,
+  PopularBadge,
+  PremiumBadge,
+  PlanIcon,
   Header,
   Content,
   Footer,
+  Name,
+  PlanDescription,
+  PriceBlock,
+  PriceWrapper,
+  Price,
+  Period,
+  PriceNote,
+  Divider,
+  List,
+  Item,
+  UpgradeButton,
 } from "./styles";
 
 import { SpanItalic } from "../Hero/styles";
@@ -64,39 +68,45 @@ export function Pricing() {
               as={motion.article}
               variants={fadeUp}
             >
-              {/* HEADER */}
+              {plan.featured && <PopularBadge>{t("pricing.mostPopular")}</PopularBadge>}
+              {plan.premium && <PremiumBadge>Luxury</PremiumBadge>}
+
+              <PlanIcon $featured={plan.featured} $premium={plan.premium}>
+                {plan.premium ? <Crown size={28} /> : plan.featured ? <Zap size={28} /> : <Zap size={28} />}
+              </PlanIcon>
+
               <Header>
-                {plan.featured ? (
-                  <FeaturedTag>{t("pricing.mostPopular")}</FeaturedTag>
-                ) : (
-                  <div style={{ height: "3.2rem" }} />
-                )}
+                <Name $featured={plan.featured} $premium={plan.premium}>
+                  {plan.name}
+                </Name>
 
-                <Name $premium={plan.premium}>{plan.name}</Name>
+                <PriceBlock $featured={plan.featured} $premium={plan.premium}>
+                  <PriceWrapper>
+                    <Price $featured={plan.featured} $premium={plan.premium}>
+                      {plan.price}
+                    </Price>
+                    <Period>{plan.period}</Period>
+                  </PriceWrapper>
+                </PriceBlock>
 
-                <PriceWrapper>
-                  <Price>{plan.price}</Price>
-                  <Period>{plan.period}</Period>
-                </PriceWrapper>
-
-                <Description>{plan.description}</Description>
+                <PlanDescription>{plan.description}</PlanDescription>
 
                 <Divider />
               </Header>
 
-              {/* CONTENT */}
               <Content>
                 <List>
                   {plan.features.map((feature) => (
                     <Item
                       key={feature.text}
                       $active={feature.available}
+                      $featured={plan.featured}
                       $premium={plan.premium}
                     >
                       {feature.available ? (
-                        <Check size={20} />
+                        <Check size={18} />
                       ) : (
-                        <X size={20} />
+                        <X size={18} />
                       )}
                       <span>{feature.text}</span>
                     </Item>
@@ -104,20 +114,11 @@ export function Pricing() {
                 </List>
               </Content>
 
-              {/* FOOTER */}
               <Footer>
-                <Button
-                  href="/"
-                  style={{
-                    width: "100%",
-                    justifyContent: "center",
-                    padding: "18px",
-                    borderRadius: "999px",
-                  }}
-                >
-                  {plan.featured && <Rocket size={18} />}
-                  {plan.button}
-                </Button>
+                <UpgradeButton $featured={plan.featured} $premium={plan.premium}>
+                  {plan.featured ? "Get Pro Access" : plan.premium ? "Get Premium Access" : "Get Started"}
+                  <ArrowRight size={18} />
+                </UpgradeButton>
               </Footer>
             </Plan>
           ))}

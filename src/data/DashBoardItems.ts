@@ -21,6 +21,6 @@ export const menuItems = [
 ];
 
 export const bottomItems = [
-  { title: "Upgrade Plan", icon: Crown, href: "/dashboard/upgrade" },
+  { title: "Upgrade Plan", icon: Crown, href: "/dashboard/upgradePlan" },
   { title: "Back to Home", icon: ArrowLeft, href: "/" },
 ];
