@@ -1,5 +1,7 @@
+import BookCoash from "@/AppFeature/Dashboard/BookCoash/bookCoash";
+
 const BookCoachPage = () => {
-  return <div>Book Coach Page</div>;
+  return <BookCoash />;
 };
 
 export default BookCoachPage;
