@@ -1,361 +1,452 @@
-<div align="center">
+<![CDATA[<div align="center">
 
-# NutriAI
+# 🥗 NutriAI
 
-**AI-Powered Health, Nutrition & Fitness Platform for the MENA Region**
+### AI-Powered Health, Nutrition & Fitness Platform for the MENA Region
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38BDF8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-00D68F?style=flat-square)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-Auth_&_DB-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![Styled Components](https://img.shields.io/badge/Styled_Components-6-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)](https://styled-components.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-[Live Demo](https://nutriai.app) · [Report Bug](https://github.com/nutriai/app/issues) · [Request Feature](https://github.com/nutriai/app/issues)
+<br />
 
----
+A comprehensive, bilingual (English / Arabic) health & nutrition SaaS platform featuring an AI-powered food scanner, real-time macro tracking, interactive dashboards, coach booking, workout planning, and community engagement — all wrapped in a premium dark glassmorphism UI.
 
-> **Track nutrition. Scan meals. Get AI-powered workout plans.**  
-> Available in Arabic & English — built for Egypt, UAE, Saudi Arabia, and beyond.
+<br />
 
-<br/>
-
-![NutriAI Hero](WomenWithNutriAI.png)
+[Getting Started](#-getting-started) · [Features](#-features) · [Tech Stack](#-tech-stack) · [Architecture](#-architecture) · [Scripts](#-available-scripts)
 
 </div>
 
 ---
 
-## Table of Contents
+## ✨ Features
 
-- [Overview](#overview)
-- [Screenshots](#screenshots)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Environment Variables](#environment-variables)
-- [Available Scripts](#available-scripts)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
-## Overview
-
-NutriAI is a full-stack AI health platform designed specifically for the MENA market. It combines intelligent food scanning, personalized workout plans, real-time coaching, and detailed analytics — all in a single Arabic-first application.
-
-The platform addresses a critical gap: **67% of MENA adults are physically inactive** (WHO 2024), yet no existing app offers a complete, locally-aware solution with Egyptian food support, RTL interfaces, and EGP-based pricing.
-
----
-
-## Screenshots
-
-### Before & After — Real Results
-
-![Before After](Before_AfterInsta.png)
-
-### AI Coach — Workout & Nutrition Intelligence
-
-![AI Coach](AI_Coach.png)
-
-### MENA Food Database — 12,000+ Local Foods
-
-![MENA Foods](MENA_Foods.png)
-
----
-
-## Features
-
+### 🏠 Landing Page
 | Feature | Description |
-|---|---|
-| 📷 **AI Food Scanner** | Snap a photo, get instant macros & micros. Supports 12,000+ Egyptian & MENA foods |
-| 📊 **Smart Analytics** | Weekly/monthly calorie trends, weight trajectory, macro breakdowns |
-| 🏋️ **AI Workout Plans** | Personalized exercise plans that adapt to your real progress |
-| 👨‍⚕️ **Coach & Doctor Sessions** | Book 1-on-1 sessions with certified trainers who see your live data |
-| ⚖️ **Weight Prediction** | 30-day AI-powered weight forecast based on your habits |
-| 👥 **Community Challenges** | Step challenges, streaks, leaderboards, and social accountability |
-| 🌍 **Bilingual UI** | Full Arabic (RTL) + English support with seamless switching |
-| 💰 **EGP Pricing** | Local currency pricing — EGP 199/month, EGP 1,499/year |
+|---------|-------------|
+| **Hero Section** | Animated hero with live macro-tracking mockup, calorie ring, floating badges, and CTA |
+| **Sponsor Carousel** | Trusted-by brand logos section |
+| **Feature Showcase** | Grid of platform capabilities with in-view scroll animations |
+| **Analytics Dashboard Preview** | Weight progress chart, weekly calories chart, macro donut chart, and metric cards |
+| **How It Works** | Step-by-step guided walkthrough |
+| **Coaches Section** | Browse and book certified nutrition coaches |
+| **Pricing Plans** | Tiered subscription cards with feature comparison |
+| **Testimonials** | User reviews and success stories |
+| **Mobile App Preview** | Promotional section for the mobile experience |
+| **Call-to-Action** | Final conversion section with sign-up prompt |
+
+### 📊 Dashboard
+| Feature | Description |
+|---------|-------------|
+| **Overview** | Calorie intake/burn stats, weight tracking, weekly streak counter |
+| **Calories & Burned Chart** | Dual-axis recharts visualization of intake vs. expenditure |
+| **Water Intake Tracker** | Daily hydration monitoring |
+| **Sleep Tracker** | Sleep duration and quality tracking |
+| **Run & Steps** | Activity and step count monitoring |
+| **AI Recommendations** | Smart health and nutrition suggestions |
+| **Today's Meals** | Real-time daily meal log with macro breakdown |
+| **BMI Calculator** | Interactive body mass index calculator with status classification |
+| **AI Food Scanner** | Upload or capture food photos for nutritional analysis |
+| **Workout Planner** | Daily workout routines and exercise tracking |
+| **Progress Tracking** | Historical health metrics with visual progress charts |
+| **Coach Booking** | Schedule sessions with health & nutrition coaches via modal |
+| **Community Hub** | Social features and community engagement |
+| **Settings** | Profile management and app preferences |
+| **Upgrade Plan** | Premium subscription upsell with plan comparison |
+
+### 🤖 AI Chatbot
+- Floating launcher with dynamic import (zero initial bundle cost)
+- Animated panel open/close transitions
+- Conversational interface with bot/user message bubbles
+- Auto-scroll to latest message
+- Localized responses
+
+### 🌍 Internationalization (i18n)
+- Full **English** and **Arabic** language support
+- RTL layout auto-switching for Arabic
+- Sidebar position flips based on language direction
+- All UI text extracted to JSON translation files
+
+### 🔐 Authentication
+- **Login** and **Registration** with multi-step sign-up
+- Zod schema validation (email, password, weight, height, birth date, gender, goals, health conditions)
+- Supabase Auth with SSR session management via `proxy.ts`
+- Server-side and client-side Supabase client utilities
+
+### 🎨 Design System
+- Premium **dark glassmorphism** UI with gradient overlays
+- Custom theme system (`theme.ts`) with curated color palette
+- Styled-components SSR registry for flicker-free rendering
+- Animated scrollbar with gradient thumb
+- Custom 404 page with decorative rings, gradient text, and meta bar
 
 ---
 
-## Tech Stack
+## 🛠 Tech Stack
 
-**Frontend**
-- [Next.js 15](https://nextjs.org) — App Router, Server Components
-- [TypeScript](https://www.typescriptlang.org) — Type-safe codebase
-- [Tailwind CSS](https://tailwindcss.com) — Utility-first styling
-- [Syne + Outfit](https://fonts.google.com) — Display & body typography via `next/font`
-- [Chart.js](https://chartjs.org) — Analytics visualizations
-- [Framer Motion](https://www.framer.com/motion) — Animations & transitions
+### Core
 
-**Backend / AI**
-- [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) — Serverless endpoints
-- [OpenAI API](https://openai.com) — Food analysis & AI coaching
-- [Prisma](https://prisma.io) — ORM & database schema
-- [PostgreSQL](https://www.postgresql.org) — Primary database
+| Category | Technology |
+|----------|------------|
+| **Framework** | Next.js 16.2 (App Router) |
+| **Language** | TypeScript 5 |
+| **Runtime** | React 19.2 |
 
-**Infrastructure**
-- [Vercel](https://vercel.com) — Hosting & edge deployment
-- [Cloudinary](https://cloudinary.com) — Food image storage & processing
-- [Stripe](https://stripe.com) — Subscription payments (EGP support)
+### Styling & UI
 
----
+| Category | Technology |
+|----------|------------|
+| **CSS-in-JS** | Styled-Components 6 |
+| **Utility CSS** | Tailwind CSS 4 |
+| **Component Library** | shadcn/ui (Radix UI primitives) |
+| **Icons** | Lucide React, React Icons |
+| **Animations** | Framer Motion 12, CSS keyframe animations |
+| **Design Tokens** | Custom theme object + CSS custom properties |
 
-## Getting Started
+### Data & Backend
 
-### Prerequisites
+| Category | Technology |
+|----------|------------|
+| **Database & Auth** | Supabase (Auth + SSR) |
+| **SSR Auth** | `@supabase/ssr` with Next.js `proxy.ts` |
+| **API** | Next.js API Routes |
 
-- **Node.js** 18.17 or later
-- **npm**, **yarn**, **pnpm**, or **bun**
-- A PostgreSQL database (local or hosted)
-- OpenAI API key
+### Forms & Validation
 
-### Installation
+| Category | Technology |
+|----------|------------|
+| **Forms** | React Hook Form 7 |
+| **Schema Validation** | Zod 4 |
+| **Resolver** | `@hookform/resolvers` |
 
-**1. Clone the repository**
+### Charts & Data Visualization
 
-```bash
-git clone https://github.com/nutriai/app.git
-cd app
-```
+| Category | Technology |
+|----------|------------|
+| **Chart Library** | Recharts 3 |
+| **Chart Types** | Area charts, donut charts, bar charts |
+| **Custom Tooltips** | Themed `ChartTooltip` component |
 
-**2. Install dependencies**
+### Internationalization
 
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
+| Category | Technology |
+|----------|------------|
+| **i18n** | i18next + react-i18next |
+| **Detection** | i18next-browser-languagedetector |
+| **Languages** | English (`en`), Arabic (`ar`) |
 
-**3. Set up environment variables**
+### Tooling
 
-```bash
-cp .env.example .env.local
-```
-
-Fill in your values — see [Environment Variables](#environment-variables) below.
-
-**4. Set up the database**
-
-```bash
-npx prisma generate
-npx prisma db push
-```
-
-**5. Run the development server**
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-The app auto-updates as you edit files. Start with `app/page.tsx`.
+| Category | Technology |
+|----------|------------|
+| **Bundler** | Turbopack (Next.js built-in) |
+| **Linting** | ESLint 9 |
+| **Bundle Analysis** | `@next/bundle-analyzer` |
+| **Class Merging** | `clsx` + `tailwind-merge` |
+| **Variant Management** | `class-variance-authority` |
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 nutriai/
-├── app/                        # Next.js App Router
-│   ├── (auth)/                 # Auth routes: login, signup
-│   ├── (dashboard)/            # Protected dashboard routes
-│   │   ├── overview/
-│   │   ├── food-log/
-│   │   ├── workouts/
-│   │   ├── progress/
-│   │   └── profile/
-│   ├── api/                    # API route handlers
-│   │   ├── analyze-food/       # AI food scanner endpoint
-│   │   ├── workout-plan/       # AI workout generation
-│   │   ├── coach/              # Coach booking
-│   │   └── stripe/             # Payment webhooks
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx                # Landing page
+├── public/                          # Static assets (favicon)
+├── src/
+│   ├── app/                         # Next.js App Router
+│   │   ├── api/                     # API routes
+│   │   │   ├── Login/               # Login API
+│   │   │   └── Register/            # Registration API
+│   │   ├── auth/                    # Auth pages (login, register)
+│   │   ├── dashboard/               # Dashboard routes
+│   │   │   ├── book-coach/          # Coach booking page
+│   │   │   ├── community/           # Community hub
+│   │   │   ├── food-log/            # Food logging + scanner
+│   │   │   ├── profile/             # User profile
+│   │   │   ├── progress/            # Progress tracking
+│   │   │   ├── upgradePlan/         # Subscription upgrade
+│   │   │   ├── workouts/            # Workout planner
+│   │   │   ├── layout.tsx           # Dashboard shell layout
+│   │   │   └── page.tsx             # Dashboard overview
+│   │   ├── Languages/               # i18n JSON files (en, ar)
+│   │   ├── Schemes/                 # Zod validation schemas
+│   │   ├── globals.css              # Tailwind + shadcn theme
+│   │   ├── layout.tsx               # Root layout (fonts, providers)
+│   │   ├── not-found.tsx            # Custom 404 page
+│   │   └── page.tsx                 # Landing page
+│   │
+│   ├── AppFeature/                  # Feature modules
+│   │   ├── auth/                    # Auth UI (login, register forms)
+│   │   ├── charts/                  # Landing page charts
+│   │   │   ├── MacroDonutChart/
+│   │   │   ├── WeeklyCaloriesChart/
+│   │   │   └── WeightProgressChart/
+│   │   ├── chatbot/                 # AI chatbot (lazy-loaded)
+│   │   ├── Dashboard/               # Dashboard feature modules
+│   │   │   ├── Overview/            # KPI cards, charts, BMI, meals
+│   │   │   ├── BookCoash/           # Coach booking + modal
+│   │   │   ├── Community/           # Community features
+│   │   │   ├── FoodLog/             # Food scanner
+│   │   │   ├── Progress/            # Progress tracking
+│   │   │   ├── Settings/            # User settings
+│   │   │   ├── UpgradePlan/         # Plan upgrade
+│   │   │   ├── workout/             # Workout planner
+│   │   │   ├── DashboardShell.tsx   # Dashboard wrapper (sidebar + header)
+│   │   │   └── app-sidebar.tsx      # Sidebar navigation
+│   │   ├── features/landing-page/   # Landing page sections
+│   │   │   ├── Hero/
+│   │   │   ├── Analytics/
+│   │   │   ├── Features/
+│   │   │   ├── HowItWorks/
+│   │   │   ├── Coaches/
+│   │   │   ├── Pricing/
+│   │   │   ├── Testimonials/
+│   │   │   ├── MobilePreview/
+│   │   │   ├── Sponsers/
+│   │   │   └── CTA/
+│   │   └── shared/                  # Reusable UI components
+│   │       ├── Button/
+│   │       ├── Footer/
+│   │       ├── GlassCard/
+│   │       ├── Modal/
+│   │       ├── Navbar/
+│   │       ├── SectionTitle/
+│   │       └── LazySection.tsx
+│   │
+│   ├── components/                  # shadcn/ui components
+│   │   ├── charts/                  # Chart theme + tooltip
+│   │   └── ui/                      # Button, Card, Sidebar, etc.
+│   │
+│   ├── data/                        # Static data modules
+│   ├── hooks/                       # Custom React hooks
+│   ├── lib/                         # Utilities (i18n, cn)
+│   ├── providers/                   # Context providers (I18nProvider)
+│   ├── store/                       # State management (reserved)
+│   ├── styles/                      # Global styles, theme, animations
+│   ├── types/                       # TypeScript type definitions
+│   ├── utils/                       # Utility functions + Supabase clients
+│   └── proxy.ts                     # Next.js 16 request proxy (auth)
 │
-├── components/
-│   ├── ui/                     # Reusable UI primitives
-│   ├── dashboard/              # Dashboard-specific components
-│   ├── landing/                # Landing page sections
-│   ├── scanner/                # Food scanner component
-│   └── charts/                 # Chart.js wrappers
-│
-├── lib/
-│   ├── ai/                     # OpenAI integration
-│   ├── db/                     # Prisma client
-│   ├── auth/                   # Auth utilities
-│   └── utils.ts
-│
-├── prisma/
-│   └── schema.prisma
-│
-├── public/
-│   ├── logo.svg
-│   ├── WomenWithNutriAI.png    # Hero lifestyle photo
-│   ├── Before_AfterInsta.png   # Before/After result image
-│   ├── AI_Coach.png            # AI coach illustration
-│   ├── MENA_Foods.png          # MENA food database visual
-│   └── foods/                  # Local food image assets
-│
-├── messages/                   # i18n translations
-│   ├── ar.json                 # Arabic (RTL)
-│   └── en.json                 # English
-│
-└── types/                      # Global TypeScript types
+├── next.config.ts                   # Next.js configuration
+├── tsconfig.json                    # TypeScript configuration
+├── components.json                  # shadcn/ui configuration
+├── eslint.config.mjs                # ESLint configuration
+├── postcss.config.mjs               # PostCSS configuration
+└── package.json
 ```
 
 ---
 
-## Environment Variables
+## 🚀 Getting Started
 
-Create a `.env.local` file in the root directory:
+### Prerequisites
 
-```env
-# Database
-DATABASE_URL="postgresql://user:password@localhost:5432/nutriai"
+- **Node.js** ≥ 18.x
+- **npm** ≥ 9.x (or equivalent package manager)
+- **Supabase** project with Auth enabled
 
-# Authentication
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-secret-here"
-
-# OpenAI — AI food analysis & coaching
-OPENAI_API_KEY="sk-..."
-
-# Cloudinary — Image uploads
-CLOUDINARY_CLOUD_NAME="your-cloud-name"
-CLOUDINARY_API_KEY="your-api-key"
-CLOUDINARY_API_SECRET="your-api-secret"
-
-# Stripe — Payments
-STRIPE_SECRET_KEY="sk_live_..."
-STRIPE_WEBHOOK_SECRET="whsec_..."
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_live_..."
-
-# App
-NEXT_PUBLIC_APP_URL="http://localhost:3000"
-```
-
-> **Never commit `.env.local` to version control.** It is already listed in `.gitignore`.
-
----
-
-## Available Scripts
+### Installation
 
 ```bash
-# Development
-npm run dev           # Start dev server at localhost:3000
+# Clone the repository
+git clone https://github.com/your-username/nutriai.git
+cd nutriai
 
-# Production build
-npm run build         # Build optimized production bundle
-npm run start         # Start production server
-
-# Code quality
-npm run lint          # Run ESLint
-npm run type-check    # Run TypeScript compiler check
-npm run format        # Run Prettier formatter
-
-# Database
-npm run db:push       # Push schema changes to database
-npm run db:studio     # Open Prisma Studio (visual DB editor)
-npm run db:seed       # Seed database with demo data
-
-# Testing
-npm run test          # Run Jest unit tests
-npm run test:e2e      # Run Playwright end-to-end tests
+# Install dependencies
+npm install
 ```
 
----
+### Environment Variables
 
-## Deployment
+Create a `.env.local` file in the project root:
 
-### Deploy on Vercel (Recommended)
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+```
 
-The fastest way to deploy NutriAI is via the [Vercel Platform](https://vercel.com/new):
+> [!IMPORTANT]
+> Never commit `.env.local` to version control. The `.gitignore` already excludes it.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new?utm_source=nutriai)
+### Development
 
-**Steps:**
-1. Push your code to GitHub
-2. Import the repository on Vercel
-3. Add all environment variables from `.env.local`
-4. Click **Deploy**
+```bash
+npm run dev
+```
 
-Vercel automatically handles:
-- Serverless API routes
-- Edge caching
-- HTTPS certificates
-- Preview deployments per pull request
+The app will start at [http://localhost:3000](http://localhost:3000).
 
-### Other Platforms
-
-NutriAI can also be deployed on any Node.js-compatible platform:
+### Production Build
 
 ```bash
 npm run build
-npm run start
+npm start
 ```
 
-See the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for Docker, AWS, and other options.
+---
+
+## 📸 Screenshots
+
+> Screenshots coming soon. Run the project locally to explore the full experience.
+
+<!-- Uncomment and replace with actual screenshots:
+| Landing Page | Dashboard | Food Scanner |
+|:---:|:---:|:---:|
+| ![Landing](screenshots/landing.png) | ![Dashboard](screenshots/dashboard.png) | ![Scanner](screenshots/scanner.png) |
+-->
 
 ---
 
-## Localization
+## 🎯 Architecture
 
-NutriAI supports Arabic and English out of the box using [`next-intl`](https://next-intl-docs.vercel.app).
+NutriAI follows a **feature-based modular architecture** built on top of the Next.js 16 App Router.
 
-- Arabic content is stored in `messages/ar.json` with RTL layout applied globally
-- English content is in `messages/en.json`
-- Language is detected automatically from the browser, and can be toggled in the app header
+```mermaid
+graph TB
+    subgraph "App Router (src/app)"
+        A["/ (Landing Page)"]
+        B["/auth/* (Login / Register)"]
+        C["/dashboard/* (Protected)"]
+        D["/api/* (API Routes)"]
+    end
 
-To add a new language, create `messages/[locale].json` and add the locale to `i18n.ts`.
+    subgraph "Feature Modules (src/AppFeature)"
+        E["features/landing-page/*"]
+        F["Dashboard/*"]
+        G["auth/*"]
+        H["chatbot/*"]
+        I["charts/*"]
+        J["shared/*"]
+    end
+
+    subgraph "Foundation"
+        K["styles/ (Theme + GlobalStyles)"]
+        L["hooks/ (Custom Hooks)"]
+        M["utils/ (Supabase + Helpers)"]
+        N["lib/ (i18n + Utilities)"]
+        O["components/ui/ (shadcn)"]
+        P["providers/ (I18nProvider)"]
+    end
+
+    A --> E
+    C --> F
+    B --> G
+    A --> H
+    E --> I
+    E --> J
+    F --> J
+    F --> O
+    E --> K
+    E --> L
+    G --> M
+    A --> P
+```
+
+### Key Design Decisions
+
+- **Feature Colocation**: Each feature (Hero, Analytics, Dashboard Overview) contains its own `index.tsx`, `styles.ts`, and data — keeping related code together
+- **Dual Styling**: Styled-components for feature modules (CSS-in-JS with theme access) + Tailwind for utility classes and shadcn/ui components
+- **SSR Compatibility**: Custom `StyledComponentsRegistry` ensures zero-FOUC styled-components rendering with Next.js streaming
+- **Proxy-based Auth**: Supabase session refresh via Next.js 16 `proxy.ts` (replaces deprecated `middleware.ts`)
 
 ---
 
-## Contributing
+## ⚡ Performance Optimizations
 
-Contributions are welcome. Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch — `git checkout -b feature/your-feature-name`
-3. Commit your changes — `git commit -m 'feat: add your feature'`
-4. Push to the branch — `git push origin feature/your-feature-name`
-5. Open a Pull Request
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting. All contributions must pass linting and type-checking CI checks.
-
----
-
-## Learn More
-
-- [Next.js Documentation](https://nextjs.org/docs) — features and API reference
-- [Learn Next.js](https://nextjs.org/learn) — interactive tutorial
-- [Next.js GitHub](https://github.com/vercel/next.js) — feedback and contributions welcome
-- [Prisma Docs](https://www.prisma.io/docs) — database ORM
-- [OpenAI API Reference](https://platform.openai.com/docs) — AI integrations
+| Optimization | Implementation |
+|-------------|----------------|
+| **Dynamic Imports** | All landing page sections below the fold are loaded via `next/dynamic` |
+| **Lazy Section Rendering** | `LazySection` component uses `IntersectionObserver` to defer rendering until the section is near the viewport |
+| **Code Splitting** | Chatbot is fully code-split via `dynamic()` with `ssr: false` — zero cost until user interaction |
+| **Package Import Optimization** | `optimizePackageImports` in `next.config.ts` for Framer Motion, Recharts, Radix UI, Lucide, React Icons, and Supabase |
+| **Bundle Analysis** | `@next/bundle-analyzer` integrated with `ANALYZE=true` flag |
+| **SSR Style Injection** | `StyledComponentsRegistry` uses `useServerInsertedHTML` for streaming-compatible style injection |
+| **Scroll-triggered Animations** | `useInViewAnimation` hook uses native `IntersectionObserver` — disconnects after trigger for zero runtime overhead |
+| **Memoized Calculations** | BMI calculator uses `useCallback` to prevent unnecessary recalculations |
+| **Font Optimization** | Google Fonts (Outfit, Syne, Geist) loaded via `next/font` with CSS variable injection |
+| **Text Rendering** | `optimizeLegibility`, antialiased font smoothing enabled globally |
 
 ---
 
-## License
+## 🔒 Security
 
-Distributed under the MIT License. See [LICENSE](LICENSE) for details.
+| Feature | Details |
+|---------|---------|
+| **Authentication** | Supabase Auth with server-side session validation |
+| **Session Refresh** | Automatic cookie-based session refresh via `proxy.ts` on every request |
+| **Server/Client Separation** | Separate Supabase clients for server components (`server.ts`) and browser (`client.ts`) |
+| **Input Validation** | Zod schemas validate all auth forms (email, password, biometric data, health conditions) |
+| **Environment Variables** | Secrets stored in `.env.local`, excluded from version control |
+| **Route Protection** | Proxy intercepts all non-static routes for auth verification |
+
+---
+
+## 🌍 Browser Support
+
+| Browser | Supported |
+|---------|-----------|
+| Chrome 90+ | ✅ |
+| Firefox 90+ | ✅ |
+| Safari 15+ | ✅ |
+| Edge 90+ | ✅ |
+| Mobile Safari (iOS 15+) | ✅ |
+| Chrome Android | ✅ |
+
+> Requires browsers with support for `IntersectionObserver`, CSS `backdrop-filter`, and ES2017+.
+
+---
+
+## 📦 Available Scripts
+
+| Script | Command | Description |
+|--------|---------|-------------|
+| **Dev** | `npm run dev` | Start development server with Turbopack |
+| **Build** | `npm run build` | Create optimized production build |
+| **Start** | `npm start` | Serve the production build |
+| **Lint** | `npm run lint` | Run ESLint across the codebase |
+| **Analyze** | `npm run analyze` | Generate bundle analysis report |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'feat: add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+> Please ensure your code follows the existing patterns and passes `npm run lint` before submitting.
+
+---
+
+## 📄 License
+
+This project is **proprietary**. All rights reserved. Unauthorized reproduction, distribution, or modification is strictly prohibited.
+
+---
+
+## 👨‍💻 Author
+
+<div align="center">
+
+**Built with 💚 for the MENA health & wellness community**
+
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ahmedgouda5)
+
+</div>
 
 ---
 
 <div align="center">
 
-Built with ❤️ for the MENA region
-
-🇪🇬 Egypt · 🇦🇪 UAE · 🇸🇦 Saudi Arabia · 🇯🇴 Jordan · 🇰🇼 Kuwait
+<sub>NutriAI — Empowering healthier lives through intelligent nutrition technology.</sub>
 
 </div>
+]]>
