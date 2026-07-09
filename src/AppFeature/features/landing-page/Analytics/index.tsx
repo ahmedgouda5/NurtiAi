@@ -25,7 +25,8 @@ export function Analytics() {
     { id: 3, label: t("Analytics.metrics.labelThree"), value: "4.2m" },
     { id: 4, label: t("Analytics.metrics.labelFour"), value: "12.8k" },
   ];
-  const { ref, isVisible } = useInViewAnimation();
+  const { ref: leftRef, isVisible: leftVisible } = useInViewAnimation();
+  const { ref: rightRef, isVisible: rightVisible } = useInViewAnimation();
 
   return (
     <Section id="analytics">
@@ -41,11 +42,17 @@ export function Analytics() {
         />
 
         <Grid>
-          <Side>
+          <Side
+            ref={leftRef as React.Ref<HTMLDivElement>}
+            $isVisible={leftVisible}
+          >
             <WeightProgressChart />
             <WeeklyCaloriesChart />
           </Side>
-          <Side ref={ref as React.Ref<HTMLDivElement>} $isVisible={isVisible}>
+          <Side
+            ref={rightRef as React.Ref<HTMLDivElement>}
+            $isVisible={rightVisible}
+          >
             <MetricGrid>
               {metrics.map((metric) => (
                 <MetricCard key={metric.id}>
