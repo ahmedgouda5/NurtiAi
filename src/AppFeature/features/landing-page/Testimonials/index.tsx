@@ -1,10 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { SectionTitle } from "@/AppFeature/shared/SectionTitle";
 import { useTestimonialsData } from "@/data/testimonials";
-import { fadeUp, staggerContainer } from "@/utils/animations";
 
 import {
   Author,
@@ -19,10 +17,12 @@ import {
   Stars,
 } from "./styles";
 import { SpanItalic } from "../Hero/styles";
+import { useInViewAnimation } from "@/hooks/useInViewAnimation";
 
 export default function Testimonials() {
   const { t } = useTranslation();
   const testimonials = useTestimonialsData();
+  const { ref, isVisible } = useInViewAnimation();
 
   return (
     <Section id="testimonials">
@@ -37,26 +37,13 @@ export default function Testimonials() {
           }
         />
 
-        <Grid
-          as={motion.div}
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <Grid ref={ref as React.Ref<HTMLDivElement>} $isVisible={isVisible}>
           {testimonials.map((testimonial) => (
-            <QuoteCard
-              key={testimonial.name}
-              as={motion.blockquote}
-              variants={fadeUp}
-            >
+            <QuoteCard key={testimonial.name}>
               <Stars>★★★★★</Stars>
-
               <Quote>{`"${testimonial.quote}"`}</Quote>
-
               <Author>
                 <Avatar>{testimonial.initials}</Avatar>
-
                 <AuthorInfo>
                   <Name>{testimonial.name}</Name>
                   <Role>{testimonial.role}</Role>

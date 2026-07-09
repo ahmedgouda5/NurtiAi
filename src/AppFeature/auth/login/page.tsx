@@ -1,8 +1,12 @@
 "use client";
 import { Button } from "@/AppFeature/shared/Button";
 import { theme } from "@/styles/theme";
-import { fadeUp, springTransition } from "@/utils/animations";
-import { motion } from "framer-motion";
+import styled from "styled-components";
+import { fadeUpKeyframes, SPRING_EASE } from "@/styles/animations";
+
+const AnimatedContent = styled.div`
+  animation: ${fadeUpKeyframes} 0.55s ${SPRING_EASE} both;
+`;
 
 import {
   AlertDialog,
@@ -35,8 +39,19 @@ const SignIn = () => {
     mode: "onBlur",
   });
 
-  function OnSubmit(data: zod.infer<typeof LoginSchema>) {
-    alert(JSON.stringify(data));
+  async function OnSubmit(data: zod.infer<typeof LoginSchema>) {
+    const res = await fetch("/api/Login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const body = await res.json();
+
+    if (!res.ok) {
+      alert(body.error ?? "Sign in failed");
+      return;
+    }
+
     reset();
   }
   return (
@@ -56,12 +71,7 @@ const SignIn = () => {
           border: `1px solid ${theme.colors.border}`,
         }}
       >
-        <motion.div
-          variants={fadeUp}
-          transition={springTransition}
-          initial="hidden"
-          animate="visible"
-        >
+        <AnimatedContent>
           <AlertDialogHeader className="flex flex-row items-center justify-between">
             <AlertDialogTitle
               className="text-center text-2xl font-bold"
@@ -132,7 +142,7 @@ const SignIn = () => {
 
             <Button className="mt-2 w-full">Sign In</Button>
           </form>
-        </motion.div>
+        </AnimatedContent>
       </AlertDialogContent>
     </AlertDialog>
   );

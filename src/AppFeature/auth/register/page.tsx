@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -72,9 +71,7 @@ const SignUp = () => {
 
         <InputGroup>
           <Input placeholder="Last Name" {...register("lastName")} />
-          {errors.lastName && (
-            <ErrorText>{errors.lastName.message}</ErrorText>
-          )}
+          {errors.lastName && <ErrorText>{errors.lastName.message}</ErrorText>}
         </InputGroup>
 
         <InputGroupFull>
@@ -88,9 +85,7 @@ const SignUp = () => {
             placeholder="Password"
             {...register("password")}
           />
-          {errors.password && (
-            <ErrorText>{errors.password.message}</ErrorText>
-          )}
+          {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
         </InputGroupFull>
 
         <InputGroup>

@@ -1,12 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Check, X, Crown, Zap, ArrowRight } from "lucide-react";
-
 import { SectionTitle } from "@/AppFeature/shared/SectionTitle";
-
-import { fadeUp, staggerContainer } from "@/utils/animations";
-
 import {
   Section,
   Grid,
@@ -23,20 +18,20 @@ import {
   PriceWrapper,
   Price,
   Period,
-  PriceNote,
   Divider,
   List,
   Item,
   UpgradeButton,
 } from "./styles";
-
 import { SpanItalic } from "../Hero/styles";
 import { usePlansData } from "@/data/plans";
 import { useTranslation } from "react-i18next";
+import { useInViewAnimation } from "@/hooks/useInViewAnimation";
 
 export function Pricing() {
   const plans = usePlansData();
   const { t } = useTranslation();
+  const { ref, isVisible } = useInViewAnimation();
 
   return (
     <Section id="pricing">
@@ -53,33 +48,20 @@ export function Pricing() {
           description={t("pricing.description")}
         />
 
-        <Grid
-          as={motion.div}
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <Grid ref={ref as React.Ref<HTMLDivElement>} $isVisible={isVisible}>
           {plans.map((plan) => (
-            <Plan
-              key={plan.id}
-              $premium={plan.premium}
-              $featured={plan.featured}
-              as={motion.article}
-              variants={fadeUp}
-            >
+            <Plan key={plan.id} $premium={plan.premium} $featured={plan.featured}>
               {plan.featured && <PopularBadge>{t("pricing.mostPopular")}</PopularBadge>}
               {plan.premium && <PremiumBadge>Luxury</PremiumBadge>}
 
               <PlanIcon $featured={plan.featured} $premium={plan.premium}>
-                {plan.premium ? <Crown size={28} /> : plan.featured ? <Zap size={28} /> : <Zap size={28} />}
+                {plan.premium ? <Crown size={28} /> : <Zap size={28} />}
               </PlanIcon>
 
               <Header>
                 <Name $featured={plan.featured} $premium={plan.premium}>
                   {plan.name}
                 </Name>
-
                 <PriceBlock $featured={plan.featured} $premium={plan.premium}>
                   <PriceWrapper>
                     <Price $featured={plan.featured} $premium={plan.premium}>
@@ -88,9 +70,7 @@ export function Pricing() {
                     <Period>{plan.period}</Period>
                   </PriceWrapper>
                 </PriceBlock>
-
                 <PlanDescription>{plan.description}</PlanDescription>
-
                 <Divider />
               </Header>
 
@@ -103,11 +83,7 @@ export function Pricing() {
                       $featured={plan.featured}
                       $premium={plan.premium}
                     >
-                      {feature.available ? (
-                        <Check size={18} />
-                      ) : (
-                        <X size={18} />
-                      )}
+                      {feature.available ? <Check size={18} /> : <X size={18} />}
                       <span>{feature.text}</span>
                     </Item>
                   ))}

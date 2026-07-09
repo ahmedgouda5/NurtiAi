@@ -27,7 +27,6 @@ function RegisterSteps() {
 
   return (
     <div className="register-wrapper">
-      {/* Step indicator dots */}
       <div className="step-dots-row">
         {STEP_LABELS.map((label, i) => {
           const num = i + 1;

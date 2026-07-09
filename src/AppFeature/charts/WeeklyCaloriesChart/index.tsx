@@ -1,34 +1,24 @@
 "use client";
 
-import {
-  BarElement,
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  Tooltip,
-} from "chart.js";
-import { Bar } from "react-chartjs-2";
 import { motion } from "framer-motion";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+} from "recharts";
 import { weeklyCaloriesData } from "@/data/charts";
 import { CanvasWrap, Header, Meta, Title, Wrap } from "./styles";
 import { GlassCard } from "@/AppFeature/shared/GlassCard";
 import { useTranslation } from "react-i18next";
-
-ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
+import { ChartTooltip } from "@/components/charts/ChartTooltip";
+import { CHART_COLORS, TICK_COLOR, GRID_COLOR } from "@/components/charts/chartTheme";
 
 export function WeeklyCaloriesChart() {
-  const data = {
-    labels: weeklyCaloriesData.map((entry) => entry.label),
-    datasets: [
-      {
-        label: "Calories",
-        data: weeklyCaloriesData.map((entry) => entry.value),
-        backgroundColor: "rgba(56, 189, 248, 0.75)",
-        borderRadius: 14,
-      },
-    ],
-  };
   const { t } = useTranslation();
 
   return (
@@ -42,28 +32,47 @@ export function WeeklyCaloriesChart() {
           <Meta>1,965 avg</Meta>
         </Header>
         <CanvasWrap>
-          <Bar
-            data={data}
-            options={{
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: { display: false },
-                tooltip: {
-                  backgroundColor: "#081222",
-                  titleColor: "#F0F6FF",
-                  bodyColor: "#7A90B3",
-                },
-              },
-              scales: {
-                x: { ticks: { color: "#7A90B3" }, grid: { display: false } },
-                y: {
-                  ticks: { color: "#7A90B3" },
-                  grid: { color: "rgba(255,255,255,0.05)" },
-                },
-              },
-            }}
-          />
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              data={weeklyCaloriesData}
+              margin={{ top: 8, right: 8, left: -16, bottom: 0 }}
+              barCategoryGap="30%"
+            >
+              <CartesianGrid
+                stroke={GRID_COLOR}
+                vertical={false}
+              />
+              <XAxis
+                dataKey="label"
+                tick={{ fill: TICK_COLOR, fontSize: 12 }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <YAxis
+                tick={{ fill: TICK_COLOR, fontSize: 12 }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <Tooltip
+                content={<ChartTooltip />}
+                cursor={{ fill: "rgba(255,255,255,0.04)" }}
+              />
+              <Bar
+                dataKey="value"
+                name="Calories"
+                radius={[7, 7, 0, 0]}
+                isAnimationActive={true}
+                animationDuration={700}
+              >
+                {weeklyCaloriesData.map((_, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={CHART_COLORS.blueFill}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
         </CanvasWrap>
       </Wrap>
     </GlassCard>

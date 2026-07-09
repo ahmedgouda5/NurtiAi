@@ -1,7 +1,27 @@
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import styled, { keyframes, css } from 'styled-components';
+import { SPRING_EASE, EASE_OUT } from '@/styles/animations';
 
-export const Overlay = styled(motion.div)`
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
+
+const fadeOut = keyframes`
+  from { opacity: 1; }
+  to { opacity: 0; }
+`;
+
+const slideUp = keyframes`
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+`;
+
+const slideDown = keyframes`
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(16px) scale(0.98); }
+`;
+
+export const Overlay = styled.div<{ $isClosing?: boolean }>`
   position: fixed;
   inset: 0;
   z-index: 80;
@@ -10,9 +30,14 @@ export const Overlay = styled(motion.div)`
   padding: 1rem;
   background: rgba(1, 7, 16, 0.62);
   backdrop-filter: blur(18px);
+
+  animation: ${({ $isClosing }) =>
+    $isClosing
+      ? css`${fadeOut} 0.25s ${EASE_OUT} both`
+      : css`${fadeIn} 0.3s ${EASE_OUT} both`};
 `;
 
-export const Panel = styled(motion.div)<{ $size: 'sm' | 'md' | 'lg' }>`
+export const Panel = styled.div<{ $size: 'sm' | 'md' | 'lg'; $isClosing?: boolean }>`
   width: min(100%, ${({ $size }) => ($size === 'sm' ? '480px' : $size === 'md' ? '640px' : '860px')});
   max-height: min(88vh, 920px);
   overflow: auto;
@@ -23,6 +48,11 @@ export const Panel = styled(motion.div)<{ $size: 'sm' | 'md' | 'lg' }>`
     radial-gradient(circle at top, rgba(0, 214, 143, 0.14), transparent 55%);
   box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
   padding: clamp(1.1rem, 3vw, 2rem);
+
+  animation: ${({ $isClosing }) =>
+    $isClosing
+      ? css`${slideDown} 0.25s ${EASE_OUT} both`
+      : css`${slideUp} 0.4s ${SPRING_EASE} both`};
 `;
 
 export const ModalHeader = styled.div`

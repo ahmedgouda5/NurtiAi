@@ -1,4 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
+import { SPRING_EASE, EASE_OUT } from "@/styles/animations";
+
+const slideUp = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const slideDown = keyframes`
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(20px); }
+`;
 
 export const Launcher = styled.button`
   position: fixed;
@@ -14,7 +25,7 @@ export const Launcher = styled.button`
   box-shadow: 0 20px 50px rgba(0, 214, 143, 0.28);
 `;
 
-export const Panel = styled.div`
+export const Panel = styled.div<{ $isClosing?: boolean }>`
   position: fixed;
   right: 1.25rem;
   bottom: 5.3rem;
@@ -26,6 +37,15 @@ export const Panel = styled.div`
   backdrop-filter: blur(24px);
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
   overflow: hidden;
+
+  animation: ${({ $isClosing }) =>
+    $isClosing
+      ? css`
+          ${slideDown} 0.25s ${EASE_OUT} both
+        `
+      : css`
+          ${slideUp} 0.4s ${SPRING_EASE} both
+        `};
 `;
 
 export const Header = styled.div`

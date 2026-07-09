@@ -1,31 +1,24 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { fadeUp, staggerContainer } from "@/utils/animations";
 import { Actions, Banner, Section, Text, Title } from "./styles";
 import { SpanItalic } from "../Hero/styles";
 import { SectionTitle } from "@/AppFeature/shared/SectionTitle";
 import { IoIosRocket } from "react-icons/io";
 import SignIn from "@/AppFeature/auth/login/page";
-import SignUp from "@/AppFeature/auth/register/page";
 import { ButtonLink } from "@/AppFeature/shared/Button/styles";
 import { theme } from "@/styles/theme";
 import { FaRocket } from "react-icons/fa6";
+import { useInViewAnimation } from "@/hooks/useInViewAnimation";
 
 export function CTA() {
   const { t } = useTranslation();
+  const { ref, isVisible } = useInViewAnimation();
 
   return (
     <Section>
       <div className="container">
-        <Banner
-          as={motion.div}
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <Banner ref={ref as React.Ref<HTMLDivElement>} $isVisible={isVisible}>
           <SectionTitle
             eyebrow={
               <span className="flex items-center gap-2">
@@ -33,15 +26,13 @@ export function CTA() {
               </span>
             }
           />
-          <Title as={motion.h2} variants={fadeUp}>
+          <Title>
             {t("cta.title.normal")}{" "}
             <SpanItalic>{t("cta.title.highlight")}</SpanItalic>{" "}
             {t("cta.title.suffix")}
           </Title>
-          <Text as={motion.p} variants={fadeUp}>
-            {t("cta.text")}
-          </Text>
-          <Actions as={motion.div} variants={fadeUp}>
+          <Text>{t("cta.text")}</Text>
+          <Actions>
             <ButtonLink
               style={{
                 backgroundColor: theme.colors.primaryDark,

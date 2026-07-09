@@ -1,5 +1,6 @@
 import { theme } from "@/styles/theme";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { fadeUpKeyframes, SPRING_EASE, hiddenState } from "@/styles/animations";
 
 export const Section = styled.section`
   position: relative;
@@ -21,6 +22,39 @@ export const Grid = styled.div`
 export const Copy = styled.div`
   display: grid;
   gap: 1.1rem;
+
+  & > * {
+    animation: fadeUp 0.5s ease-out both;
+  }
+  & > *:nth-child(1) {
+    animation-delay: 0s;
+  }
+  & > *:nth-child(2) {
+    animation-delay: 0.08s;
+  }
+  & > *:nth-child(3) {
+    animation-delay: 0.16s;
+  }
+  & > *:nth-child(4) {
+    animation-delay: 0.24s;
+  }
+  & > *:nth-child(5) {
+    animation-delay: 0.32s;
+  }
+  & > *:nth-child(6) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 export const Badge = styled.div`
@@ -89,10 +123,16 @@ export const StatLabel = styled.span`
   font-size: 0.92rem;
 `;
 
-export const Mockup = styled.div`
+export const Mockup = styled.div<{ $isVisible?: boolean }>`
   position: relative;
   display: grid;
   gap: 1rem;
+  ${({ $isVisible }) =>
+    $isVisible
+      ? css`
+          animation: ${fadeUpKeyframes} 0.55s ${SPRING_EASE} both;
+        `
+      : hiddenState}
 `;
 
 export const FloatingCard = styled.div`

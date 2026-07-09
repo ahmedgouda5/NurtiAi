@@ -2,10 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AnimatePresence, motion } from "framer-motion";
 import { FiSend, FiX } from "react-icons/fi";
 import { Button } from "@/AppFeature/shared/Button";
-import { fadeUp } from "@/utils/animations";
 import {
   Bubble,
   Composer,
@@ -34,6 +32,10 @@ export function Chatbot() {
   }) as string[];
 
   const [open, setOpen] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [prevOpen, setPrevOpen] = useState(false);
+
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
@@ -47,6 +49,26 @@ export function Chatbot() {
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
+
+  if (open !== prevOpen) {
+    setPrevOpen(open);
+    if (open) {
+      setShouldRender(true);
+      setIsClosing(false);
+    } else if (shouldRender) {
+      setIsClosing(true);
+    }
+  }
+
+  useEffect(() => {
+    if (isClosing) {
+      const timer = setTimeout(() => {
+        setShouldRender(false);
+        setIsClosing(false);
+      }, 300); // matches CSS animation duration
+      return () => clearTimeout(timer);
+    }
+  }, [isClosing]);
 
   function sendMessage(text: string) {
     if (!text.trim()) return;
@@ -68,50 +90,42 @@ export function Chatbot() {
 
   return (
     <>
-      <AnimatePresence>
-        {open ? (
-          <Panel
-            as={motion.section}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
+      {shouldRender && (
+        <Panel $isClosing={isClosing}>
+          <Header>
+            <HeaderMeta>
+              <Title>{t("chatbot.title")}</Title>
+              <Status>{t("chatbot.status")}</Status>
+            </HeaderMeta>
+            <Button onClick={() => setOpen(false)} aria-label="Close chat">
+              <FiX />
+            </Button>
+          </Header>
+          <Messages>
+            {messages.map((message) => (
+              <Bubble key={message.id} $role={message.role}>
+                {message.text}
+              </Bubble>
+            ))}
+            <div ref={endRef} />
+          </Messages>
+          <Composer
+            onSubmit={(event) => {
+              event.preventDefault();
+              sendMessage(input);
+            }}
           >
-            <Header>
-              <HeaderMeta>
-                <Title>{t("chatbot.title")}</Title>
-                <Status>{t("chatbot.status")}</Status>
-              </HeaderMeta>
-              <Button onClick={() => setOpen(false)} aria-label="Close chat">
-                <FiX />
-              </Button>
-            </Header>
-            <Messages>
-              {messages.map((message) => (
-                <Bubble key={message.id} $role={message.role}>
-                  {message.text}
-                </Bubble>
-              ))}
-              <div ref={endRef} />
-            </Messages>
-            <Composer
-              onSubmit={(event) => {
-                event.preventDefault();
-                sendMessage(input);
-              }}
-            >
-              <Input
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-                placeholder={t("chatbot.placeholder")}
-              />
-              <Button type="submit" aria-label="Send message">
-                <FiSend />
-              </Button>
-            </Composer>
-          </Panel>
-        ) : null}
-      </AnimatePresence>
+            <Input
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              placeholder={t("chatbot.placeholder")}
+            />
+            <Button type="submit" aria-label="Send message">
+              <FiSend />
+            </Button>
+          </Composer>
+        </Panel>
+      )}
 
       <Launcher
         type="button"

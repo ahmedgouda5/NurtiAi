@@ -1,7 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
 import { SectionTitle } from "@/AppFeature/shared/SectionTitle";
-import { fadeUp, staggerContainer } from "@/utils/animations";
 import {
   Description,
   FeatureCard,
@@ -17,9 +15,12 @@ import { useFeaturesData } from "@/data/Featuers";
 import { SpanItalic } from "../Hero/styles";
 import i18n from "@/lib/i18n";
 import { FaArrowLeft } from "react-icons/fa6";
+import { useInViewAnimation } from "@/hooks/useInViewAnimation";
+
 export function Features() {
   const { t } = useTranslation();
   const features = useFeaturesData();
+  const { ref, isVisible } = useInViewAnimation();
 
   return (
     <Section id="features">
@@ -35,31 +36,16 @@ export function Features() {
           description={t("features.description")}
         />
 
-        <Grid
-          as={motion.div}
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <Grid ref={ref as React.Ref<HTMLDivElement>} $isVisible={isVisible}>
           {features.map((feature) => {
             const Icon = feature.icon;
-
             return (
-              <FeatureCard
-                as={motion.a}
-                href={feature.href}
-                key={feature.id}
-                variants={fadeUp}
-              >
+              <FeatureCard href={feature.href} key={feature.id}>
                 <IconWrap bg={feature.bg}>
                   <Icon />
                 </IconWrap>
-
                 <Title>{feature.title}</Title>
-
                 <Description>{feature.description}</Description>
-
                 <Meta color={feature.bg}>
                   {t("features.learnMore")}{" "}
                   {i18n.language === "en" ? <FaArrowRight /> : <FaArrowLeft />}

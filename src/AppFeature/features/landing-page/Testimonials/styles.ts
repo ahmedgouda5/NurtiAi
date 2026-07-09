@@ -1,11 +1,12 @@
 import { theme } from "@/styles/theme";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { fadeUpKeyframes, SPRING_EASE, hiddenState } from "@/styles/animations";
 
 export const Section = styled.section`
   padding: clamp(4rem, 8vw, 7rem) 0;
 `;
 
-export const Grid = styled.div`
+export const Grid = styled.div<{ $isVisible?: boolean }>`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
@@ -17,6 +18,18 @@ export const Grid = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
+
+  ${({ $isVisible }) =>
+    $isVisible
+      ? css`
+          & > * {
+            animation: ${fadeUpKeyframes} 0.55s ${SPRING_EASE} both;
+          }
+          & > *:nth-child(1) { animation-delay: 0s; }
+          & > *:nth-child(2) { animation-delay: 0.09s; }
+          & > *:nth-child(3) { animation-delay: 0.18s; }
+        `
+      : css`& > * { ${hiddenState} }`}
 `;
 
 export const QuoteCard = styled.blockquote`

@@ -92,7 +92,18 @@ export function RegisterFormProvider({
 
     setIsSubmitting(true);
     try {
-      await new Promise((res) => setTimeout(res, 1200));
+      const res = await fetch("/api/Register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fullData),
+      });
+
+      console.log(res);
+      if (!res.ok) {
+        const body = await res.json();
+        throw new Error(body.error ?? "Registration failed");
+      }
+
       router.push("/dashboard");
     } finally {
       setIsSubmitting(false);

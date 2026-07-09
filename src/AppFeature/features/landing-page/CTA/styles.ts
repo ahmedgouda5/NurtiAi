@@ -1,11 +1,12 @@
 import { theme } from "@/styles/theme";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { fadeUpKeyframes, SPRING_EASE, hiddenState } from "@/styles/animations";
 
 export const Section = styled.section`
   padding: clamp(3rem, 7vw, 6rem) 0 5rem;
 `;
 
-export const Banner = styled.div`
+export const Banner = styled.div<{ $isVisible?: boolean }>`
   padding: clamp(1.5rem, 4vw, 3rem);
   border-radius: 32px;
   border: 1px solid rgba(0, 214, 143, 0.2);
@@ -19,6 +20,19 @@ export const Banner = styled.div`
   display: grid;
   gap: 1rem;
   text-align: center;
+
+  ${({ $isVisible }) =>
+    $isVisible
+      ? css`
+          & > * {
+            animation: ${fadeUpKeyframes} 0.55s ${SPRING_EASE} both;
+          }
+          & > *:nth-child(1) { animation-delay: 0s; }
+          & > *:nth-child(2) { animation-delay: 0.09s; }
+          & > *:nth-child(3) { animation-delay: 0.18s; }
+          & > *:nth-child(4) { animation-delay: 0.27s; }
+        `
+      : css`& > * { ${hiddenState} }`}
 `;
 
 export const Title = styled.h2`

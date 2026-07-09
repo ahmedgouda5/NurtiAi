@@ -1,11 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { SectionTitle } from "@/AppFeature/shared/SectionTitle";
 import { Button } from "@/AppFeature/shared/Button";
 import { Modal } from "@/AppFeature/shared/Modal";
 import { useModal } from "@/hooks/useModal";
-import { fadeUp, staggerContainer } from "@/utils/animations";
 import {
   FooterRow,
   Grid,
@@ -18,11 +16,13 @@ import {
 import { SpanItalic } from "../Hero/styles";
 import { UseHowItsWorks } from "@/data/How_Its_Works";
 import { useTranslation } from "react-i18next";
+import { useInViewAnimation } from "@/hooks/useInViewAnimation";
 
 export function HowItWorks() {
   const steps = UseHowItsWorks();
   const coachModal = useModal();
   const { t } = useTranslation();
+  const { ref, isVisible } = useInViewAnimation();
 
   return (
     <Section>
@@ -37,15 +37,9 @@ export function HowItWorks() {
           }
         />
 
-        <Grid
-          as={motion.div}
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <Grid ref={ref as React.Ref<HTMLDivElement>} $isVisible={isVisible}>
           {steps.map((step, index) => (
-            <Step key={step.id} as={motion.article} variants={fadeUp}>
+            <Step key={step.id}>
               <StepsIcon $iconBg={step.iconBg}>{step.icon}</StepsIcon>
               <Title>
                 {index + 1}. {step.title}

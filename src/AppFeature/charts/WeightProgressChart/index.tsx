@@ -1,78 +1,31 @@
 "use client";
 
-import {
-  ArcElement,
-  CategoryScale,
-  Chart as ChartJS,
-  Filler,
-  Legend,
-  LineElement,
-  LinearScale,
-  PointElement,
-  Tooltip,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
 import { motion } from "framer-motion";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 import { weightProgressData } from "@/data/charts";
 import { CanvasWrap, Header, Meta, Title, Wrap } from "./styles";
 import { GlassCard } from "@/AppFeature/shared/GlassCard";
 import { useTranslation } from "react-i18next";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip,
-  Legend,
-  ArcElement,
-  Filler,
-);
+import { ChartTooltip } from "@/components/charts/ChartTooltip";
+import {
+  CHART_COLORS,
+  TICK_COLOR,
+  GRID_COLOR,
+  DOT_STROKE,
+  DOT_RADIUS,
+} from "@/components/charts/chartTheme";
 
 export function WeightProgressChart() {
-  const data = {
-    labels: weightProgressData.map((entry) => entry.month),
-    datasets: [
-      {
-        label: "Weight",
-        data: weightProgressData.map((entry) => entry.value),
-        borderColor: "#00D68F",
-        backgroundColor: "rgba(0, 214, 143, 0.18)",
-        pointBackgroundColor: "#00D68F",
-        pointBorderColor: "#04101f",
-        pointRadius: 5,
-        borderWidth: 3,
-        tension: 0.42,
-        fill: true,
-      },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        backgroundColor: "#081222",
-        titleColor: "#F0F6FF",
-        bodyColor: "#7A90B3",
-        borderColor: "rgba(255,255,255,0.08)",
-        borderWidth: 1,
-      },
-    },
-    scales: {
-      x: {
-        ticks: { color: "#7A90B3" },
-        grid: { color: "rgba(255,255,255,0.05)" },
-      },
-      y: {
-        ticks: { color: "#7A90B3" },
-        grid: { color: "rgba(255,255,255,0.05)" },
-      },
-    },
-  };
   const { t } = useTranslation();
+
   return (
     <GlassCard padding="0">
       <Wrap as={motion.div} whileHover={{ y: -4 }}>
@@ -84,7 +37,62 @@ export function WeightProgressChart() {
           <Meta>-5.4%</Meta>
         </Header>
         <CanvasWrap>
-          <Line data={data} options={options} />
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart
+              data={weightProgressData}
+              margin={{ top: 8, right: 8, left: -16, bottom: 0 }}
+            >
+              <defs>
+                <linearGradient id="weightGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor={CHART_COLORS.green}
+                    stopOpacity={0.18}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor={CHART_COLORS.green}
+                    stopOpacity={0}
+                  />
+                </linearGradient>
+              </defs>
+              <CartesianGrid stroke={GRID_COLOR} vertical={false} />
+              <XAxis
+                dataKey="month"
+                tick={{ fill: TICK_COLOR, fontSize: 12 }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <YAxis
+                tick={{ fill: TICK_COLOR, fontSize: 12 }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <Tooltip content={<ChartTooltip />} cursor={{ stroke: GRID_COLOR }} />
+              <Area
+                type="monotone"
+                dataKey="value"
+                name="Weight"
+                stroke={CHART_COLORS.green}
+                strokeWidth={3}
+                fill="url(#weightGradient)"
+                dot={{
+                  r: DOT_RADIUS,
+                  fill: CHART_COLORS.green,
+                  stroke: DOT_STROKE,
+                  strokeWidth: 2,
+                }}
+                activeDot={{
+                  r: DOT_RADIUS + 2,
+                  fill: CHART_COLORS.green,
+                  stroke: DOT_STROKE,
+                  strokeWidth: 2,
+                }}
+                isAnimationActive={true}
+                animationDuration={800}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
         </CanvasWrap>
       </Wrap>
     </GlassCard>

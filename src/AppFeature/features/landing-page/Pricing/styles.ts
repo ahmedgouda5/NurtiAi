@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { fadeUpKeyframes, SPRING_EASE, hiddenState } from "@/styles/animations";
 import { theme } from "@/styles/theme";
 
 export const Section = styled.section`
@@ -6,7 +7,7 @@ export const Section = styled.section`
   background: ${theme.colors.bg};
 `;
 
-export const Grid = styled.div`
+export const Grid = styled.div<{ $isVisible?: boolean }>`
   display: grid;
   gap: 2rem;
   margin-top: 4rem;
@@ -16,6 +17,18 @@ export const Grid = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
+
+  ${({ $isVisible }) =>
+    $isVisible
+      ? css`
+          & > * {
+            animation: ${fadeUpKeyframes} 0.55s ${SPRING_EASE} both;
+          }
+          & > *:nth-child(1) { animation-delay: 0s; }
+          & > *:nth-child(2) { animation-delay: 0.09s; }
+          & > *:nth-child(3) { animation-delay: 0.18s; }
+        `
+      : css`& > * { ${hiddenState} }`}
 `;
 
 export const Plan = styled.article<{

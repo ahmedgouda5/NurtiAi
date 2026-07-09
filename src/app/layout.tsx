@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Outfit, Syne, Geist } from "next/font/google";
 import "./globals.css";
 import StyledComponentsRegistry from "@/styles/StyledComponentsRegistry";
-import { Chatbot } from "@/AppFeature/chatbot";
+import { ChatbotLoader } from "@/AppFeature/chatbot/ChatbotLoader";
 import { cn } from "@/lib/utils";
 import I18nProvider from "@/providers/I18nProvider";
+
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const outfit = Outfit({
@@ -48,7 +49,7 @@ export default function RootLayout({
         <I18nProvider>
           <StyledComponentsRegistry>
             {children}
-            <Chatbot />
+            <ChatbotLoader />
           </StyledComponentsRegistry>
         </I18nProvider>
       </body>

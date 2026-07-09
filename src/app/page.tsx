@@ -1,34 +1,42 @@
+"use client";
+
 import { Navbar } from "@/AppFeature/shared/Navbar";
 import { Footer } from "@/AppFeature/shared/Footer";
 import { Hero } from "@/AppFeature/features/landing-page/Hero";
-import { Features } from "@/AppFeature/features/landing-page/Features";
-import { HowItWorks } from "@/AppFeature/features/landing-page/HowItWorks";
-import { Pricing } from "@/AppFeature/features/landing-page/Pricing";
-import MobileApp from "@/AppFeature/features/landing-page/MobilePreview";
-import { CTA } from "@/AppFeature/features/landing-page/CTA";
 import Sponser from "@/AppFeature/features/landing-page/Sponsers";
-import { Suspense } from "react";
+import { LazySection } from "@/AppFeature/shared/LazySection";
 import dynamic from "next/dynamic";
+
+const Features = dynamic(
+  () => import("@/AppFeature/features/landing-page/Features").then((m) => ({ default: m.Features })),
+);
+
+const HowItWorks = dynamic(
+  () => import("@/AppFeature/features/landing-page/HowItWorks").then((m) => ({ default: m.HowItWorks })),
+);
+
+const Pricing = dynamic(
+  () => import("@/AppFeature/features/landing-page/Pricing").then((m) => ({ default: m.Pricing })),
+);
 
 const Analytics = dynamic(
   () => import("@/AppFeature/features/landing-page/Analytics/index"),
-  {
-    loading: () => <div>Loading...</div>,
-  },
 );
 
 const CoachesSection = dynamic(
   () => import("@/AppFeature/features/landing-page/Coaches/index"),
-  {
-    loading: () => <div>Loading...</div>,
-  },
 );
 
 const TestimonialsSection = dynamic(
   () => import("@/AppFeature/features/landing-page/Testimonials/index"),
-  {
-    loading: () => <div>Loading...</div>,
-  },
+);
+
+const MobileAppSection = dynamic(
+  () => import("@/AppFeature/features/landing-page/MobilePreview"),
+);
+
+const CTA = dynamic(
+  () => import("@/AppFeature/features/landing-page/CTA").then((m) => ({ default: m.CTA })),
 );
 
 export default function Home() {
@@ -38,20 +46,38 @@ export default function Home() {
       <main>
         <Hero />
         <Sponser />
-        <Features />
-        <Suspense fallback={<div>Loading...</div>}>
+
+        <LazySection minHeight={500}>
+          <Features />
+        </LazySection>
+
+        <LazySection minHeight={500}>
           <Analytics />
-        </Suspense>
-        <HowItWorks />
-        <Suspense fallback={<div>Loading...</div>}>
+        </LazySection>
+
+        <LazySection minHeight={500}>
+          <HowItWorks />
+        </LazySection>
+
+        <LazySection minHeight={500}>
           <CoachesSection />
-        </Suspense>
-        <Pricing />
-        <Suspense fallback={<div>Loading...</div>}>
+        </LazySection>
+
+        <LazySection minHeight={500}>
+          <Pricing />
+        </LazySection>
+
+        <LazySection minHeight={500}>
           <TestimonialsSection />
-        </Suspense>
-        <MobileApp />
-        <CTA />
+        </LazySection>
+
+        <LazySection minHeight={500}>
+          <MobileAppSection />
+        </LazySection>
+
+        <LazySection minHeight={300}>
+          <CTA />
+        </LazySection>
       </main>
       <Footer />
     </>

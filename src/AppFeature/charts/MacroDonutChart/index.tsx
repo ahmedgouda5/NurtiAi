@@ -1,28 +1,22 @@
 "use client";
 
-import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
 import { motion } from "framer-motion";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 import { macroData } from "@/data/charts";
 import { CanvasWrap, Header, Meta, Title, Wrap } from "./styles";
 import { GlassCard } from "@/AppFeature/shared/GlassCard";
 import { useTranslation } from "react-i18next";
-
-ChartJS.register(ArcElement, Tooltip, Legend);
+import { ChartTooltip } from "@/components/charts/ChartTooltip";
 
 export function MacroDonutChart() {
-  const data = {
-    labels: macroData.map((entry) => entry.label),
-    datasets: [
-      {
-        data: macroData.map((entry) => entry.value),
-        backgroundColor: macroData.map((entry) => entry.color),
-        borderWidth: 0,
-        hoverOffset: 6,
-      },
-    ],
-  };
   const { t } = useTranslation();
+
   return (
     <GlassCard padding="0">
       <Wrap as={motion.div} whileHover={{ y: -4 }}>
@@ -34,22 +28,31 @@ export function MacroDonutChart() {
           <Meta>100%</Meta>
         </Header>
         <CanvasWrap>
-          <Doughnut
-            data={data}
-            options={{
-              responsive: true,
-              maintainAspectRatio: false,
-              cutout: "72%",
-              plugins: {
-                legend: { display: false },
-                tooltip: {
-                  backgroundColor: "#081222",
-                  titleColor: "#F0F6FF",
-                  bodyColor: "#7A90B3",
-                },
-              },
-            }}
-          />
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={macroData}
+                dataKey="value"
+                nameKey="label"
+                cx="50%"
+                cy="50%"
+                innerRadius="62%"
+                outerRadius="82%"
+                strokeWidth={0}
+                paddingAngle={2}
+                isAnimationActive={true}
+                animationDuration={800}
+              >
+                {macroData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={entry.color}
+                  />
+                ))}
+              </Pie>
+              <Tooltip content={<ChartTooltip />} />
+            </PieChart>
+          </ResponsiveContainer>
         </CanvasWrap>
       </Wrap>
     </GlassCard>
