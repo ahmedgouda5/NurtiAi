@@ -1,4 +1,4 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # 🥗 NutriAI
 
@@ -188,7 +188,7 @@ nutriai/
 │   │   ├── chatbot/                 # AI chatbot (lazy-loaded)
 │   │   ├── Dashboard/               # Dashboard feature modules
 │   │   │   ├── Overview/            # KPI cards, charts, BMI, meals
-│   │   │   ├── BookCoash/           # Coach booking + modal
+│   │   │   ├── BookCoach/           # Coach booking + modal
 │   │   │   ├── Community/           # Community features
 │   │   │   ├── FoodLog/             # Food scanner
 │   │   │   ├── Progress/            # Progress tracking
@@ -206,7 +206,7 @@ nutriai/
 │   │   │   ├── Pricing/
 │   │   │   ├── Testimonials/
 │   │   │   ├── MobilePreview/
-│   │   │   ├── Sponsers/
+│   │   │   ├── Sponsors/
 │   │   │   └── CTA/
 │   │   └── shared/                  # Reusable UI components
 │   │       ├── Button/
@@ -449,4 +449,3 @@ This project is **proprietary**. All rights reserved. Unauthorized reproduction,
 <sub>NutriAI — Empowering healthier lives through intelligent nutrition technology.</sub>
 
 </div>
-]]>
