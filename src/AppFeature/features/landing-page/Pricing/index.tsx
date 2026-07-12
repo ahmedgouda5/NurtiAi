@@ -50,8 +50,14 @@ export function Pricing() {
 
         <Grid ref={ref as React.Ref<HTMLDivElement>} $isVisible={isVisible}>
           {plans.map((plan) => (
-            <Plan key={plan.id} $premium={plan.premium} $featured={plan.featured}>
-              {plan.featured && <PopularBadge>{t("pricing.mostPopular")}</PopularBadge>}
+            <Plan
+              key={plan.id}
+              $premium={plan.premium}
+              $featured={plan.featured}
+            >
+              {plan.featured && (
+                <PopularBadge>{t("pricing.mostPopular")}</PopularBadge>
+              )}
               {plan.premium && <PremiumBadge>Luxury</PremiumBadge>}
 
               <PlanIcon $featured={plan.featured} $premium={plan.premium}>
@@ -83,7 +89,11 @@ export function Pricing() {
                       $featured={plan.featured}
                       $premium={plan.premium}
                     >
-                      {feature.available ? <Check size={18} /> : <X size={18} />}
+                      {feature.available ? (
+                        <Check size={18} />
+                      ) : (
+                        <X size={18} />
+                      )}
                       <span>{feature.text}</span>
                     </Item>
                   ))}
@@ -91,8 +101,15 @@ export function Pricing() {
               </Content>
 
               <Footer>
-                <UpgradeButton $featured={plan.featured} $premium={plan.premium}>
-                  {plan.featured ? "Get Pro Access" : plan.premium ? "Get Premium Access" : "Get Started"}
+                <UpgradeButton
+                  $featured={plan.featured}
+                  $premium={plan.premium}
+                >
+                  {plan.featured
+                    ? "Get Pro Access"
+                    : plan.premium
+                      ? "Get Premium Access"
+                      : "Get Started"}
                   <ArrowRight size={18} />
                 </UpgradeButton>
               </Footer>

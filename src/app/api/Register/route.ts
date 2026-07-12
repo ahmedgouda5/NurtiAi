@@ -5,8 +5,8 @@ import { cookies } from "next/headers";
 
 export async function POST(request: Request) {
   const body = await request.json();
-
   const parsed = SignUpSchema.safeParse(body);
+
   if (!parsed.success) {
     return NextResponse.json(
       {
@@ -17,30 +17,32 @@ export async function POST(request: Request) {
     );
   }
 
-  const data = parsed.data;
+  const {
+    email,
+    password,
+    firstName,
+    lastName,
+    country,
+    city,
+    weight,
+    height,
+    birthDate,
+    gender,
+    goals,
+    maritalStatus,
+    financialStatus,
+    healthConditions,
+  } = parsed.data;
 
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
+  const origin = new URL(request.url).origin;
 
   const { data: authData, error: authError } = await supabase.auth.signUp({
-    email: data.email,
-    password: data.password,
+    email,
+    password,
     options: {
-      emailRedirectTo: `${new URL(request.url).origin}/dashboard`,
-      data: {
-        first_name: data.firstName,
-        last_name: data.lastName,
-        country: data.country,
-        city: data.city,
-        weight: data.weight,
-        height: data.height,
-        birth_date: data.birthDate,
-        gender: data.gender,
-        goals: data.goals,
-        marital_status: data.maritalStatus,
-        financial_status: data.financialStatus,
-        health_conditions: data.healthConditions,
-      },
+      emailRedirectTo: `${origin}/dashboard`,
     },
   });
 
@@ -48,5 +50,54 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: authError.message }, { status: 400 });
   }
 
-  return NextResponse.json({ user: authData?.user?.id }, { status: 201 });
+  const userId = authData.user?.id;
+
+  if (!userId) {
+    return NextResponse.json(
+      { error: "Sign up succeeded but no user id was returned" },
+      { status: 500 },
+    );
+  }
+
+  const { error: profileError } = await supabase.from("profile").insert({
+    id: userId,
+    first_name: firstName,
+    last_name: lastName,
+    country,
+    city,
+    weight,
+    height,
+    birth_date: birthDate,
+    gender,
+    goals,
+    marital_status: maritalStatus,
+    financial_status: financialStatus,
+    health_conditions: healthConditions,
+  });
+
+  if (profileError) {
+    return NextResponse.json({ error: profileError.message }, { status: 400 });
+  }
+
+  return NextResponse.json(
+    {
+      user: {
+        id: userId,
+        email,
+        firstName,
+        lastName,
+        country,
+        city,
+        weight,
+        height,
+        birthDate,
+        gender,
+        goals,
+        maritalStatus,
+        financialStatus,
+        healthConditions,
+      },
+    },
+    { status: 201 },
+  );
 }

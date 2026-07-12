@@ -22,6 +22,7 @@ import { useForm } from "react-hook-form";
 import { LoginSchema } from "@/app/Schemes/AuthSchema";
 import zod from "zod";
 import { useTranslation } from "react-i18next";
+import useUserStore from "@/store/User.Store";
 
 const SignIn = () => {
   const { t } = useTranslation();
@@ -52,6 +53,27 @@ const SignIn = () => {
       return;
     }
 
+    const { user } = body;
+    const profile = user.profile;
+
+    const userData = {
+      id: user.id,
+      email: user.email,
+      firstName: profile.first_name,
+      lastName: profile.last_name,
+      country: profile.country,
+      city: profile.city,
+      weight: profile.weight,
+      height: profile.height,
+      birthDate: profile.birth_date,
+      gender: profile.gender,
+      goals: profile.goals,
+      maritalStatus: profile.marital_status,
+      financialStatus: profile.financial_status,
+      healthConditions: profile.health_conditions ?? [],
+    };
+
+    useUserStore.getState().setUser(userData);
     reset();
   }
   return (

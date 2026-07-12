@@ -16,6 +16,7 @@ import {
   MobileLink,
   MobileAuth,
 } from "./styles";
+import { FcBusinessman } from "react-icons/fc";
 
 import { Button } from "@/AppFeature/shared/Button";
 import { SpanItalic } from "@/AppFeature/features/landing-page/Hero/styles";
@@ -25,10 +26,19 @@ import Link from "next/link";
 import { ButtonLink } from "../Button/styles";
 import { theme } from "@/styles/theme";
 import { FaRocket } from "react-icons/fa6";
+import useUserStore from "@/store/User.Store";
+import { Logout } from "@/AppFeature/auth/serivces/Auth";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const { t, i18n } = useTranslation();
+  const user = useUserStore((state) => state.user);
+  const clearUser = useUserStore((state) => state.clearUser);
+
+  const handleLogout = () => {
+    Logout();
+    clearUser();
+  };
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -89,21 +99,41 @@ export function Navbar() {
           </DesktopNav>
 
           <Actions>
-            <div className="hidden md:flex gap-2">
+            <div className="hidden md:flex gap-2 items-center">
               <Button onClick={toggleLanguage}>
                 {currentLang === "en" ? "Ar" : "En"}
               </Button>
 
-              <SignIn />
-              <ButtonLink
-                style={{
-                  backgroundColor: theme.colors.primaryDark,
-                  color: "black",
-                }}
-                href="/auth/register"
-              >
-                <FaRocket size={18} /> {t("navbar.Sign Up")}
-              </ButtonLink>
+              {user ? (
+                <div className="flex items-center gap-3 ml-2">
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center font-bold"
+                    style={{
+                      backgroundColor: theme.colors.primaryDark,
+                      color: "black",
+                    }}
+                    title={`${user.firstName} ${user.lastName}`}
+                  >
+                    <Link href="/dashboard/profile">
+                      <FcBusinessman />
+                    </Link>
+                  </div>
+                  <Button onClick={handleLogout}>Logout</Button>
+                </div>
+              ) : (
+                <>
+                  <SignIn />
+                  <ButtonLink
+                    style={{
+                      backgroundColor: theme.colors.primaryDark,
+                      color: "black",
+                    }}
+                    href="/auth/register"
+                  >
+                    <FaRocket size={18} /> {t("navbar.Sign Up")}
+                  </ButtonLink>
+                </>
+              )}
             </div>
 
             <MobileMenuButton
@@ -127,8 +157,35 @@ export function Navbar() {
           ))}
 
           <MobileAuth>
-            <SignIn />
-            <ButtonLink href="/auth/register">{t("navbar.Sign Up")}</ButtonLink>
+            {user ? (
+              <div className="flex flex-col gap-4 w-full mb-4">
+                <div className="flex items-center gap-3 justify-center">
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center font-bold"
+                    style={{
+                      backgroundColor: theme.colors.primaryDark,
+                      color: "black",
+                    }}
+                  >
+                    {user.firstName?.[0]?.toUpperCase() || ""}
+                    {user.lastName?.[0]?.toUpperCase() || ""}
+                  </div>
+                  <span className="font-semibold text-lg">
+                    {user.firstName} {user.lastName}
+                  </span>
+                </div>
+                <Button onClick={handleLogout} style={{ width: "100%" }}>
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <>
+                <SignIn />
+                <ButtonLink href="/auth/register">
+                  {t("navbar.Sign Up")}
+                </ButtonLink>
+              </>
+            )}
 
             <Button onClick={toggleLanguage}>
               {currentLang === "en" ? "العربية" : "English"}

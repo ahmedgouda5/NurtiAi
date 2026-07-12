@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { FaCrown } from "react-icons/fa";
+import useUserStore from "@/store/User.Store";
 import {
   SettingsPage,
   MainGrid,
@@ -25,25 +26,28 @@ import {
 } from "./style";
 
 const goalOptions = [
-  { value: "lose", label: "Lose Weight" },
-  { value: "maintain", label: "Maintain Weight" },
-  { value: "gain", label: "Gain Weight" },
-  { value: "muscle", label: "Build Muscle" },
+  { value: "lose weight", label: "Lose Weight" },
+  { value: "gain weight", label: "Gain Weight" },
+  { value: "build muscle", label: "Build Muscle" },
+  { value: "stay in shape", label: "Stay in Shape" },
 ];
 
-const activityOptions = [
-  { value: "sedentary", label: "Sedentary" },
-  { value: "light", label: "Lightly Active" },
-  { value: "moderate", label: "Moderately Active" },
-  { value: "very", label: "Very Active" },
+const genderOptions = [
+  { value: "male", label: "Male" },
+  { value: "female", label: "Female" },
 ];
 
-const dietOptions = [
-  { value: "none", label: "No Restrictions" },
-  { value: "vegetarian", label: "Vegetarian" },
-  { value: "vegan", label: "Vegan" },
-  { value: "keto", label: "Keto" },
-  { value: "lowcarb", label: "Low Carb" },
+const maritalOptions = [
+  { value: "single", label: "Single" },
+  { value: "married", label: "Married" },
+  { value: "divorced", label: "Divorced" },
+  { value: "widowed", label: "Widowed" },
+];
+
+const financialOptions = [
+  { value: "low", label: "Low" },
+  { value: "middle", label: "Middle" },
+  { value: "high", label: "High" },
 ];
 
 const containerVariants = {
@@ -60,18 +64,28 @@ const itemVariants = {
 };
 
 const SettingsDashboard = () => {
+  const user = useUserStore((state) => state.user);
+
   const [formData, setFormData] = useState({
-    goal: "lose",
-    activity: "moderate",
-    calories: 2200,
-    water: 8,
-    targetWeight: 70,
-    diet: "none",
+    firstName: user?.firstName ?? "",
+    lastName: user?.lastName ?? "",
+    email: user?.email ?? "",
+    country: user?.country ?? "",
+    city: user?.city ?? "",
+    weight: user?.weight ?? 0,
+    height: user?.height ?? 0,
+    birthDate: user?.birthDate ?? "",
+    gender: user?.gender ?? "male",
+    goals: user?.goals ?? "lose weight",
+    maritalStatus: user?.maritalStatus ?? "single",
+    financialStatus: user?.financialStatus ?? "middle",
+    healthConditions: user?.healthConditions?.join(", ") ?? "",
   });
 
   const memoizedGoalOptions = useMemo(() => goalOptions, []);
-  const memoizedActivityOptions = useMemo(() => activityOptions, []);
-  const memoizedDietOptions = useMemo(() => dietOptions, []);
+  const memoizedGenderOptions = useMemo(() => genderOptions, []);
+  const memoizedMaritalOptions = useMemo(() => maritalOptions, []);
+  const memoizedFinancialOptions = useMemo(() => financialOptions, []);
 
   const handleChange = (field: string, value: string | number) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -79,6 +93,7 @@ const SettingsDashboard = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // TODO: persist changes back to Supabase
   };
 
   return (
@@ -89,11 +104,18 @@ const SettingsDashboard = () => {
         animate="visible"
       >
         <MainGrid>
+          {/* ── Left: Profile Card ── */}
           <motion.div variants={itemVariants}>
             <ProfileCard>
-              <AvatarCircle>SJ</AvatarCircle>
-              <ProfileName>Sarah Johnson</ProfileName>
-              <ProfileEmail>sarah@email.com</ProfileEmail>
+              <AvatarCircle>
+                {user
+                  ? `${user.firstName?.[0] || ""}${user.lastName?.[0] || ""}`.toUpperCase()
+                  : "?"}
+              </AvatarCircle>
+              <ProfileName>
+                {user ? `${user.firstName} ${user.lastName}` : "—"}
+              </ProfileName>
+              <ProfileEmail>{user ? user.email : "—"}</ProfileEmail>
 
               <MembershipBanner>
                 <MembershipTitle>
@@ -108,17 +130,117 @@ const SettingsDashboard = () => {
             </ProfileCard>
           </motion.div>
 
+          {/* ── Right: Form Card ── */}
           <motion.div variants={itemVariants}>
             <FormCard>
               <FormTitle>Profile Settings</FormTitle>
               <form onSubmit={handleSubmit}>
                 <FormGrid>
+
+                  {/* Personal Info */}
                   <FormGroup>
-                    <Label htmlFor="goal">Goal</Label>
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input
+                      id="firstName"
+                      type="text"
+                      value={formData.firstName}
+                      onChange={(e) => handleChange("firstName", e.target.value)}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input
+                      id="lastName"
+                      type="text"
+                      value={formData.lastName}
+                      onChange={(e) => handleChange("lastName", e.target.value)}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => handleChange("email", e.target.value)}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <Label htmlFor="birthDate">Birth Date</Label>
+                    <Input
+                      id="birthDate"
+                      type="date"
+                      value={formData.birthDate}
+                      onChange={(e) => handleChange("birthDate", e.target.value)}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <Label htmlFor="country">Country</Label>
+                    <Input
+                      id="country"
+                      type="text"
+                      value={formData.country}
+                      onChange={(e) => handleChange("country", e.target.value)}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <Label htmlFor="city">City</Label>
+                    <Input
+                      id="city"
+                      type="text"
+                      value={formData.city}
+                      onChange={(e) => handleChange("city", e.target.value)}
+                    />
+                  </FormGroup>
+
+                  {/* Body Stats */}
+                  <FormGroup>
+                    <Label htmlFor="weight">Weight (KG)</Label>
+                    <Input
+                      id="weight"
+                      type="number"
+                      value={formData.weight}
+                      onChange={(e) => handleChange("weight", Number(e.target.value))}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <Label htmlFor="height">Height (CM)</Label>
+                    <Input
+                      id="height"
+                      type="number"
+                      value={formData.height}
+                      onChange={(e) => handleChange("height", Number(e.target.value))}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <Label htmlFor="gender">Gender</Label>
                     <Select
-                      id="goal"
-                      value={formData.goal}
-                      onChange={(e) => handleChange("goal", e.target.value)}
+                      id="gender"
+                      value={formData.gender}
+                      onChange={(e) => handleChange("gender", e.target.value)}
+                    >
+                      {memoizedGenderOptions.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </Select>
+                  </FormGroup>
+
+                  {/* Lifestyle */}
+                  <FormGroup>
+                    <Label htmlFor="goals">Goal</Label>
+                    <Select
+                      id="goals"
+                      value={formData.goals}
+                      onChange={(e) => handleChange("goals", e.target.value)}
                     >
                       {memoizedGoalOptions.map((opt) => (
                         <option key={opt.value} value={opt.value}>
@@ -129,13 +251,13 @@ const SettingsDashboard = () => {
                   </FormGroup>
 
                   <FormGroup>
-                    <Label htmlFor="activity">Activity Level</Label>
+                    <Label htmlFor="maritalStatus">Marital Status</Label>
                     <Select
-                      id="activity"
-                      value={formData.activity}
-                      onChange={(e) => handleChange("activity", e.target.value)}
+                      id="maritalStatus"
+                      value={formData.maritalStatus}
+                      onChange={(e) => handleChange("maritalStatus", e.target.value)}
                     >
-                      {memoizedActivityOptions.map((opt) => (
+                      {memoizedMaritalOptions.map((opt) => (
                         <option key={opt.value} value={opt.value}>
                           {opt.label}
                         </option>
@@ -144,55 +266,30 @@ const SettingsDashboard = () => {
                   </FormGroup>
 
                   <FormGroup>
-                    <Label htmlFor="calories">Daily Calorie Goal</Label>
-                    <Input
-                      id="calories"
-                      type="number"
-                      value={formData.calories}
-                      onChange={(e) =>
-                        handleChange("calories", Number(e.target.value))
-                      }
-                    />
-                  </FormGroup>
-
-                  <FormGroup>
-                    <Label htmlFor="water">Water Goal (Glasses)</Label>
-                    <Input
-                      id="water"
-                      type="number"
-                      value={formData.water}
-                      onChange={(e) =>
-                        handleChange("water", Number(e.target.value))
-                      }
-                    />
-                  </FormGroup>
-
-                  <FormGroup>
-                    <Label htmlFor="targetWeight">Target Weight (KG)</Label>
-                    <Input
-                      id="targetWeight"
-                      type="number"
-                      value={formData.targetWeight}
-                      onChange={(e) =>
-                        handleChange("targetWeight", Number(e.target.value))
-                      }
-                    />
-                  </FormGroup>
-
-                  <FormGroup>
-                    <Label htmlFor="diet">Dietary Preference</Label>
+                    <Label htmlFor="financialStatus">Financial Status</Label>
                     <Select
-                      id="diet"
-                      value={formData.diet}
-                      onChange={(e) => handleChange("diet", e.target.value)}
+                      id="financialStatus"
+                      value={formData.financialStatus}
+                      onChange={(e) => handleChange("financialStatus", e.target.value)}
                     >
-                      {memoizedDietOptions.map((opt) => (
+                      {memoizedFinancialOptions.map((opt) => (
                         <option key={opt.value} value={opt.value}>
                           {opt.label}
                         </option>
                       ))}
                     </Select>
                   </FormGroup>
+
+                  <FormGroup>
+                    <Label htmlFor="healthConditions">Health Conditions</Label>
+                    <Input
+                      id="healthConditions"
+                      type="text"
+                      value={formData.healthConditions}
+                      onChange={(e) => handleChange("healthConditions", e.target.value)}
+                    />
+                  </FormGroup>
+
                 </FormGrid>
 
                 <SaveButton type="submit">Save Changes</SaveButton>

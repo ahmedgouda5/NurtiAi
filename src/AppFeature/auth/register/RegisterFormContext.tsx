@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState } from "react";
 import { z } from "zod";
 import { SignUpSchema } from "@/app/Schemes/AuthSchema";
 import { useRouter } from "next/navigation";
+import useUserStore from "@/store/User.Store";
 export type SignUpType = z.infer<typeof SignUpSchema>;
 
 /** Step 1 — Personal Info */
@@ -98,12 +99,14 @@ export function RegisterFormProvider({
         body: JSON.stringify(fullData),
       });
 
-      console.log(res);
+      const data = await res.json();
+
+      console.log(data);
       if (!res.ok) {
-        const body = await res.json();
-        throw new Error(body.error ?? "Registration failed");
+        throw new Error(data.error ?? "Registration failed");
       }
 
+      useUserStore.getState().setUser(data.user);
       router.push("/dashboard");
     } finally {
       setIsSubmitting(false);

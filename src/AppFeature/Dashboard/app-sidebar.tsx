@@ -32,9 +32,11 @@ import {
   FooterLink,
   FooterIcon,
 } from "./sidebar-styles";
+import useUserStore from "@/store/User.Store";
 
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
+  const { user } = useUserStore();
 
   return (
     <Sidebar {...props} className="border-r border-white/5">
@@ -54,9 +56,11 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
 
           <UserCard>
             <UserInfo>
-              <Avatar>SJ</Avatar>
+              <Avatar>{user?.firstName?.[0]?.toUpperCase() || ""}{user?.lastName?.[0]?.toUpperCase() || ""}</Avatar>
               <UserDetails>
-                <UserName>Sarah Johnson</UserName>
+                <UserName>
+                  {user?.firstName} {user?.lastName}
+                </UserName>
                 <UserBadge>
                   <BadgeDot />
                   Pro Member

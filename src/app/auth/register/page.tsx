@@ -11,15 +11,9 @@ import FinancialStatusStep from "@/AppFeature/auth/register/financialStatus/page
 import HealthConditionsStep from "@/AppFeature/auth/register/healthConditions/page";
 import { theme } from "@/styles/theme";
 
-const STEP_LABELS = [
-  "Personal Info",
-  "Body & Fitness",
-  "Relationship",
-  "Budget",
-  "Health",
-];
+const STEP_LABELS = ["Personal Info", "Body & Fitness", "Budget", "Health"];
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 4;
 
 function RegisterSteps() {
   const { step } = useRegisterForm();

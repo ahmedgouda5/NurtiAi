@@ -65,21 +65,23 @@ const MaritalStatusStep = () => {
 
           <CardsGrid>
             {OPTIONS.map(({ value, label, emoji }) => (
-              <motion.button
+              <motion.div
                 key={value}
-                type="button"
-                onClick={() => {
-                  setSelected(value);
-                  setError("");
-                }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <StatusCard $isActive={selected === value}>
+                <StatusCard
+                  type="button"
+                  $isActive={selected === value}
+                  onClick={() => {
+                    setSelected(value);
+                    setError("");
+                  }}
+                >
                   <CardEmoji>{emoji}</CardEmoji>
                   <CardLabel>{label}</CardLabel>
                 </StatusCard>
-              </motion.button>
+              </motion.div>
             ))}
           </CardsGrid>
 
