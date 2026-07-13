@@ -10,6 +10,7 @@
     "analyze": "cross-env ANALYZE=true next build --webpack"
   },
   "dependencies": {
+    "@google/genai": "^2.11.0",
     "@hookform/resolvers": "^5.4.0",
     "@next/bundle-analyzer": "^16.2.10",
     "@supabase/ssr": "^0.12.0",

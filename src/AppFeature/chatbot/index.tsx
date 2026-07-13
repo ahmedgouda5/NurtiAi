@@ -27,10 +27,6 @@ type ChatMessage = {
 export function Chatbot() {
   const { t } = useTranslation();
 
-  const cannedReplies = t("chatbot.replies", {
-    returnObjects: true,
-  }) as string[];
-
   const [open, setOpen] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -44,6 +40,7 @@ export function Chatbot() {
     },
   ]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -70,22 +67,52 @@ export function Chatbot() {
     }
   }, [isClosing]);
 
-  function sendMessage(text: string) {
-    if (!text.trim()) return;
+  async function sendMessage(text: string) {
+    if (!text.trim() || isLoading) return;
 
     const userMessage: ChatMessage = {
       id: `${Date.now()}`,
       role: "user",
       text,
     };
-    const reply: ChatMessage = {
-      id: `${Date.now()}-bot`,
-      role: "bot",
-      text: cannedReplies[Math.floor(Math.random() * cannedReplies.length)],
-    };
 
-    setMessages((current) => [...current, userMessage, reply]);
+    setMessages((current) => [...current, userMessage]);
     setInput("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/Chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: text }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to get response");
+      }
+
+      const data = await response.json();
+
+      const reply: ChatMessage = {
+        id: `${Date.now()}-bot`,
+        role: "bot",
+        text: data.reply || "No response",
+      };
+
+      setMessages((current) => [...current, reply]);
+    } catch (error) {
+      console.error("Chat API error:", error);
+      const errorReply: ChatMessage = {
+        id: `${Date.now()}-bot`,
+        role: "bot",
+        text: "Sorry, I am having trouble connecting right now. Please try again later.",
+      };
+      setMessages((current) => [...current, errorReply]);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -107,6 +134,15 @@ export function Chatbot() {
                 {message.text}
               </Bubble>
             ))}
+            {isLoading && (
+              <Bubble key="loading" $role="bot">
+                <div className="flex h-5 items-center space-x-1 px-1">
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400" style={{ animationDelay: '0ms' }} />
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400" style={{ animationDelay: '150ms' }} />
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400" style={{ animationDelay: '300ms' }} />
+                </div>
+              </Bubble>
+            )}
             <div ref={endRef} />
           </Messages>
           <Composer
