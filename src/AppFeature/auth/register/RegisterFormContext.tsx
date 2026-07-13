@@ -5,6 +5,7 @@ import { z } from "zod";
 import { SignUpSchema } from "@/app/Schemes/AuthSchema";
 import { useRouter } from "next/navigation";
 import useUserStore from "@/store/User.Store";
+import useHealthPlanStore from "@/store/HealthPlan.Store";
 export type SignUpType = z.infer<typeof SignUpSchema>;
 
 /** Step 1 — Personal Info */
@@ -107,6 +108,26 @@ export function RegisterFormProvider({
       }
 
       useUserStore.getState().setUser(data.user);
+
+      // Generate the personalized AI health plan for the new user
+      try {
+        const planRes = await fetch("/api/HealthPlan", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data.user),
+        });
+
+        if (planRes.ok) {
+          const planData = await planRes.json();
+          if (planData.plan) {
+            useHealthPlanStore.getState().setPlan(planData.plan);
+          }
+        }
+      } catch (planError) {
+        // Non-fatal: user still gets to dashboard, plan loads as null
+        console.error("Failed to generate health plan:", planError);
+      }
+
       router.push("/dashboard");
     } finally {
       setIsSubmitting(false);

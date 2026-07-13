@@ -1,16 +1,31 @@
 "use client";
 
 import { theme } from "@/styles/theme";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FaBottleWater } from "react-icons/fa6";
 import { IoIosWater } from "react-icons/io";
 
-const initialGlasses = Array.from({ length: 8 }, (_, index) => ({
-  id: index + 1,
-  active: false,
-}));
+type WaterIntakeProps = {
+  dailyWaterLiters?: number;
+};
 
-const WaterIntake = () => {
+const GLASS_VOLUME_LITERS = 0.25;
+
+const WaterIntake = ({ dailyWaterLiters }: WaterIntakeProps) => {
+  const glassCount = useMemo(() => {
+    if (!dailyWaterLiters) return 8;
+    return Math.max(4, Math.round(dailyWaterLiters / GLASS_VOLUME_LITERS));
+  }, [dailyWaterLiters]);
+
+  const initialGlasses = useMemo(
+    () =>
+      Array.from({ length: glassCount }, (_, index) => ({
+        id: index + 1,
+        active: false,
+      })),
+    [glassCount],
+  );
+
   const [glasses, setGlasses] = useState(initialGlasses);
   const totalGlasses = glasses.filter((glass) => glass.active).length;
 
@@ -29,7 +44,7 @@ const WaterIntake = () => {
 
   return (
     <div
-      className="h-full rounded-3xl border p-3 "
+      className="h-full rounded-3xl border p-3"
       style={{
         backgroundColor: theme.colors.bg2,
         borderColor: theme.colors.border,
@@ -45,11 +60,12 @@ const WaterIntake = () => {
         </h1>
 
         <span style={{ color: theme.colors.textSecondary }}>
-          {totalGlasses}/8 Glasses
+          {totalGlasses}/{glassCount} Glasses
+          {dailyWaterLiters ? ` (${dailyWaterLiters}L goal)` : ""}
         </span>
       </nav>
 
-      <section className="mt-12 flex justify-between">
+      <section className="mt-12 flex justify-between flex-wrap gap-1">
         {glasses.map((item) => (
           <button key={item.id} onClick={() => handleAddGlass(item.id)}>
             <FaBottleWater

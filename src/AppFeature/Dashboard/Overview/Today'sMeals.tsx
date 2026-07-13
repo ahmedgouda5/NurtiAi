@@ -1,35 +1,105 @@
 import { theme } from "@/styles/theme";
 
-const TodayMeals = () => {
-  const Meals = [
-    {
-      id: 1,
-      name: " 🌅 Breakfast",
-      cal: "100",
-      fat: "10g",
-      carbs: "30g",
-      protein: "20g",
-      Food: ["eggs", "toast"],
-    },
-    {
-      id: 2,
-      name: " ☀️ Lunch",
-      cal: "100",
-      fat: "10g",
-      carbs: "30g",
-      protein: "20g",
-      Food: ["rice", "chicken", "salad"],
-    },
-    {
-      id: 3,
-      name: " 🌙 Dinner",
-      cal: "100",
-      fat: "10g",
-      carbs: "30g",
-      protein: "20g",
-      Food: ["fish", "vegetables", "pasta"],
-    },
-  ];
+type MealEntry = {
+  id: number;
+  name: string;
+  cal: string;
+  fat: string;
+  carbs: string;
+  protein: string;
+  Food: string[];
+};
+
+type TodayMealsProps = {
+  nutritionRecommendations?: string[];
+  dailyCalories?: number;
+  dailyProtein?: number;
+  dailyCarbs?: number;
+  dailyFat?: number;
+};
+
+const MEAL_LABELS = [
+  { icon: "🌅", label: "Breakfast" },
+  { icon: "☀️", label: "Lunch" },
+  { icon: "🌙", label: "Dinner" },
+];
+
+function buildMealsFromPlan(
+  recommendations: string[],
+  dailyCalories: number,
+  dailyProtein: number,
+  dailyCarbs: number,
+  dailyFat: number,
+): MealEntry[] {
+  // Rough split: Breakfast 25%, Lunch 40%, Dinner 35%
+  const splits = [0.25, 0.4, 0.35];
+
+  return recommendations.slice(0, 3).map((rec, i) => {
+    const split = splits[i] ?? 0.33;
+    return {
+      id: i + 1,
+      name: ` ${MEAL_LABELS[i]?.icon ?? "🍽️"} ${MEAL_LABELS[i]?.label ?? `Meal ${i + 1}`}`,
+      cal: Math.round(dailyCalories * split).toString(),
+      protein: `${Math.round(dailyProtein * split)}g`,
+      carbs: `${Math.round(dailyCarbs * split)}g`,
+      fat: `${Math.round(dailyFat * split)}g`,
+      Food: rec
+        .split(/[,.;]/)
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .slice(0, 4),
+    };
+  });
+}
+
+const DEFAULT_MEALS: MealEntry[] = [
+  {
+    id: 1,
+    name: " 🌅 Breakfast",
+    cal: "550",
+    fat: "15g",
+    carbs: "70g",
+    protein: "30g",
+    Food: ["eggs", "oats", "fruit"],
+  },
+  {
+    id: 2,
+    name: " ☀️ Lunch",
+    cal: "880",
+    fat: "25g",
+    carbs: "110g",
+    protein: "50g",
+    Food: ["rice", "chicken", "salad"],
+  },
+  {
+    id: 3,
+    name: " 🌙 Dinner",
+    cal: "770",
+    fat: "20g",
+    carbs: "95g",
+    protein: "45g",
+    Food: ["fish", "vegetables", "quinoa"],
+  },
+];
+
+const TodayMeals = ({
+  nutritionRecommendations,
+  dailyCalories = 2200,
+  dailyProtein = 120,
+  dailyCarbs = 250,
+  dailyFat = 70,
+}: TodayMealsProps) => {
+  const Meals =
+    nutritionRecommendations && nutritionRecommendations.length >= 3
+      ? buildMealsFromPlan(
+          nutritionRecommendations,
+          dailyCalories,
+          dailyProtein,
+          dailyCarbs,
+          dailyFat,
+        )
+      : DEFAULT_MEALS;
+
   return (
     <div
       className="rounded-3xl border p-4"
@@ -51,7 +121,7 @@ const TodayMeals = () => {
         {Meals.map((meal) => (
           <div
             key={meal.id}
-            className="my-2 rounded-2xl border bg-clip-padding p-3  backdrop-blur-sm"
+            className="my-2 rounded-2xl border bg-clip-padding p-3 backdrop-blur-sm"
             style={{
               backgroundColor: theme.colors.border,
               borderColor: theme.colors.border,
