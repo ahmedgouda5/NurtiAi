@@ -45,4 +45,3 @@ export function Button({ children, href, fullWidth, ...props }: ButtonProps) {
     </ButtonBase>
   );
 }
-0;

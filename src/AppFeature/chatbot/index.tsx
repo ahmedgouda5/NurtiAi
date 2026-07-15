@@ -102,8 +102,7 @@ export function Chatbot() {
       };
 
       setMessages((current) => [...current, reply]);
-    } catch (error) {
-      console.error("Chat API error:", error);
+    } catch {
       const errorReply: ChatMessage = {
         id: `${Date.now()}-bot`,
         role: "bot",

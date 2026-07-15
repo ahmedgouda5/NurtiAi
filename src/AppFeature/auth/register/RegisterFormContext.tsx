@@ -101,8 +101,6 @@ export function RegisterFormProvider({
       });
 
       const data = await res.json();
-
-      console.log(data);
       if (!res.ok) {
         throw new Error(data.error ?? "Registration failed");
       }
@@ -123,9 +121,8 @@ export function RegisterFormProvider({
             useHealthPlanStore.getState().setPlan(planData.plan);
           }
         }
-      } catch (planError) {
+      } catch {
         // Non-fatal: user still gets to dashboard, plan loads as null
-        console.error("Failed to generate health plan:", planError);
       }
 
       router.push("/dashboard");

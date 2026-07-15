@@ -104,7 +104,6 @@ ${JSON.stringify(userProfile, null, 2)}`;
     try {
       plan = JSON.parse(cleaned);
     } catch {
-      console.error("Failed to parse Gemini response as JSON:", rawText);
       return NextResponse.json(
         { error: "AI returned an invalid response. Please try again." },
         { status: 500 },
@@ -113,7 +112,6 @@ ${JSON.stringify(userProfile, null, 2)}`;
 
     return NextResponse.json({ plan });
   } catch (error) {
-    console.error("HealthPlan API Error:", error);
     const errorMessage =
       error instanceof Error ? error.message : "Something went wrong";
     return NextResponse.json({ error: errorMessage }, { status: 500 });

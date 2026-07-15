@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FaRunning } from "react-icons/fa";
 
 const RunSteps = () => {
-  const [steps, setSteps] = useState(8234);
+  const [steps] = useState(8234);
   const goal = 10000;
   const progress = (steps / goal) * 100;
   return (

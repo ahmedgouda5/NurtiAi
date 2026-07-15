@@ -29,7 +29,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ reply: response.text });
   } catch (error) {
-    console.error("Gemini API Error:", error);
     const errorMessage =
       error instanceof Error ? error.message : "Something went wrong";
     return NextResponse.json({ error: errorMessage }, { status: 500 });

@@ -3,6 +3,7 @@ import { Button } from "@/AppFeature/shared/Button";
 import { theme } from "@/styles/theme";
 import styled from "styled-components";
 import { fadeUpKeyframes, SPRING_EASE } from "@/styles/animations";
+import { useState } from "react";
 
 const AnimatedContent = styled.div`
   animation: ${fadeUpKeyframes} 0.55s ${SPRING_EASE} both;
@@ -26,6 +27,7 @@ import useUserStore from "@/store/User.Store";
 
 const SignIn = () => {
   const { t } = useTranslation();
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -41,6 +43,7 @@ const SignIn = () => {
   });
 
   async function OnSubmit(data: zod.infer<typeof LoginSchema>) {
+    setSubmitError(null);
     const res = await fetch("/api/Login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -49,7 +52,7 @@ const SignIn = () => {
     const body = await res.json();
 
     if (!res.ok) {
-      alert(body.error ?? "Sign in failed");
+      setSubmitError(body.error ?? "Sign in failed");
       return;
     }
 
@@ -163,6 +166,11 @@ const SignIn = () => {
             </div>
 
             <Button className="mt-2 w-full">Sign In</Button>
+            {submitError && (
+              <p className="text-sm text-red-500" role="alert">
+                {submitError}
+              </p>
+            )}
           </form>
         </AnimatedContent>
       </AlertDialogContent>

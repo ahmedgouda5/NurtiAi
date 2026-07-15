@@ -1,7 +1,5 @@
-import Link from "next/link";
 import styled from "styled-components";
 
-/* ================= HEADER ================= */
 export const Bar = styled.header`
   position: sticky;
   top: 0;
@@ -12,7 +10,6 @@ export const Bar = styled.header`
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 `;
 
-/* ================= INNER ================= */
 export const Inner = styled.div`
   display: flex;
   align-items: center;
@@ -21,7 +18,6 @@ export const Inner = styled.div`
   padding: 1rem 0;
 `;
 
-/* ================= BRAND ================= */
 export const Brand = styled.div`
   display: inline-flex;
   align-items: center;
@@ -52,7 +48,6 @@ export const Mark = styled.span`
   border: 1px solid rgba(0, 214, 143, 0.24);
 `;
 
-/* ================= DESKTOP NAV ================= */
 export const DesktopNav = styled.nav`
   display: flex;
   align-items: center;
@@ -79,14 +74,12 @@ export const NavLink = styled.a`
   }
 `;
 
-/* ================= ACTIONS ================= */
 export const Actions = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
 `;
 
-/* ================= MOBILE BUTTON ================= */
 export const MobileMenuButton = styled.button`
   display: none;
 
@@ -108,7 +101,6 @@ export const MobileMenuButton = styled.button`
   }
 `;
 
-/* ================= MOBILE NAV (DROP DOWN UNDER BAR) ================= */
 export const MobileNav = styled.nav<{ $open: boolean }>`
   display: none;
 
@@ -129,7 +121,6 @@ export const MobileNav = styled.nav<{ $open: boolean }>`
   }
 `;
 
-/* ================= MOBILE LINK ================= */
 export const MobileLink = styled.a`
   padding: 0.9rem 1rem;
 
@@ -149,7 +140,6 @@ export const MobileLink = styled.a`
   }
 `;
 
-/* ================= MOBILE AUTH SECTION ================= */
 export const MobileAuth = styled.div`
   display: none;
 

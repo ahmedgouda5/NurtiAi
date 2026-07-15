@@ -1,6 +1,6 @@
 "use client";
 
-import { Crown, Star, Check, Zap, ArrowRight } from "lucide-react";
+import { Crown, Check, Zap, ArrowRight } from "lucide-react";
 
 import {
   Section,
@@ -85,10 +85,6 @@ const plans: Plan[] = [
 ];
 
 export function UpgradePlan() {
-  const handleUpgrade = (planId: string) => {
-    console.log(`Upgrading to ${planId} plan`);
-  };
-
   return (
     <Section>
       <Container>
@@ -139,7 +135,7 @@ export function UpgradePlan() {
 
               <UpgradeButton
                 $isPremium={plan.isPremium}
-                onClick={() => handleUpgrade(plan.id)}
+                type="button"
               >
                 {plan.isPremium ? "Get Premium Access" : "Upgrade Now"}
                 <ArrowRight size={18} />

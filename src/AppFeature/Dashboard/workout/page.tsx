@@ -1,6 +1,5 @@
 "use client";
 import { WorkoutsDay } from "@/data/WorkoutsDay";
-import { theme } from "@/styles/theme";
 import { useState } from "react";
 import { motion } from "framer-motion";
 

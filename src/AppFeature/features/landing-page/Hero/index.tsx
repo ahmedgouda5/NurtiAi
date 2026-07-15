@@ -31,7 +31,6 @@ import {
   SpanItalic,
 } from "./styles";
 import { FaCamera } from "react-icons/fa";
-import SignUp from "@/AppFeature/auth/register/page";
 import { useTranslation } from "react-i18next";
 import { ButtonLink } from "@/AppFeature/shared/Button/styles";
 import { FaRocket } from "react-icons/fa6";

@@ -25,8 +25,6 @@ export async function POST(request: Request) {
     password: parsed.data.password,
   });
 
-  console.log(data);
-
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
@@ -36,8 +34,6 @@ export async function POST(request: Request) {
     .select("*")
     .eq("id", data.user.id)
     .single();
-
-  console.log(profile);
 
   return NextResponse.json(
     { user: { ...data.user, profile } },
